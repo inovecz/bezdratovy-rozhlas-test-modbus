@@ -1,0 +1,618 @@
+# 1. Kompletní specifikace binárních zpráv JSVV
+
+## 1.1 Formát a rámcování zpráv 
+Komunikace v jednotném systému varování a vyrozumění (JSVV) probíhá formou strukturovaných zpráv ve formátu ASCII. Každá zpráva je tvořena **rámcem** s pevně danou strukturou a oddělovacími znaky:
+
+- **Znaková forma přenosu:** Všechny hodnoty jsou přenášeny jako tisknutelné znaky ASCII (0x00–0x7F). Číselné údaje jsou tedy posílány jako řetězce číslic (např. číslo `1` je přeneseno jako znak `'1'` s kódem 0x31). 
+- **Struktura rámce:** Každá zpráva se skládá z **identifikátoru zprávy (MID)** následovaného případnými **datovými položkami (DATA)**. Obecné schéma je:  
+  `[MID] [D1] [D2] ... [Dx]`  
+- **Oddělovače:** Jednotlivé části zprávy (MID a datové bloky) jsou odděleny jednou mezerou (ASCII 0x20). 
+- **Zahájení a ukončení zprávy:** Rámec zprávy je ukončen speciálním znakem **newline (LF, 0x0A)**. 
+- **Příklad rámce:**  
+  ```
+  INIT OP1 1000
+
+  ```  
+
+## 1.2 Identifikátory a adresace 
+Každá zpráva obsahuje (přímo či nepřímo) tyto identifikátory:
+
+- **ID sítě:** 1–255 (krajský subsystém).  
+- **ID VyC (vyrozumívací centrum):** 1–255.  
+- **ID operátora:** 1–65535 (max 1000 současných).  
+- **Adresa KPPS:** 0–65534 (0xFFFF = vyhrazeno). KPPS podporuje více adres: individuální, územní, krajskou a skupinové adresy A1–A16, B1–B16.  
+
+Časové značky jsou ve formátu **Unix time (UINT64)**. RTC musí být synchronizován, odchylka max. ±3 s/den.
+
+## 1.3 Typy zpráv a příkazů z VyC 
+
+### Aktivační příkazy
+| Příkaz | Popis | Parametry | Priorita |
+|--------|-------|-----------|----------|
+| Signál sirény | Aktivace akustického signálu (3 typy tónů) | kód signálu (1–3) | P2 |
+| Znělka (gong) | Znělka 1 (start) nebo 2 (konec) | typ (1–2) | P3 |
+| Verbální informace | Přehrání nahrané hlášky | číslo hlášení (1–20) | P2 |
+| Připojení rozhlasu | Přesměrování audio z rádia | – | P3 |
+| Vzdálený hlas (VyC) | Živý mikrofon z centra | – | P3 |
+| Místní hlas | Aktivace místního mikrofonu | – | P3 |
+| Externí audio zdroj | Připojení primárního externího zdroje | – | P3 |
+| Sekundární ext. audio | Připojení sekundárního externího zdroje | – | P3 |
+| Text pro panel | Text 1–128 znaků na informační panel | text | P3 |
+| STOP | Okamžité ukončení činnosti | – | P1 |
+| RESET | Reset systému, vyprázdnění front | – | P1 |
+| TEST | Tichý test funkčnosti | – | P3 |
+
+### Stavové a diagnostické dotazy
+| Dotaz | Popis | Priorita |
+|-------|-------|----------|
+| Dotaz stav EKPV | Vrátí stav sirény/panelu | P1 |
+| Dotaz stav KPM | Stav koncového prvku měření | P1 |
+| Dotaz vadné hlásiče MIS | Seznam chybných hlásičů MIS | P1 |
+| Dotaz stav KPPS | Diagnostika KPPS (napájení, paměť, komunikace) | P1 |
+| Dotaz adresy (`READ_ADR`) | Seznam všech 35 adres KPPS | P1 |
+| Dotaz konfigurace (`READ_CFG`) | Konfigurace provozních parametrů | P1 |
+| Dotaz záznamů (`READ_LOG`) | Log posledních událostí | P1 |
+
+### Konfigurační příkazy
+| Příkaz | Popis | Priorita |
+|--------|-------|----------|
+| `SET_CFG` | Nastavení konfigurace KPPS | P1 |
+| `SET_ADR` | Nastavení všech adres KPPS | P1 |
+| `SET_KEYS` | Nahrání šifrovacích klíčů AES-256 | P1 |
+| `FRESET` | Tovární reset | P1 |
+| Servisní příkazy (`INIT`, `PING`, `READ_DIAG`, ...) | Lokální servisní komunikace | P1 |
+
+## 1.4 Kontrolní součet (CRC)
+- Algoritmus: **CRC-16-CCITT** (0x1021, init=0x0000, bez invertování).  
+- Vstup: všechny znaky zprávy kromě koncového newline.  
+- Výstup: 4 hex číslice ASCII.  
+- Příklad: `INIT OP1 1000` → CRC = 0x004B → `CRC 004B`.
+
+## 1.5 Detekce duplicit a ztrát zpráv 
+- **Detekce duplicit:** kombinace typu příkazu + parametry + ID operátora + timestamp. Blokace duplicit (výchozí 180 s, nastavitelná 30–300 s).  
+- **Ztráty zpráv:** řeší se opakováním vysílání, automatickými hlášeními a parametrem MER (Message Error Rate).  
+- **Chybné zprávy:** CRC error nebo špatný formát → odmítnout a zalogovat.
+
+
+# 2. Návrh Python parseru JSVV
+
+Parser zajišťuje komunikaci mezi KPPS (přes RS-232) a backendem (Laravel). Jeho úkolem je přijímat, dekódovat a validovat zprávy, převádět je na jednotný JSON a předávat je backendu.
+
+## 2.1 Architektura modulů parseru
+
+- **RS-232 přijímač**  
+  - Parametry: 9600 b/s, 8 datových bitů, žádná parita, 1 stop bit, žádné řízení toku.  
+  - Propojení: null-modem, DE9, RXD=2, TXD=3, GND=5.  
+  - Funkce: čte příchozí rámce ukončené LF (0x0A).
+
+- **Parser zpráv**  
+  - Rozdělí zprávu podle mezer na MID a datové bloky.  
+  - Validuje formát a typ zprávy.  
+  - Ověří, zda odpovídá specifikaci (počet a typ parametrů).
+
+- **Validátor CRC**  
+  - Pokud zpráva vyžaduje CRC, vypočítá CRC-16-CCITT a ověří.  
+  - CRC nesedí → zpráva odmítnuta, zalogována jako „CRC ERROR“.
+
+- **Mapper na JSON**  
+  - Převede zprávu do jednotné JSON struktury (viz bod 3).  
+  - Doplňuje identifikátory (síť, VyC) z konfigurace, pokud nejsou ve zprávě.  
+
+- **Prioritní fronta**  
+  - Vkládá zprávy podle priority (P1 > P2 > P3).  
+  - Při přijetí vyšší priority přeruší zpracování nižší.  
+  - Použije datovou strukturu typu `PriorityQueue`.
+
+- **Komunikace s Artisan**  
+  - Volá Artisan příkaz s JSON payloadem.  
+  - Zachytává exit code a výstup.  
+  - Retry mechanizmus s exponenciálním backoffem.  
+
+## 2.2 Priority zpráv a logika preempce
+
+- **P1 (STOP, RESET, stavové dotazy):** okamžité zpracování, přednost před vším ostatním.  
+- **P2 (sirény, verbální informace):** zpracování do 3 s, akustická aktivace do 10 s. Přerušuje P3.  
+- **P3 (hlášení, externí audio, TEST):** nejnižší priorita, může být přerušena P2 nebo P1.  
+
+### SLA požadavky
+- STOP → zařízení do klidu do 15 s.  
+- RESET → reset do 60 s.  
+- Aktivace sirény → zahájena do 3 s, akustika do 10 s.  
+
+## 2.3 Logování parseru
+
+Každá zpráva musí být zalogována s:  
+- časem příjmu (lokální + timestamp z payloadu),  
+- RAW (HEX) zprávou,  
+- dekódovanými poli,  
+- výsledkem CRC validace,  
+- vyhodnocenou prioritou,  
+- stavem zpracování: RECEIVED, DECODED, DUPLICATE, REJECTED, FORWARDED, FAILED, DONE.  
+
+### Příklad logu
+
+```
+2025-10-01T08:50:12.345Z [RECEIVED] RAW: "STOP 5 1696157700"
+2025-10-01T08:50:12.346Z [DECODED] MID=STOP, operatorId=5, timestamp=1696157700 -> Priority=P1
+2025-10-01T08:50:12.347Z [FORWARDED] Artisan call jsvv:processMessage (single); status=0
+2025-10-01T08:50:12.348Z [DONE] Message STOP handled successfully.
+```
+
+```
+2025-10-01T09:00:00.100Z [RECEIVED] RAW: "READ_CFG"
+2025-10-01T09:00:00.101Z [DECODED] MID=READ_CFG (status query) -> Priority=P1
+2025-10-01T09:00:00.102Z [FORWARDED] Artisan call jsvv:processMessage (single); status=0
+2025-10-01T09:00:00.150Z [RECEIVED] RAW: "READ_CFG 1 30 180 0000000000000001 3 10 2 1 12"
+2025-10-01T09:00:00.151Z [DECODED] MID=READ_CFG (response), params: type=1 (ES), interval=30, blockTime=180 ...
+2025-10-01T09:00:00.152Z [FORWARDED] Artisan call jsvv:processMessage (single); status=0
+```
+
+
+
+# 3. Specifikace JSON a komunikace parser → Laravel Artisan
+
+Parser komunikuje s backendem přes Artisan příkaz v Laravelu. Všechny zprávy jsou převedeny do jednotného JSON formátu.
+
+## 3.1 Formát JSON zprávy
+
+Každá zpráva má tuto strukturu:
+
+- **networkId**: číslo (ID sítě / krajský subsystém)  
+- **vycId**: číslo (ID vyrozumívacího centra)  
+- **kppsAddress**: string/hex (adresa KPPS, 0–65534)  
+- **operatorId**: číslo (pokud dostupné)  
+- **type**: řetězec (ACTIVATION | STATUS | FAULT | TRIGGER | QUERY | RESPONSE)  
+- **command**: řetězec (např. SIREN_SIGNAL | GONG | VERBAL_INFO | BATTERY_LOW …)  
+- **params**: objekt s parametry specifickými pro command  
+- **priority**: řetězec (P1 | P2 | P3)  
+- **timestamp**: číslo (UNIX time, sekundy, UINT64)  
+- **rawMessage**: řetězec (HEX nebo ASCII rámec)  
+
+### Příklad JSON
+```
+{
+  "networkId": 5,
+  "vycId": 12,
+  "kppsAddress": "0x1A2B",
+  "operatorId": 42,
+  "type": "ACTIVATION",
+  "command": "SIREN_SIGNAL",
+  "params": { "signalType": 1, "duration": 180 },
+  "priority": "P2",
+  "timestamp": 1696157700,
+  "rawMessage": "SIREN 1 180"
+}
+```
+
+## 3.2 Varianty volání Artisan
+
+- **Single mode**:  
+  Každá zpráva = jedno volání Artisan.  
+  ```
+  php artisan jsvv:processMessage '{"networkId":5,...}'
+  ```
+
+- **Batch mode**:  
+  Více zpráv předaných v jedné dávce. JSON obsahuje pole `items[]`.  
+  ```
+  {
+    "items": [
+      { "networkId": 5, "command": "SIREN_SIGNAL", ... },
+      { "networkId": 5, "command": "STOP", ... }
+    ]
+  }
+  ```
+
+- **Retry pravidla**:  
+  Pokud Artisan vrátí nenulový exit code, zpráva je zařazena do retry fronty s exponenciálním backoffem. Počet pokusů a intervaly nastavitelné v parseru.  
+
+## 3.3 Výstup Artisan (STDOUT/exit code)
+
+- **OK**:  
+  „OK Message processed: {command} at {ISO8601}“, exit code 0.  
+
+- **ERROR**:  
+  „ERROR {reason}“, exit code 1.  
+
+## 3.4 Bezpečnost a robustnost
+
+- **Maximální velikost payloadu**: doporučeno max. 1 MB na jednu zprávu / dávku.  
+- **Validace JSON**: všechny příchozí zprávy validovat proti JSON schématu.  
+- **Idempotence**: zprávy deduplikovat podle `dedupKey` (kombinace: networkId, vycId, kppsAddress, command, params, timestamp).  
+- **Timeouty**: parser musí čekat na odpověď Artisanu max. 5 s, jinak retry.  
+
+
+
+# 4. Návrh backendu v Laravelu
+
+Backend v Laravelu přijímá zprávy z parseru (Artisan), provádí validaci, ukládá je do databáze, emituje interní eventy a spouští navazující workflow (výstrahy, notifikace, řízení Modbus kanálu). Návrh klade důraz na idempotenci, nízkou latenci a auditovatelnost.
+
+## 4.1 Datový model a migrace
+
+### Tabulka: `jsvv_messages`
+Slouží jako centrální evidenční tabulka všech přijatých zpráv.
+
+- `id` (bigIncrements) – primární klíč.  
+- `networkId` (unsignedSmallInteger) – ID sítě.  
+- `vycId` (unsignedSmallInteger) – ID VyC.  
+- `kppsAddress` (string, 32) – adresa KPPS (hex/dec).  
+- `operatorId` (unsignedInteger, nullable) – ID operátora.  
+- `type` (string, 32) – ACTIVATION | STATUS | FAULT | TRIGGER | QUERY | RESPONSE.  
+- `command` (string, 64) – viz slovník příkazů.  
+- `params` (json) – parametry příkazu.  
+- `priority` (string, 4) – P1 | P2 | P3.  
+- `payloadTimestamp` (unsignedBigInteger) – Unix time (UINT64).  
+- `receivedAt` (timestampTz) – čas přijetí z Artisanu.  
+- `rawHex` (longText) – původní rámec (HEX/ASCII).  
+- `status` (string, 24) – NEW | VALIDATED | QUEUED | PROCESSED | DUPLICATE | REJECTED | FAILED.  
+- `dedupKey` (string, 128) – hash pro idempotenci (unikátní index).  
+- `artisanExit` (smallInteger, nullable) – návratový kód z Artisanu (pokud je volán synchronně).  
+- `meta` (json, nullable) – doplňková metadata.  
+- `created_at` / `updated_at` (timestampsTz).  
+
+Indexy:
+- `idx_jsvv_messages_lookup` na (`networkId`, `vycId`, `kppsAddress`, `payloadTimestamp`, `priority`).  
+- `uniq_jsvv_messages_dedupKey` – unique na `dedupKey`.  
+- `idx_jsvv_messages_type_command` na (`type`, `command`).
+
+### Tabulka: `jsvv_events`
+Auditní stopa navazujících akcí a stavových změn.
+
+- `id` (bigIncrements).  
+- `message_id` (foreignId → `jsvv_messages.id`).  
+- `event` (string, 64) – např. JsvvMessageReceived, ValidationFailed, DispatchedToQueue, ModbusPaused, ModbusResumed, NotificationSent, WorkflowCompleted, ErrorRaised, RetryScheduled apod.  
+- `data` (json) – payload události.  
+- `created_at` (timestampTz).  
+
+Indexy:
+- `idx_jsvv_events_message` na (`message_id`).  
+- `idx_jsvv_events_event_time` na (`event`, `created_at`).
+
+### Tabulka: `control_channel_commands`
+Log a poslední známý stav řídicích příkazů Modbus kanálu.
+
+- `id` (bigIncrements).  
+- `command` (string, 32) – pause_modbus | resume_modbus | stop_modbus | status_modbus.  
+- `state_before` (string, 24) – IDLE | TRANSMITTING | PAUSED | STOPPED.  
+- `state_after` (string, 24).  
+- `reason` (string, 128) – např. „P1 STOP přijato“.  
+- `message_id` (foreignId nullable) – původní zpráva, která přechod vyvolala.  
+- `result` (string, 24) – OK | TIMEOUT | FAILED.  
+- `created_at` (timestampTz).
+
+### Příklad migrace (zestručněno)
+
+```php
+Schema::create('jsvv_messages', function (Blueprint $t) {
+  $t->bigIncrements('id');
+  $t->unsignedSmallInteger('networkId');
+  $t->unsignedSmallInteger('vycId');
+  $t->string('kppsAddress', 32);
+  $t->unsignedInteger('operatorId')->nullable();
+  $t->string('type', 32);
+  $t->string('command', 64);
+  $t->json('params');
+  $t->string('priority', 4);
+  $t->unsignedBigInteger('payloadTimestamp');
+  $t->timestampTz('receivedAt');
+  $t->longText('rawHex');
+  $t->string('status', 24)->default('NEW');
+  $t->string('dedupKey', 128);
+  $t->smallInteger('artisanExit')->nullable();
+  $t->json('meta')->nullable();
+  $t->timestampsTz();
+  $t->unique('dedupKey', 'uniq_jsvv_messages_dedupKey');
+  $t->index(['networkId','vycId','kppsAddress','payloadTimestamp','priority'], 'idx_jsvv_messages_lookup');
+  $t->index(['type','command'], 'idx_jsvv_messages_type_command');
+});
+```
+
+## 4.2 Příjem zpráv z Artisanu (Command Handler)
+
+### Artisan příkaz
+`php artisan jsvv:processMessage {payload}`
+
+- Přijme JSON (`single` nebo `batch`).  
+- Ověří JSON proti schématu (Laravel Validation / JSON Schema).  
+- Vytvoří nebo najde záznam v `jsvv_messages` podle `dedupKey`.  
+- Emituje event `JsvvMessageReceived`.  
+- U `batch` iteruje nad `items[]` a postupuje stejně pro každou zprávu.
+
+### DedupKey (idempotence)
+`dedupKey = sha256(networkId|vycId|kppsAddress|type|command|normalized(params)|timestamp)`
+
+- `normalized(params)` = serializace JSON s deterministickým pořadím klíčů.  
+- Pokud už záznam s `dedupKey` existuje → označit jako `DUPLICATE`, zalogovat audit a **neprovádět** znovu workflow (no-op).
+
+## 4.3 Zpracování zpráv (Event → Listeners)
+
+Po uložení a validaci je emitován **`JsvvMessageReceived`** s payloadem celé zprávy. Typické posluchače:
+
+- **`RouteActivationCommands`** – pro `type=ACTIVATION` (P1/P2/P3) rychlá cesta do prioritní queue (`activations-high`).  
+- **`HandleStatusAndFaults`** – ukládá stavové/fault zprávy, spouští notifikace a případné servisní workflow.  
+- **`ControlChannelCoordinator`** – vyhodnotí, zda má být Modbus kanál **pozastaven/přerušen** (viz kapitola 5).  
+- **`AuditTrailWriter`** – zapisuje události do `jsvv_events`.  
+
+### Queues a priority
+- `activations-high` – nejvyšší priorita, minimální middleware, krátké timeouts.  
+- `default` – běžné úlohy.  
+- `low` – reporty a housekeeping.
+
+**Cíl SLA:** Zajištění zpracování aktivační zprávy (P2) v řádu **< 500 ms** v backendu, aby celková doba od přijetí po zahájení akustiky nepřesáhla 3 s / 10 s.
+
+## 4.4 Validace schématu
+
+Příklad validačních pravidel (Laravel validation):
+- `networkId` – required|integer|min:0|max:255  
+- `vycId` – required|integer|min:0|max:255  
+- `kppsAddress` – required|string|max:32  
+- `operatorId` – nullable|integer|min:0|max:65535  
+- `type` – required|in:ACTIVATION,STATUS,FAULT,TRIGGER,QUERY,RESPONSE  
+- `command` – required|string|max:64  
+- `params` – required|array  
+- `priority` – required|in:P1,P2,P3  
+- `timestamp` – required|integer|min:0  
+- `rawMessage` – required|string
+
+Chybná validace → stav `REJECTED`, audit `ValidationFailed` s chybami.
+
+## 4.5 Idempotence a TTL pro duplicitní cache
+
+- Primární idempotence: `dedupKey` v DB (unique index).  
+- Sekundární cache (Redis): `dedup:{dedupKey} = 1` s TTL **10 minut** – zabrání závodům ve více instancích.  
+- Chování při duplicitě: zapsat `jsvv_events(event=DUPLICATE_DETECTED)`, nezpracovávat už podruhé.
+
+## 4.6 Zrychlená cesta pro aktivace (fast path)
+
+Pro `type=ACTIVATION`:
+1. Minimální validace → **save** (status=VALIDATED).  
+2. Emit `JsvvMessageReceived`.  
+3. Listener `RouteActivationCommands` bezodkladně pushne job do `activations-high`.  
+4. Job provede pouze nezbytné kroky (např. přímý zápis příznaku pro Modbus koordinátor, notifikaci).  
+5. Ostatní doprovodné akce (reporting, sekundární notifikace) provádět **asynchronně** v `default/low`.
+
+## 4.7 Chybové stavy a stavový automat
+
+Stavová pole v `jsvv_messages.status`:  
+- `NEW` → `VALIDATED` → `QUEUED` → `PROCESSED`  
+- Odbočky: `REJECTED` (validace/parse fail), `DUPLICATE` (idempotence), `FAILED` (výjimka/timeout).
+
+Přechody:
+- `NEW` → `REJECTED` (neprošel schema).  
+- `VALIDATED` → `FAILED` (výjimka posluchače) → retry (exponenciální, max 5x).  
+- `QUEUED` → `PROCESSED` (úspěch) | `FAILED`.  
+
+Každý přechod se loguje do `jsvv_events` s důvodem a metadaty (časy, identifikátory).
+
+## 4.8 Monitoring a metriky
+
+- Latence `parser → artisan → stored` (ms).  
+- Čas validace (ms), čas emise eventu (ms), queue wait time (ms).  
+- Počty zpráv podle `type/command/priority`.  
+- Chybovost validace, podíl duplicit.  
+- SLA watch: procento aktivací zpracovaných < 3 s, akustika < 10 s (z kombinovaných dat).
+
+Prometheus/Laravel Telescope/Health checks; alarm při degradaci SLA.
+
+## 4.9 Bezpečnost a audit
+
+- Podpis Artisanu (ověření, že volající je parser – API key/Unix socket).  
+- Rate limiting na příkaz (ochrana před bouří).  
+- Úplná auditní stopa v `jsvv_events` – zejména pro zásahy do Modbus kanálu.  
+- Logování originálního `rawHex` pro forenzní analýzu.
+
+## 4.10 Příklady zpracování (happy path a edge cases)
+
+### Aktivace sirény (P2)
+- Přijato → validace OK → uloženo → emit event → fast path queue → koordinátor Modbus označí potřebu preempce → workflow pokračuje; status = `PROCESSED`.
+
+### STOP (P1)
+- Přijato → validace OK → uloženo → emit event → koordinátor pošle `stop_modbus` přes Control Channel → čeká potvrzení → pokud TIMEOUT, eskalace (fallback viz kap. 5).
+
+### Duplicitní aktivace
+- Přijato → `dedupKey` koliduje → záznam s `DUPLICATE`, audit událost, bez dalšího workflow.
+
+### Invalid schema
+- Přijato → validace KO → záznam `REJECTED` + seznam chyb v `jsvv_events`.
+
+
+
+# 5. Integrace s Modbus a pravidla přerušování
+
+Tato kapitola definuje propojení backendu (Laravel) s Modbus kanálem a kooperaci s Python parserem tak, aby byla zajištěna **preempce** vysílání podle priorit JSVV (P1 > P2 > P3) a dodrženy SLA: **zahájení do 3 s** a **akustická aktivace do 10 s** od přijetí příkazu.
+
+## 5.1 Control Channel (Backend ↔ Parser)
+
+Obousměrné řídicí rozhraní mezi backendem a parserem (IPC přes Unix socket / ZeroMQ / gRPC-lite). Logicky jde o „řídicí vrstvu“, která nevede samotná data JSVV, ale **koordinační příkazy** pro Modbus kanál na straně parseru.
+
+### Příkazy
+- `pause_modbus` – okamžitě pozastaví běžící Modbus operace (dotazování, write/coil, read/holding).  
+- `resume_modbus` – obnoví dříve pozastavené Modbus operace.  
+- `stop_modbus` – **okamžitě** ukončí probíhající přenos (hard stop); přepne kanál do bezpečného stavu.  
+- `status_modbus` – požadavek na zaslání aktuálního stavu FSM (viz níže) a rozpracovaných operací.
+
+### Formát zpráv Control Channel
+Každá zpráva má JSON payload:
+- `id` – UUID požadavku.  
+- `command` – viz výše.  
+- `reason` – lidsky čitelný důvod (např. „P1 STOP“, „P2 activation preemption“).  
+- `sourceMessageId` – ID záznamu v `jsvv_messages` (je-li k dispozici).  
+- `deadlineMs` – měkký deadline pro provedení (např. 500 ms).
+
+### Odpověď
+- `ok` (bool)  
+- `state` – aktuální stav FSM (IDLE | TRANSMITTING | PAUSED | STOPPED)  
+- `details` – doplňkové info (aktuální operace, poslední chyba)  
+- `ts` – čas odpovědi (ISO8601)  
+
+Všechny příkazy a odpovědi se auditují do tabulky `control_channel_commands`.
+
+## 5.2 Stavový model Modbus kanálu (FSM)
+
+```
+IDLE ──(start Tx)──▶ TRANSMITTING
+  ▲                   │  │
+  │                   │  ├─(pause_modbus)──▶ PAUSED
+  │                   │  └─(stop_modbus)───▶ STOPPED
+  │                   │
+  └──(resume)◀────────┘
+PAUSED ──(resume_modbus)──▶ TRANSMITTING
+STOPPED ──(reset/init)──▶ IDLE
+```
+
+- **IDLE** – kanál neprovádí žádné přenosy.  
+- **TRANSMITTING** – probíhá aktivní komunikace (např. periodické čtení registrů, zápis do cílových zařízení).  
+- **PAUSED** – dočasně pozastaveno; lze bezpečně obnovit.  
+- **STOPPED** – tvrdě zastaveno; pro návrat je potřeba reinitializace (znovu otevřít port, rehandshake).
+
+### Přechody vyvolané prioritami JSVV
+- **P1 (STOP/RESET, kritické stavy)**: backend ihned odešle `stop_modbus` → parser musí **do 200 ms** potvrdit přechod do `STOPPED`.  
+- **P2 (aktivační příkazy sirén/verbálů)**: backend odešle `pause_modbus` → parser musí **do 200 ms** přepnout do `PAUSED`; po dokončení klíčové akce backendem (např. zápis příkazu na další rozhraní) odešle `resume_modbus`.  
+- **P3**: bez zásahu, pouze pokud nebrání SLA vyšších priorit; může být pauzováno, pokud si to vyžádá režie P2/P1.
+
+## 5.3 Prioritizace a preempce
+
+- **P1 má absolutní přednost**: okamžité `stop_modbus`; běžící P2/P3 úlohy se ukončí (na Modbus i jinde).  
+- **P2 přerušuje P3**: při příchodu P2 backend *nejprve* pozastaví Modbus (`pause_modbus`), aby uvolnil kanál i CPU pro rychlou reakci, a teprve poté pokračuje v aktivaci.  
+- **P3 je přerušitelná**: může být pozastavena libovolně často, nemá nárok blokovat P2/P1.  
+
+### Časování a SLA
+- Backend + parser společně musejí zajistit, aby pro P2 platilo: **zahájení ≤ 3 s**, **akustika ≤ 10 s** od přijetí zprávy.  
+- V praxi: Control Channel reakce (pause/stop) do 200 ms, dispatch aktivace do prioritní queue (`activations-high`) do 50 ms, Modbus pauza okamžitá.  
+
+## 5.4 Implementační detaily na straně parseru (Modbus worker)
+
+- Samostatný **Modbus worker** (vlákno/proces) obsluhující čtení/zápis.  
+- Worker respektuje **FSM** a **Control Channel** signály (non-blocking).  
+- Bezpečné body přerušení: mezi PDU transakcemi (TX/RX), mezitím maximální wait 50–100 ms.  
+- Hard-stop: pokud přijde `stop_modbus` uprostřed transakce → zrušit timeoutem, zavřít port, přejít do `STOPPED`.  
+- Po `resume_modbus` obnovit periodické dotazy a zápisy v původném pořadí.
+
+## 5.5 Chování backendu při preempci
+
+- Listener `ControlChannelCoordinator` hodnotí `type/priority` přijatého `jsvv_message`:  
+  - P1 → `stop_modbus(reason="P1 " + command)`.  
+  - P2 → `pause_modbus(reason="P2 activation")`, po potvrzení `PAUSED` → pokračovat v aktivaci → `resume_modbus` po dokončení.  
+  - P3 → bez zásahu (pokud koliduje, může být pauzována).
+
+- Všechny tyto kroky se zapisují do `jsvv_events` i `control_channel_commands` (důvod, čas, stav před/po).
+
+## 5.6 Bezpečnostní pojistky a fallbacky
+
+- **Timeout potvrzení**: pokud parser nepotvrdí `stop_modbus`/`pause_modbus` do **500 ms**, backend pošle **opakování**.  
+- **Eskalace**: pokud po **3 pokusech** bez potvrzení, backend vyvolá **hardware fallback** (např. **hard-cut relé** přes oddělený out-of-band kanál) a označí výsledek jako `TIMEOUT`.  
+- **Watchdog**: parser publikuje heartbeat (např. každých 2 s). Výpadek > 5 s → backend přepne do **degradovaného režimu** (přímá aktivace bez spoléhání na modbus worker, pokud architektura dovoluje).  
+- **Obnova po STOPPED**: návrat do `IDLE` pouze explicitním `reset/init` krokem s ověřením portu a linkových parametrů.
+
+## 5.7 Audit a observabilita
+
+- Každý Control Channel příkaz → záznam do `control_channel_commands` s `state_before/state_after/reason/message_id`.  
+- Korelace s `jsvv_messages.id` pro kompletní trasování „příčina→následek“.  
+- Metriky: počet preempcí, průměrná doba potvrzení pause/stop, % případů vyžadujících fallback, dopad na SLA.
+
+## 5.8 Příklady sekvencí
+
+### P2 aktivace během běžícího P3 (rozhlas)
+1. Přijata zpráva `SIREN_SIGNAL` (P2).  
+2. Backend: `pause_modbus(reason="P2 activation")` → parser odpoví `PAUSED`.  
+3. Backend spustí prioritní workflow pro aktivaci.  
+4. Po potvrzení provedení → `resume_modbus`.  
+5. Audit: `ModbusPaused` → `ActivationDispatched` → `ModbusResumed`.
+
+### P1 STOP během P2 hlášení
+1. Přijato `STOP` (P1).  
+2. Backend: `stop_modbus(reason="P1 STOP")` → parser `STOPPED`.  
+3. Backend provede ukončovací kroky a nastaví systém do klidu.  
+4. Audit: `ModbusStopped` → `SystemIdle`.
+
+## 5.9 Konfigurace a ladění
+
+Doporučené konfigurační položky (Laravel .env / parser config):
+- `CONTROL_CHANNEL_ENDPOINT` (unix:///var/run/jsvv.sock)  
+- `CONTROL_CHANNEL_TIMEOUT_MS` (500)  
+- `CONTROL_CHANNEL_RETRY` (3)  
+- `MODBUS_SAFE_BREAKPOINT_MS` (100)  
+- `MODBUS_WORKER_HEARTBEAT_MS` (2000)  
+- `SLA_ACTIVATION_START_MS` (3000)  
+- `SLA_ACOUSTIC_START_MS` (10000)
+
+
+
+# 6. Referenční tabulky a slovníky
+
+Tato kapitola obsahuje kompletní tabulky extrahované ze specifikace JSVV, nutné pro implementaci parseru, backendu a řízení Modbus. Jsou zde vyjmenovány všechny typy zpráv, stavových dotazů, automatických hlášení, adresace a SLA parametry.
+
+## 6.1 Typy zpráv a příkazů z VyC → KPPS (aktivace)
+
+| Příkaz | Parametry | Rozsah | Jednotky | Priorita | Poznámka |
+|--------|-----------|--------|-----------|----------|----------|
+| Signál sirény | `signalType` | 1–3 | kód (typ tónu) | P2 | 3 různé tóny (např. varovný, požární, zkouška) |
+| Znělka (gong) | `gongType` | 1–2 | – | P3 | Gong 1 = začátek, Gong 2 = konec |
+| Verbální informace | `slot` | 1–20 | index hlášky | P2 | min. 20 nahraných hlášek |
+| Připojení rozhlasu | – | – | – | P3 | připojení na rozhlasový přijímač |
+| Vzdálený hlas | – | – | – | P3 | živý mikrofon z VyC |
+| Místní hlas | – | – | – | P3 | mikrofon lokálně |
+| Externí audio (primární) | – | – | – | P3 | |
+| Externí audio (sekundární) | – | – | – | P3 | |
+| Text pro panel | `text` | 1–128 znaků | UTF-8 | P3 | zobrazení na LED panelu |
+| STOP | – | – | – | P1 | okamžité ukončení |
+| RESET | – | – | – | P1 | tovární reset |
+| TEST | – | – | – | P3 | tichý test |
+
+## 6.2 Stavové dotazy a odpovědi
+
+| Dotaz | Odpověď – pole | Jednotky | Priorita |
+|-------|----------------|----------|----------|
+| Stav EKPV | `sirenaStatus`, `panelStatus` | bool | P1 |
+| Stav KPM | `napajeni`, `signal`, `teplota` | V, dB, °C | P1 |
+| Vadné hlásiče MIS | `ids[]` | seznam ID | P1 |
+| Stav KPPS | `napajeni`, `paměť`, `signalStrength` | V, B, dB | P1 |
+| Adresy (`READ_ADR`) | `adr[35]` | hex | P1 |
+| Konfigurace (`READ_CFG`) | `interval`, `blockTime`, `retry`, `AESkeyId` | s | P1 |
+| Záznamy (`READ_LOG`) | `logEntries[]` | – | P1 |
+
+## 6.3 Automatická hlášení (faults/alarms)
+
+| Hlásící prvek | Stav | Parametry | Priorita |
+|---------------|------|-----------|----------|
+| KPPS | Porucha napájení | napětí < limit | P1 |
+| KPPS | Přetížení | proud > limit | P1 |
+| KPPS | Otevření skříně | switch=1 | P1 |
+| EKPV | Porucha sirény | stav=FAULT | P1 |
+| EKPV | Porucha panelu | stav=FAULT | P1 |
+| KPM | Teplota mimo rozsah | > 85 °C | P1 |
+| Baterie | Nízké napětí | < 11.5 V | P1 |
+| Audio | Ztráta signálu | SNR < 10 dB | P1 |
+
+## 6.4 Adresace a identifikátory
+
+| Pole | Formát | Rozsah | Poznámka |
+|------|--------|--------|----------|
+| ID sítě | číslo | 1–255 | krajský subsystém |
+| ID VyC | číslo | 1–255 | centrum |
+| ID operátora | číslo | 0–65535 | max 1000 současných |
+| Adresa KPPS | číslo/hex | 0–65534 | 0xFFFF vyhrazeno |
+| Skupinové adresy A1–A16 | hex | definované | 16 adres |
+| Skupinové adresy B1–B16 | hex | definované | 16 adres |
+| Společné adresy | – | – | pro rychlou aktivaci více prvků |
+
+## 6.5 Časování a SLA
+
+| Parametr | Hodnota | Jednotka | Poznámka |
+|----------|---------|----------|----------|
+| Zahájení aktivačního příkazu | ≤ 3 | s | od přijetí zprávy |
+| Zahájení akustické aktivace | ≤ 10 | s | od přijetí zprávy |
+| Synchronizace RTC | ±3 | s/den | vyžadováno |
+| Formát časové značky | UINT64 | s | Unix time |
+| Timeout duplicit | 180 (30–300) | s | nastavitelný |
+| Heartbeat parseru | 2 | s | pro watchdog |
+
+## 6.6 Kontrolní mechanismy
+
+- **CRC**: CRC-16-CCITT, polynom 0x1021, init=0x0000, výstup 4 ASCII hex číslice.  
+- **Duplicitní klíč**: kombinace `command+params+operatorId+timestamp`.  
+- **Ztráty**: retry + logování MER.  
+- **Ochrana proti CRC failu**: zpráva odmítnuta, logována.  
+
+
+
