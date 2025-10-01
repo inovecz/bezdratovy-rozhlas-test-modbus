@@ -1,0 +1,3126 @@
+MINISTERSTVO VNITRA
+generální ředitelství Hasičského záchranného sboru České republiky
+Kloknerova 2295/26, Praha 414, 148 01
+
+
+Č.j. MV- 29584-1/PO-KIS-2025
+Praha 18. února 2025
+Počet listů: 84
+
+
+
+
+
+
+
+
+
+
+POŽADAVKY NA ZAŘÍZENÍ
+PRO JEDNOTNÝ SYSTÉM VAROVÁNÍ A VYROZUMĚNÍ
+A POSTUP PŘI SCHVALOVÁNÍ PŘIPOJENÍ NOVÝCH ZAŘÍZENÍ DO JEDNOTNÉHO SYSTÉMU VAROVÁNÍ A VYROZUMĚNÍ
+
+
+VE ZNĚNÍ ZMĚNY Č. 2
+
+
+
+
+
+2025
+
+Obsah
+Úvod	3
+	•	Pojmy a definice	3
+	•	Jednotný systém varování a vyrozumění	7
+	•	JSVV a jeho funkcionality	7
+	•	Vyrozumívací centra	8
+	•	Telekomunikační sítě	9
+	•	Přenosová soustava JSVV	9
+	•	Komunikace na úrovni přenosové soustavy JSVV	11
+	•	Společné požadavky na zařízení JSVV	14
+	•	Koncové prvky přenosové soustavy JSVV	17
+	•	Obecné požadavky na KPPS	17
+	•	Požadavky na KPPS pro první vrstvu přenosové soustavy JSVV	18
+	•	Požadavky na KPPS pro druhou vrstvu přenosové soustavy JSVV	19
+	•	Koncové prvky JSVV	24
+	•	Koncové prvky JSVV obecně	24
+	•	Rozhraní pro koncové prvky JSVV	24
+	•	Obecné požadavky na koncové prvky varování	25
+	•	Požadavky na elektronické koncové prvky varování	25
+	•	Požadavky na elektronické sirény	27
+	•	Požadavky na místní informační systémy	27
+	•	Požadavky na koncové prvky informování	30
+	•	Požadavky na elektrické rotační sirény	30
+	•	Požadavky na koncové prvky měření	31
+	•	Požadavky na rozmístění koncových prvků varování	32
+	•	Autonomní systém varování a jeho vazba k JSVV	33
+	•	Koncové prvky vyrozumění	33
+	•	Zkouška a kontrola provozuschopnosti JSVV	35
+	•	Schvalování připojení nových zařízení do JSVV	35
+	•	Závěrečná ustanovení	37
+Seznam příloh	38
+
+Úvod
+V souladu s § 7 odst. 2 písm. f) zákona č. 239/2000 Sb., o integrovaném záchranném systému a o změně některých zákonů 1), a § 9 odst. 7 vyhlášky č. 380/2002 Sb., k přípravě a provádění úkolů ochrany obyvatelstva, a k technickému, provoznímu a organizačnímu zabezpečení jednotného systému varování a vyrozumění 2) se stanovují tyto požadavky na zařízení pro jednotný systém varování a vyrozumění (dále jen „JSVV“).
+V těchto požadavcích jsou definovány základní funkcionality, technické, užitné a výkonové parametry technických zařízení připojovaných do JSVV a vazby mezi jednotlivými prvky systému. Součástí těchto požadavků jsou i technické požadavky pro připojení technických zařízení, která provozuje obec nebo jiná právnická osoba, jež jsou využitelné jako koncové prvky varování do JSVV (viz kapitola 5).
+Dále je zde stanoven postup při schvalování připojení nových zařízení do JSVV (viz kapitola 10).
+
+
+	•	Pojmy a definice
+Pro účely tohoto dokumentu platí dále uvedené pojmy a jejich definice:
+akustické pokrytí
+oblast, ve které daný systém nebo zařízení splňuje požadavky na slyšitelnost a srozumitelnost informace
+anténa
+část rádiového zařízení, která umožňuje vazbu mezi rádiovým zařízením a prostředím, kterým jsou rádiové vlny šířeny
+autonomní systém varování (ASV)
+systém pro ovládání a komunikaci s koncovými prvky varování, který používá přenosové soustavy realizované rádiovým signálem a je provozován na omezeném území jiným subjektem než Hasičským záchranným sborem ČR. Zahrnuje soubor zařízení, generující varovný signál a hlasovou informaci či jiný zvuk elektronickou cestou
+diagnostická informace
+oznámení stavu koncového prvku nebo hodnoty veličiny z čidla monitoringu prostředí
+elektrická rotační siréna (RS)
+elektrické zařízení generující varovný signál či jiný zvuk mechanickým způsobem. Jedná se o zařízení, které může varovat obyvatelstvo pouze signálem s předem určeným významem
+elektronická siréna (ES)
+zařízení, které generuje varovný signál a hlasovou informaci či jiný zvuk elektronickou cestou. Jedná se o samostatně plně funkční zařízení, které slouží k varování, předání tísňové informace a informování obyvatelstva, včetně hlasových relací, a které lze ovládat lokálně i dálkově
+elektronický koncový prvek varování (EKPV)
+elektronické zařízení zabezpečující varování,	předání tísňové informace a informování obyvatelstva, zejména v akustické podobě. Může jím být:
+	•	elektronická siréna,
+	•	místní informační systém
+
+1)  Jsou-li v textu uváděny odkazy na konkrétní právní předpisy, případně normy, rozumí se tím vždy předpisy v platném znění.
+2)  Zásady  dalšího  rozvoje  jednotného  systému  varování  a  informování  obyvatelstva  v České  republice po roce 2010 (č.j. MV-21332-1/PO-2010).
+Strategický cíl 2, úkol č. 4 Koncepce ochrany obyvatelstva do roku 2025 s výhledem do roku 2030 (schválena usnesením vlády č. 560 ze dne 21. června 2021).
+
+informování obyvatelstva
+informace, kterou se sděluje obyvatelstvu průběh mimořádné události. Informování může mít podobu přímého hlasového vstupu z VyC nebo vstupu z hromadných sdělovacích prostředků
+jednotný systém varování a vyrozumění (JSVV)
+systém definovaný aktuálně platnými právními předpisy, zajišťující varování, předání tísňové informace a informování obyvatelstva o hrozící nebo již nastalé mimořádné události na území České republiky. Je tvořen:
+	•	vyrozumívacími centry,
+	•	telekomunikačními sítěmi,
+	•	přenosovou soustavou,
+	•	koncovými prvky
+koncový prvek informování (KPI)
+technické zařízení schopné předat tísňovou informaci a dále informovat obyvatelstvo o hrozící nebo již nastalé mimořádné události. Může jím být:
+	•	varovný informační panel
+koncový prvek JSVV (KP)
+koncové zařízení, kterým je stanovenou formou realizováno varování, případně též předání tísňové informace a další informování obyvatelstva o hrozící nebo již nastalé mimořádné události, nebo přenos informací o stavu prostředí, který vyžaduje, aby uvedené varování a informování bylo iniciováno. Koncovým prvkem může být:
+	•	koncový prvek varování,
+	•	koncový prvek měření,
+	•	koncový prvek informování
+koncový prvek měření (KPM)
+zařízení ke sběru dat z okolního prostředí a jejich předání na příslušná vyrozumívací centra prostřednictvím infrastruktury JSVV
+koncový prvek přenosové soustavy (KPPS)
+rádiové zařízení pro dálkové ovládání KP z vyrozumívacích center a pro přenos dat z KP na vyrozumívací centra prostřednictvím přenosové soustavy JSVV
+koncový prvek varování (KPV)
+technické zařízení schopné vydávat varovný signál, případně též předat tísňovou informaci a dále informovat obyvatelstvo o hrozící nebo již nastalé mimořádné události. Může jím být:
+	•	elektrická rotační siréna,
+	•	elektronický koncový prvek varování
+koncový prvek vyrozumění
+technické zařízení schopné předat informaci orgánům krizového řízení. Může jím být:
+	•	pager
+místní informační systém (MIS)
+druh elektronického koncového prvku varování, využívaného na omezeném území zpravidla ve formě místního/obecního/objektového rozhlasu. Zahrnuje soubor zařízení, generující varovný signál, jiný zvuk nebo hlasovou informaci elektronickou cestou. Místním informačním systémem může být:
+	•	bezdrátový místní informační systém (dále i BMIS), který používá rádiovou přenosovou soustavu,
+	•	drátový místní informační systém (dále i DMIS), který používá přenosovou soustavu po drátových rozvodech,
+	•	kabelový místní informační systém (dále i KMIS), který používá přenosovou soustavu po IP kabelových rozvodech
+
+odbavení
+schopnost zařízení realizovat varování, předání tísňové informace nebo informování obyvatelstva na základě místně, dálkově nebo automaticky zadaného příkazu
+ovládací panel
+součást zařízení, ze kterého je koncový prvek varování obsluhován, ovládán a zobrazuje vizuálně jeho provozní stav
+ozvučovací zařízení
+elektroakustické zařízení, šířící zvuk v prostředí. Z pohledu těchto technických podmínek se jedná o sirénu nebo hlásič MIS
+pokrytí rádiovým signálem
+oblast, ve které je síla pole rádiového systému dostatečná pro spolehlivou činnost všech rádiových zařízení
+přenosová soustava JSVV
+část JSVV, která zabezpečuje:
+	•	přenos příkazů ke koncovým prvkům z vyrozumívacích center (dále i jen „VyC“),
+	•	přenos diagnostických a stavových informací od KP a dat a poplachových informací z čidel monitoringu prostředí KPM na územně příslušná VyC a případně další určená místa,
+	•	přenos modulace přímého hlasového vstupu z VyC a případně z dalších vybraných míst do EKPV,
+	•	svolání členů jednotek sborů dobrovolných hasičů (dále jen „JSDH“) zařazených do plošného pokrytí území kraje jednotkami požární ochrany a pracovníků havarijních služeb a provozovatelů nebezpečných objektů z VyC,
+	•	přenos diagnostických a stavových informací ze zařízení přenosové soustavy JSVV na VyC
+přenosová soustava MIS
+část MIS, která zabezpečuje:
+	•	přenos příkazů pro hlásiče a případná další integrovaná zařízení z ovládacího pracoviště MIS,
+	•	přenos diagnostických a stavových informací od hlásičů a dalších integrovaných zařízení na ovládací pracoviště MIS a další určená místa,
+	•	přenos modulace přímého hlasového vstupu z ovládacího pracoviště MIS a dalších vybraných míst do hlásičů,
+	•	přenos diagnostických a stavových informací z technologických prvků vlastní přenosové soustavy MIS na ovládací pracoviště MIS a další určená místa
+přijímač
+technické zařízení pro příjem a zpracování signálu
+radiostanice
+zařízení, které se skládá z vysílače a přijímače a dalších komponent, potřebných pro šíření rádiového signálu
+rádiové rušení
+současné vysílání rádiových vln ze dvou a více vysílačů nebo zdrojů, které brání nebo znemožňuje příjem rádiového signálu vysílaného na určitém kmitočtu
+signál sirén
+akustický signál se stanoveným časovým průběhem a kmitočtovou charakteristikou, kterým je oznamován určitý stav nebo potřeba provedení stanovené činnosti
+
+slyšitelnost
+vlastnost zvuku, která umožňuje, aby byl požadovaný zvuk rozlišen mezi ostatními zvuky
+spínací jednotka (SSR)
+polovodičové spínací relé
+srozumitelnost
+taková kvalita řečové zprávy a jejího přenosu k posluchači, která má vliv na její správné pochopení
+stavová informace
+informace o provozním, případně poruchovém stavu prvku přenosové soustavy a koncových prvků
+systém
+soubor zařízení sloužících k dosažení požadovaného účelu
+telekomunikační sítě
+vyhrazené nebo veřejné sítě určené pro přenosy příkazů pro varování a vyrozumění, tísňové a provozní informace a další data mezi VyC jednotlivých úrovní a mezi prvky přenosové soustavy JSVV
+tísňová informace
+informace, kterou se sdělují údaje o bezprostředním nebezpečí vzniku nebo již nastalé mimořádné události a údaje o opatřeních k ochraně obyvatelstva. Tísňová informace je předávána bezodkladně po vyhlášení varovného signálu. Tísňová informace může mít podobu verbální informace předem uložené v paměti EKPV, odbavitelné bez nutnosti provedení přímého hlasového vstupu z VyC, nebo může být předána přímým hlasovým vstupem do EKPV z VyC nebo cestou hromadných sdělovacích prostředků
+varování
+souhrn organizačních, technických a provozních opatření zabezpečujících včasné upozornění obyvatelstva na hrozící nebo nastalou mimořádnou událost, vyžadující realizaci opatření na ochranu obyvatelstva a majetku
+varovný informační panel (VIP)
+optické zařízení, umožňující varování, předání tísňové informace a další informování obyvatelstva ve formě textů, piktogramů nebo jiné vhodné vizuální formě
+varovný signál
+akustický signál „Všeobecná výstraha“, který je určen k varování obyvatelstva před hrozící nebo nastalou mimořádnou událostí, charakterizovaný kolísavým tónem KPV po dobu 140 vteřin, který může zaznít třikrát po sobě v cca tříminutových intervalech
+verbální informace
+informace se stanoveným obsahem uložená v paměti EKPV. Zahrnuje tísňové informace, provozní informace a vyrozumění jednotek požární ochrany
+vyrozumívací centrum (VyC)
+místo pro technické, organizační a provozní zabezpečení varování, vyrozumění, předání tísňových a provozních informací a informování obyvatelstva. Mimo to zajišťuje sběr, ukládání a zobrazení stavových informací z koncových prvků
+vyrozumění
+opatření zabezpečující včasné předání informací o hrozící či nastalé mimořádné události orgánům krizového řízení, orgánům státní správy a samosprávy, právnickým osobám a podnikajícím fyzickým osobám dle havarijních nebo krizových plánů
+vysílač
+zařízení, které vysílá vysokofrekvenční signál určený k přenosu informace
+
+vzdálený terminál
+zařízení, ze kterého lze koncové prvky ovládat a které signalizuje jeho provozní stavy na místě jiném, než je umístění vlastního koncového prvku nebo ovládacího pracoviště MIS, BMIS nebo ASV
+zařízení
+technický prostředek nebo přístroj vykonávající určitou činnost
+
+
+	•	Jednotný systém varování a vyrozumění
+	•	JSVV a jeho funkcionality
+	•	JSVV zajišťuje spolehlivé a včasné varování obyvatelstva, předání tísňových informací, umožňuje další informování obyvatelstva a specifické formy vyrozumění.
+	•	JSVV se skládá z:
+	•	vyrozumívacích center,
+	•	telekomunikačních sítí,
+	•	přenosové soustavy,
+	•	koncových prvků.
+	•	Obecné schéma JSVV a jeho vazby na další systémy jsou uvedeny na obrázku v příloze A.
+	•	JSVV zabezpečuje základní a rozšířené funkcionality.
+	•	Základními funkcionalitami JSVV jsou:
+	•	varování obyvatelstva varovným signálem,
+	•	poskytování předem definovaných verbálních informací, které jsou uloženy v paměti koncových prvků varování,
+	•	svolání členů JSDH zařazených do plošného pokrytí území kraje jednotkami požární ochrany a pracovníků havarijních služeb a provozovatelů nebezpečných objektů.
+	•	Rozšířenými funkcionalitami JSVV jsou:
+	•	přenos diagnostických a stavových informací od KP a dat a poplachových informací z čidel monitoringu prostředí KPM na územně příslušná VyC a případně další určená místa,
+	•	přenos modulace přímého hlasového vstupu z VyC II. nebo III. úrovně a případně z dalších vybraných míst do EKPV,
+	•	přenos diagnostických a stavových informací ze zařízení přenosové soustavy JSVV na VyC II. úrovně.
+	•	JSVV a KPV do něho začleněné musí umožnit použití minimálně 3 signálů sirén. Jejich časový průběh, kmitočtovou charakteristiku a význam stanovují na základě vyhlášky č. 380/2002 Sb., k přípravě a provádění úkolů ochrany obyvatelstva, přílohy E a G těchto požadavků.
+	•	Časový a kmitočtový průběh signálů sirén musí být možné uživatelsky měnit, minimálně výměnou příslušné paměti v řídící elektronice EKPV nebo KPPS. Změnu průběhů je možné provádět pouze na základě příslušného právního předpisu.
+	•	JSVV a EKPV do něho začleněné musí umožnit odbavení minimálně 20 verbálních informací, které musí být uloženy v jeho elektronické paměti.
+	•	Obsah verbálních informací musí být možné uživatelsky měnit, minimálně výměnou příslušné elektronické paměti v řídící elektronice EKPV.
+
+	•	Veškeré verbální informace musí být čisté, krátké, nedvojsmyslné a předem připravené. V odůvodněných případech se připouští vedle českého jazyka i cizojazyčné verze.
+	•	Nahrávky verbálních informací jsou k dispozici v otevřeném formátu wav nebo mp3 na MV-generálním ředitelství HZS ČR (dále jen „MV-GŘ HZS ČR“).
+	•	Varování nebo předání tísňové informace musí být KPV odbaveno do max. 60 sekund od zadání příslušného příkazu ve VyC.
+	•	KPV odbaví varování nebo předání tísňové informace neprodleně, jakmile přijme příslušný příkaz od přenosové soustavy JSVV nebo od místního ovládání, případně jej zařadí do fronty dle bodu 2.5.10.
+	•	Místně musí být možné aktivovat varování a předání tísňové informace:
+	•	obsluhou z ovládacího panelu EKPV. U MIS jsou ovládacím panelem vybavena pouze ovládací pracoviště a ústředna MIS,
+	•	obsluhou ze vzdáleného terminálu EKPV, pokud je jím EKPV vybaven,
+	•	externím tlačítkem místního ovládání KPV, pokud je jím KPV vybaven.
+	•	Dálkově musí být varování a předání tísňové informace aktivováno z VyC přenosovou soustavou JSVV, ze vzdáleného terminálu nebo prostřednictvím ASV.
+	•	Každý KPV musí umožnit tichou kontrolu. U RS se provádí rozběhem motoru sirény na max. 2,5 sekundy.
+	•	Kontrolu provozuschopnosti EKPV musí být možné odbavit:
+	•	místně,
+	•	dálkově z VyC prostřednictvím KPPS. Připouští se i dálková kontrola EKPV ze vzdáleného terminálu.
+
+	•	Vyrozumívací centra
+	•	Vyrozumívací centra se člení do tří úrovní:
+	•	Vyrozumívací centrum I. úrovně (dále i jen VyC I. úrovně).
+	•	Vyrozumívací centrum II. úrovně (dále i jen VyC II. úrovně).
+	•	Vyrozumívací centrum III. úrovně (dále i jen VyC III. úrovně).
+	•	Vyrozumívací centrum I. úrovně je centrum s celostátní působností. Je integrální součásti Národního operačního a informačního střediska („NOPIS“) MV-GŘ HZS ČR. Zajišťuje centrální ovládání všech KP a KPPS na celém území ČR nebo selektivně:
+	•	na spádovém území jednoho kraje,
+	•	na spádovém území v působnosti územního odboru HZS kraje v rámci příslušného kraje,
+	•	na spádovém území obce s rozšířenou působností.
+	•	Součástí VyC I. úrovně je pracoviště centrální správy JSVV. Toto pracoviště:
+	•	spravuje veškeré číselníky a databáze související s činností JSVV, přiděluje šifrovací kódy a adresy ztotožňující jednotlivé prvky přenosové soustavy JSVV,
+	•	monitoruje a v případě zjištění nefunkčnosti vyžaduje u poskytovatele služby zjednání nápravy a obnovení provozuschopnosti telekomunikačních sítí k VyC II. úrovně.
+	•	Vyrozumívací centrum II. úrovně je centrum s krajskou působností. Je integrální součástí krajského operačního a informačního střediska („KOPIS“) HZS kraje. Zajišťuje:
+	•	ovládání všech KP a KPPS na celém spádovém území příslušného kraje nebo selektivně:
+	•	na spádovém území v působnosti územního odboru HZS kraje v rámci příslušného kraje,
+
+	•	na spádovém území obce s rozšířenou působností v rámci příslušného kraje,
+	•	na spádovém území obce na území příslušného kraje,
+	•	na úrovni jednoho nebo několika KP či KPPS,
+	•	přímý hlasový vstup do EKPV,
+	•	archivaci odeslaných příkazů,
+	•	sběr, vyhodnocování a archivaci stavových a diagnostických informací:
+	•	z prvků přenosové soustavy krajského subsystému JSVV, včetně periodické detekce průchodnosti na úrovni druhé vrstvy přenosové soustavy JSVV,
+	•	z KP a KPPS s následným předáním na VyC I. a III. úrovně.
+	•	Vyrozumívací centrum III. úrovně je centrum s obecní působností, s působností provozovatele zařazeného do skupiny B podle zákona č. 224/2015 Sb. nebo držitele povolení podle zákona č. 263/2016 Sb. Může být součástí obecního úřadu nebo dispečinku provozovatele objektu nebo držitele povolení. Zajišťuje:
+	•	ovládání všech KP a KPPS na území obce nebo selektivně na úrovni jednoho nebo několika konkrétních KP či KPPS umístěných na území dané obce nebo v zóně havarijního plánování objektu,
+	•	přímý hlasový vstup do EKPV,
+	•	připojení externího zdroje modulace (např. mobilní telefon).
+	•	VyC jsou pro zajištění základních a rozšířených funkcionalit JSVV vybavena zadávacími terminály, které jsou tvořeny příslušným technickým vybavením a uživatelskými softwarovými aplikacemi.
+	•	VyC jsou propojena telekomunikačními sítěmi tak, aby VyC I. a III. úrovně mohla vstupovat do přenosové soustavy JSVV prostřednictvím VyC II. úrovně.
+
+	•	Telekomunikační sítě
+	•	VyC jsou propojena telekomunikačními sítěmi.
+	•	Přenos příkazů pro ovládání KP a KPPS z VyC všech úrovní je realizován přes řídící prvek nebo master JSVV přenosové soustavy krajského subsystému JSVV příslušné vrstvy.
+	•	VyC II. úrovně a územně příslušná VyC III. úrovně jsou propojena telekomunikačními sítěmi do soustavy v topologii hvězda s uzlovým bodem na VyC II. úrovně.
+
+	•	Přenosová soustava JSVV
+	•	Přenosová soustav JSVV je tvořena nezávislými rádiovými přenosovými infrastrukturami, členěnými do minimálně dvou vrstev.
+	•	První vrstva přenosové soustavy JSVV je jednosměrná rádiová infrastruktura, pracující s přenosovým formátem Radio-Paging Code No. 1 (POCSAG) podle doporučení č. 584 CCIR. Tato vrstva přenosové soustavy JSVV zajišťuje základní funkcionality JSVV dle bodu 2.1.5., a to i během závažných krizových situací. Činnost prvků této vrstvy je v případě nutnosti obnovována přednostně.
+	•	Druhá vrstva přenosové soustavy JSVV je tvořena obousměrnou přenosovou infrastrukturou na bázi rádiové technologie DMR (Digital Mobile Radio) dle standardu ETSI. Tato vrstva zajišťuje základní funkcionality JSVV dle bodu 2.1.5. a rozšířené funkcionality JSVV dle bodu 2.1.6.
+	•	Připouští se i další přenosová vrstva pro zajištění základních a rozšířených funkcionalit JSVV. Tato vrstva musí být tvořena infrastrukturou využívající standardizované technologie.
+
+	•	Přenosová soustava JSVV první a druhé vrstvy je členěna do samostatně funkčních krajských subsystémů s územní působností HZS krajů.
+	•	Každý krajský subsystém musí být identifikován jedinečným číslem sítě.
+	•	Přenosová soustava JSVV krajského subsystému je řízena z VyC II. úrovně.
+	•	První vrstva přenosové soustavy JSVV je tvořena:
+	•	mastery krajských subsystémů,
+	•	základnovými rádiovými stanicemi,
+	•	koncovými prvky přenosové soustavy.
+	•	Druhá vrstva přenosové soustavy JSVV je tvořena:
+	•	řídícími prvky rádiové sítě krajských subsystémů,
+	•	páteřní sítí IP krajských subsystémů, tvořené ethernet konektivitou nebo UHF rádiovým linkem,
+	•	základnovými rádiovými stanicemi,
+	•	koncovými prvky přenosové soustavy.
+	•	Technologie pro řízení přenosové soustavy JSVV (master u první vrstvy, řídící prvek rádiové sítě u druhé vrstvy přenosové soustavy JSVV) musí být zdvojeny. Záložní technologie musí být instalována na geograficky odlišné lokalitě.
+	•	Technologie použité v rámci přenosové soustavy JSVV musí provádět automatickou diagnostiku a umožňovat dálkovou správu: sledování provozu, předávání informací o průchodu informací rádiovou sítí a o poruchových stavech základnových rádiových stanic.
+	•	Vstupním/výstupním rozhraním pro druhou vrstvu přenosové soustavy JSVV je:
+	•	pro připojení základnových rádiových stanic ETHERNET 10BT/100TX/1000TX a rozhraní pro připojení rádiového linku v pásmu 410 – 430 MHz,
+	•	pro připojení operátorského rozhraní ETHERNET 100BT/100TX/1000TX.
+	•	Každá rádiová komponenta JSVV musí být identifikována jedinečným identifikačním číslem.
+	•	Přenosová soustava JSVV a KP začleněné do JSVV musí zajistit přenosy a činnosti, které jsou uvedeny v následujícím výčtu:
+	•	přenosy příkazů a odbavení varování a předání tísňových informací zadaných na VyC jednotlivých úrovní,
+	•	přenosy informací z čidel monitoringu prostředí při překročení stanoveného limitu,
+	•	přenosy diagnostických a stavových informací z technologických prvků přenosové soustavy JSVV,
+	•	přenosy diagnostických a stavových informací od KP a dat a poplachových informací z čidel monitoringu prostředí KPM na územně příslušná VyC a případně další určená místa,
+	•	přenosy a odbavení dalších informací, vyplývajících ze základních a rozšířených funkcionalit JSVV.
+	•	Ve druhé vrstvě přenosové soustavy JSVV musí být u řídícího prvku rádiové sítě a základnových stanic zajištěna synchronizace přesného času minimálně podle časového normálu GPS.
+
+	•	Komunikace na úrovni přenosové soustavy JSVV
+	•	Jedná se o výměnu dat mezi linkovým operátorským rozhraním na VyC a KPPS příslušné vrstvy přenosové soustavy JSVV formou zpráv.
+	•	Musí být zajištěna jednoznačná identifikace původců a adresátů jednotlivých zpráv, odhaleny duplicitní zprávy a zjištěny ztracené zprávy.
+	•	Identifikace původců a adresátů zpráv:
+	•	ID sítě - jedinečné číslo přidělené každému krajskému subsystému.
+	•	ID VyC - jedinečné číslo přidělené každému VyC.
+	•	ID operátora - každé osobě, která má oprávnění pracovat s aplikací linkového operátorského rozhraní na VyC, je přiděleno jedinečné identifikační číslo, které se zaznamenává do příslušné položky při změně některého z parametrů nebo odeslání požadavku na vysílání. Rozsah max. 1000 operátorů.
+	•	Adresa KPPS - každý KPPS musí být identifikován svou jedinečnou adresou, přičemž musí umožňovat použití více adres (i společných) proto, aby byla zajištěna optimální a rychlá aktivace potřebných koncových prvků. Podrobně o adresaci KPPS v bodech 4.2.1. a 4.3.1.
+	•	Zprávy vysílané z VyC:
+	•	Příkazy aktivace KP
+	•	Signál sirény.
+Rozsah: 3 signály sirény. U varovných informačních panelů zobrazení příslušných textů.
+	•	Znělka (gong).
+Rozsah: 2 znělky. Znělka 1 zahajuje a znělka 2 ukončuje verbální informace nebo hlasový vstup.
+	•	Verbální informace uložené v paměti EKPV. Rozsah: minimálně 20 informací.
+	•	Připojení rozhlasového přijímače.
+	•	Připojení přímého hlasového vstupu z VyC.
+	•	Připojení místního hlasového vstupu.
+	•	Připojení externího zdroje audio signálu.
+	•	Připojení sekundárního externího zdroje audio signálu.
+	•	Zpráva pro varovný informační panel. Rozsah: maximálně 128 znaků.
+	•	STOP. Ukončí jakoukoliv právě realizovanou činnost KP podle příkazů obsažených v aktuálně odbavovaném pokynu a uvede jej do pohotovostního stavu nejpozději do 15 sec. od přijetí příkazu.
+	•	RESET. Ukončí jakoukoliv právě realizovanou činnost KP a ruší veškeré další činnosti podle pokynů, které čekají v paměti KP a KPPS na odbavení. Uvádí KP a KPPS do pohotovostního stavu nejpozději 60 sec. od přijetí příkazu.
+	•	TEST. Tímto příkazem, přijatým na kterékoliv adrese KPPS, se aktivuje prověrka funkčnosti všech rozhodujících částí připojeného KP bez vně zjevného zvukového efektu, a výsledek kontroly se zaznamená do nepomíjivé paměti. Prověrka funkčnosti všech rozhodujících částí KP musí být dokončena max. do 60 sec. od přijetí příkazu.
+	•	Jedna zpráva může obsahovat až 4 různé příkazy uvedené pod body 2.5.4.1.1. až 2.5.4.1.9. a musí být označena začátkem a koncem. Takováto zpráva je považována za jeden pokyn k činnosti KP.
+	•	Vysílání  zpráv s  příkazy pro ovládání  KP musí  být možné realizovat v obou vrstvách přenosové soustavy JSVV, mimo příkazů uvedených
+
+v bodech 2.5.4.1.5., 2.5.4.1.8. a 2.5.4.1.9., které jsou vysílány pouze ve druhé vrstvě přenosové soustavy JSVV.
+	•	Stavové dotazy (diagnostika)
+	•	Provozní stav EKPV.
+	•	Stav KPM.
+	•	Vadné hlásiče MIS
+	•	Stav KPPS
+	•	Provozní stav KPPS. 2.5.4.4.4.2. Automatická hlášení. 2.5.4.4.4.3. Adresy nastavené v KPPS. 2.5.4.4.4.4. Servisní nastavení KPPS.
+	•	Záznam o aktivitě.
+	•	Příkazy nastavení
+	•	Nastavení KPPS
+	•	Automatická hlášení.
+	•	Adresy KPPS.
+	•	Servisní nastavení KPPS. 2.5.4.5.1.4. Fronta příkazů JSVV.
+	•	Digitální port.
+	•	Scanning.
+	•	Přenos primárních klíčů AES256.
+	•	Vysílání zpráv obsahujících stavové dotazy dle bodu 2.5.4.4. a zpráv s příkazy nastavení dle bodu 2.5.4.5. je realizováno pouze ve druhé vrstvě přenosové soustavy JSVV.
+	•	Zprávy obsahující více částí, tj. zprávy dle bodů 2.5.4.1.9. a 2.5.4.5.1.7., jsou vysílány s rozestupem minimálně 3 sec. a maximálně 10 sec.
+	•	Vysílání zpráv od koncových prvků je realizováno pouze ve druhé vrstvě přenosové soustavy JSVV. Jedná se o:
+	•	Automaticky hlášené stavy
+	•	Nedostatečná kapacita akumulátoru, která se určuje postupem uvedeným v bodu 3.15. tohoto dokumentu.
+	•	Překročení nastavené hodnoty veličiny čidla monitoringu prostředí.
+	•	Poruchový stav KP
+	•	Závada na audiovýstupu EKPV.
+Je jí míněna jakákoliv závada na koncovém zesilovači nebo elektroakustickém měniči, která způsobí snížení hlasitosti či srozumitelnosti varování, tísňové informace nebo informování obyvatelstva.
+	•	Vadné hlásiče MIS.
+Jedná se o jakoukoliv poruchu, která způsobí snížení hlasitosti či srozumitelnosti varování, tísňové informace nebo informování obyvatelstva. Je vysílána i v případě, že se zvýší počet vadných hlásičů MIS o jeden. Vadným hlásičem MIS je míněna závada na koncovém zesilovači, elektroakustickém měniči, nebo problém v komunikaci mezi řídící technologií a hlásičem.
+	•	Otevření skříně s řídící elektronikou. 2.5.5.1.3.4. Závada KPPS.
+Jedná se o jakoukoliv poruchu, která může způsobit nefunkčnost nebo nespolehlivost spojení mezi VyC a KP. Mezi vyžadované prvky kontroly patří stav napájení,  obvodu  RTC,  nepomíjivé  paměti  KPPS,
+
+spojení s radiostanicí, provozní okolní podmínky (teplota a vlhkost) a spojení s KP.
+2.5.5.1.3.5. Nadměrný počet trigger událostí.
+Je jím míněno zachycení nadměrného počtu událostí, které vyžadují automaticky hlášený stav a řídí se dle bodu 4.3.20. Slouží k ochraně zahlcení kapacity přenosové soustavy.
+	•	Automaticky hlášené aktivace KP
+	•	Místní spuštění KPV, včetně informace o spuštěném příkazu.
+	•	Spuštění	KPV	ze	vzdáleného	terminálu,	včetně	informace o spuštěném příkazu.
+	•	Spuštění KPV cestou autonomního systému varování, včetně informace o spuštěném příkazu a identifikace ASV.
+	•	Podrobný obsah zpráv obsahujících příkazy, dotazy a hlášené stavy dle bodů 2.5.4. a 2.5.5. je uveden v protokolech pro jednotlivé vrstvy přenosové soustavy JSVV.
+	•	Popis	protokolu	pro	druhou	vrstvu	přenosové	soustavy	JSVV	je	k dispozici na MV-GŘ HZS ČR.
+	•	Popis protokolu pro druhou vrstvu přenosové soustavy JSVV je utajovanou informací podle zákona č. 412/2005 Sb., o ochraně utajovaných informací a bezpečnostní způsobilosti, stupně utajení „Vyhrazené“.
+	•	Veškeré příkazy a dotazy zadané na VyC jiných úrovní, jsou realizovány cestou VyC
+II. úrovně, na kterém jsou uloženy do paměti a předány dále přenosovou soustavou ke koncovým prvkům a zpět.
+	•	V případě nahromadění více pokynů k činnosti, a to i z různých zdrojů, řadí KPPS i KP pokyny a stavové dotazy do front k postupnému odbavení dle času přijetí a podle následujících priorit (u KPPS v případě, že není nastaven režim kompatibility 4 nebo 5 dle přílohy N):
+	•	Prioritu P1 mají příkazy STOP a RESET. Tyto příkazy přeskočí případné příkazy s nižší prioritou ve frontě a jsou provedeny následovně:
+	•	Příkaz STOP ukončí jakoukoliv právě vykonávanou činnost (pokyn) KP a uvede jej do pohotovostního stavu.
+	•	Příkaz RESET navíc vymaže všechny příkazy čekající ve frontách KP a KPPS k odbavení.
+	•	Tuto prioritu má i příkaz zadaný obsluhou stisknutím tlačítka STOP na EKPV dle bodu 5.4.12.
+	•	Tuto prioritu mají i stavové dotazy s tím, že nepřerušují právě vykonávanou činnost KP.
+	•	Prioritu P2 mají pokyny k varování obyvatelstva, tj. příkazy k odbavení varovného signálu a verbální informace uložené v paměti EKPV. KPV takovýto pokyn provede takto:
+	•	pokud KPV právě nevykonává žádnou činnost, provede jej okamžitě, 2.5.10.2.2. pokud KPV právě odbavuje činnost podle dříve přijatého pokynu, který obsahuje pouze příkazy s prioritou P3, ukončí ji a odbaví nově
+přijatý pokyn, který obsahuje příkaz s prioritou P2,
+	•	pokud KPV právě odbavuje činnost podle dříve přijatého pokynu, který obsahuje příkaz s prioritou P2, tuto činnost dokončí a následně odbaví nově přijatý pokyn, který obsahuje příkaz s prioritou P2, a to max. do 30 sec. po skončení činnosti podle pokynu předcházejícího,
+
+	•	pokud je nově příchozí pokyn totožný s právě probíhajícím a byl přijat v době blokování příjmu dle bodu 4.1.9., je pokyn ignorován a do fronty není zařazen.
+	•	Prioritu P3 mají všechny ostatní činnosti - tj. dálkový hlasový vstup do KPV, místní hlasový vstup do KPV, připojení externího audia ke KPV, připojení sekundárního externího audia do KPV, připojení rozhlasového přijímače ke KPV a příkaz TEST, který však KPV odbaví pouze pokud je v klidovém stavu. Pokyny obsahující pouze příkazy s prioritou P3 jsou řazeny na konec fronty podle času přijetí.
+	•	Příkazy aktivace KP dle bodu 2.5.4.1. musí být zahájeny do 3 sec. a akustická aktivace do 10 sec. od přijetí příkazu. Doby odpovědi na dotaz se kontrolují dle bodu 5.2.4.
+	•	Časové značky obsažené v protokolu jsou formátu standardního času UNIX s počátkem 1.1.1970 v 0:0:00. Jednotkou časové značky je sekunda a datovým typem pro její přenos ve druhé vrstvě přenosové soustavy je UINT64.
+
+
+	•	Společné požadavky na zařízení JSVV 3)
+	•	Do JSVV lze připojit pouze zařízení způsobilá z hlediska zajištění bezpečnosti a ochrany zdraví při práci.
+	•	Do JSVV lze připojit pouze zařízení, u kterých výrobce nebo dodavatel zaručí, minimálně formou čestného prohlášení, jejich podporu dostupností náhradních dílů, pomůcek a materiálů, včetně potřebných upgrade firmware po dobu minimálně 10 let od termínu jejich připojení do JSVV.
+	•	Veškerá zařízení vystavená povětrnostním vlivům musí splňovat požadavky na stupeň krytí min. IP 44 dle ČSN EN 60529. Ostatní pak IP 30.
+	•	Zařízení  musí  splňovat  podmínky  bezpečného  provozu  při  pracovních  teplotách v minimálním rozsahu -25 až +55 °C, které musí být ověřeny zkouškami vlivů prostředí dle ČSN EN 60068-2-1 ed. 2 a ČSN EN 60068-2-2 s dobou trvání 16 hod. Splnění těchto podmínek je požadováno i pro zařízení umísťovaná ve vnitřních prostorách s elektricky bezpečným prostředím.
+	•	Z hlediska elektromagnetické kompatibility EMC musí zařízení splňovat podmínky nařízení vlády č. 117/2016 Sb., o posuzování shody výrobků z hlediska elektromagnetické kompatibility při jejich dodávání na trh, zejména odolnost dle ČSN EN IEC 61000-6-2 a emise dle ČSN EN 61000-6-3. Splnění těchto požadavků musí být dokladováno pro všechny provozní režimy a stavy, tj. pro provoz z elektrorozvodné sítě, z náhradního zdroje elektrické energie, pro klidový stav zařízení a emise i pro stav, kdy zařízení pracuje jmenovitým výkonem. V případě, že je součástí zařízení rádiové komunikační zařízení podle bodu 4.1.1.2. nebo 5.6.7.5. a 5.6.10.5., je rádiové zařízení při zkoušení plnění podmínek emisí nahrazeno minimální reprezentativní konfigurací pomocných přístrojů nezbytných pro vyzkoušení stavu, který odpovídá provoznímu stavu s výkonem 5 W e.r.p.
+	•	Zařízení zapojovaná do JSVV musí být provozuschopná v těchto klimatických podmínkách:
+	•	relativní vlhkost vzduchu 25 % až 95 %,
+	•	tlak vzduchu 86 kPa až 106 kPa.
+	•	Zařízení zapojené do JSVV musí být trvale připojeno ke zdroji elektrické energie a zapnuto.
+
+3) Vyjma pagerů, na které jsou s ohledem na to, že se jedná o přenosné osobní přijímače, kladeny specifické nároky uvedené v kapitole 8.
+
+	•	Zařízení JSVV, mimo RS, musí být napájena z hlavního a náhradního energetického zdroje.
+	•	Výstupní výkon napájecích zdrojů musí být dostatečný k zajištění minimálních požadavků na funkci zařízení JSVV dle bodu 3.12.
+	•	Hlavní zdroj napájení zařízení JSVV tvoří elektrická distribuční síť. V případě její poruchy či výpadku musí být zajištěn okamžitý přechod na náhradní zdroj napájení s potřebným výkonem a spolehlivostí. Přechod na náhradní zdroj napájení nesmí způsobit přerušení činnosti zařízení JSVV.
+	•	Náhradním zdrojem je bezúdržbový zdroj akumulátorového typu.
+	•	Každé elektrické zařízení JSVV, vyjma RS, musí být zálohováno na minimálně 72 hodin provozu.
+	•	Pro základnové stanice přenosové soustavy JSVV se doba zálohy stanovuje pro provozní cyklus 30/0/70 (provozní stav vysílání/klid/příjem).
+	•	Pro KPPS první vrstvy přenosové soustavy se doba zálohy stanovuje pro provozní cyklus 0/70/30 (provozní stav vysílání/klid/příjem).
+	•	Pro KPPS druhé vrstvy přenosové soustavy a ústřednu MIS se doba zálohy stanovuje pro provozní cyklus 3/67/30 (provozní stav vysílání/klid/příjem).
+	•	Pro EKPV a hlásiče MIS se doba zálohy stanovuje pro zabezpečení odbavení 4 signálů sirény o délce 140 sekund, které jsou doplněny každý znělkou č. 1, tísňovou informací trvající 20 sekund a znělkou č. 2 za 24 hodin, a tísňových informací či hlasového vstupu v trvání 5 minut za 24 hodin, včetně znělek č. 1 a č. 2.
+	•	Pro KPM se doba zálohy stanovuje pro provozní stav klid.
+	•	Pro KPPS, EKPV a KPM se provozním stavem klid míní stav, při kterém se KPPS dotazuje na stav připojeného KP a ten mu odpovídá dle bodu 4.1.16.
+	•	Pro VIP se doba zálohy stanovuje pro zabezpečení zobrazování textů a piktogramů v jejich plném znění v trvání 30 minut za 24 hodin.
+	•	Musí být použity takové náhradní zdroje, jejichž životnost bude minimálně 4 roky. Za konec životnosti je považován stav, kdy při provozu ze zdroje při jmenovitém výkonu dojde k poklesu jeho kapacity pod 80 % jmenovité kapacity v Ah při jednohodinovém výkonu.
+	•	Mohou být použity pouze uzavřené akumulátory s následujícími typy článků. U každého typu je uvedena hodnota hraničního napětí na jeden článek rozhodná pro hodnocení nedostatečné kapacity akumulátoru:
+	•	Olověné články: 1,9 V,
+	•	Lithium-iontové články:
+	•	LCO (lithium-kobalt-oxid): 3,3 V,
+	•	LMO (lithium-mangan-oxid): 3,3 V,
+	•	NMC (lithium-nikl-mangan-kobalt-oxid): 3,3 V,
+	•	LFP (lithium-železo-fosfát): 2,75 V,
+	•	NCA (lithium-nikl-kobalt-hořčík-oxid): 3,3 V,
+	•	LTO (lithium-titanát): 2 V,
+	•	Lithium-polymerové články: 3,4 V.
+	•	Jako nedostatečná kapacita akumulátoru se hodnotí stav, kdy je napětí akumulátoru rovno nebo nižší než násobek počtu článků a hodnoty hraničního napětí na jeden článek dle bodu 3.14.
+	•	KP musí provést měření během příkazu TEST (dle bodu 2.5.4.1.12.). Je-li KP při přijetí příkazu TEST napájen z energetické distribuční sítě, musí provést dočasné odpojení od distribuční sítě. Po dokončení příkazu TEST změří KP stav akumulátoru a opět napájení z distribuční sítě připojí. Stav akumulátoru
+
+předávaný na VyC dle bodů 2.5.4.4.1. a 2.5.4.4.2. musí obsahovat poslední stav, který byl změřen při provedení příkazu TEST.
+	•	V případě výpadku distribuční sítě provádí KP automaticky měření napětí akumulátoru bez nutnosti příkazu TEST, a to až do doby obnovení napájení z distribuční sítě.
+	•	Použití akumulátoru, jehož hraniční napětí na jeden článek se liší od výše uvedených hodnot (z důvodu typu elektrod, separátoru elektrod, apod.), je možné pouze se souhlasem MV-GŘ HZS ČR. K tomu výrobce nebo dodavatel předloží postupem dle kapitoly 10 těchto technických požadavků žádost o schválení použití konkrétního akumulátoru MV-GŘ HZS ČR spolu s příslušnou technickou specifikací.
+	•	Náhradní zdroj musí být automaticky dobíjen z energetické distribuční sítě. K nabíjení náhradního zdroje bude použit nabíječ s dostatečnou velikostí výstupního proudu, který zajistí nabití zdroje na 80 % maximální jmenovité kapacity za dobu, která nepřesáhne 12 hodin, a bude vybaven elektronickým řízením procesu nabíjení umožňujícím režim konzervace. Proces nabíjení a řízeného vybíjení akumulátorů musí být optimalizován pro zajištění maximální životnosti náhradního zdroje a musí kompenzovat aktuální klimatické podmínky, zejména teplotu prostředí.
+	•	Zařízení musí být vybaveno odpojovačem zátěže, který zabrání hlubokému vybití akumulátoru. Před odpojením zátěže musí zařízení nahlásit automatické hlášení dle bodu 2.5.5.1.1.
+	•	Hlavní a náhradní zdroje musí obsahovat ochranné/filtrační prvky pro omezení nebo snížení rušení po elektrorozvodné síti.
+	•	Každé elektrické zařízení přenosové soustavy JSVV musí obsahovat ochranné prvky proti přepětí, podpětí a přepólování na vstupních/výstupních obvodech včetně napájecích obvodů. U KP se použití těchto ochranných prvků doporučuje tam, kde místní podmínky umožní jejich instalaci.
+	•	Napájení zařízení JSVV může být realizováno také ze záložních zdrojů (generátorů, UPS apod.). Požadavky dle bodu 3.12. zůstávají v platnosti.
+	•	Veškeré ovládací a řídící prvky zařízení JSVV musí být trvale označeny informacemi o jejich funkci.
+	•	Veškeré svorky zařízení JSVV musí být trvale označeny informacemi o určení, vlastnostech a polaritě.
+	•	Označení musí být takové, aby bylo možné nastavit ovládací a řídící prvky a potvrdit jejich polohy v souladu s informacemi v uživatelské příručce.
+	•	Označení musí obsahovat symboly, značky, písmena a čísla, které jsou mezinárodně srozumitelné. Označení bude provedeno dle ČSN EN IEC 60027-2.
+	•	Každé zařízení, které je součástí JSVV, musí být trvale označeno. Označení je provedeno bílým obdélníkem s červeným orámováním o poměru stran 2:1 s minimálními rozměry 140 x 70 mm. V obdélníku je umístěn text bezpatkovým písmem Arial v černé barvě se zněním „Obecně prospěšné zařízení pro varování obyvatelstva - NEVYPÍNAT! Poškození a ohrožení provozu se trestá podle zákona! Poškození hlásit na tel.:…… nebo e-mail:……“. Na místě teček se doplní konkrétní telefonní číslo a e-mailová adresa vlastníka nebo provozovatele zařízení. Podoba tohoto označení je uvedena v příloze P. Venkovní hlásiče MIS nemusí být takto označeny.
+
+	•	Koncové prvky přenosové soustavy JSVV
+	•	Obecné požadavky na KPPS
+	•	KPPS se obecně skládá z:
+	•	řídící jednotky,
+	•	rádiového komunikačního zařízení,
+	•	zdroje napájení.
+	•	KPPS plní funkci podle toho, pro kterou vrstvu přenosové soustavy JSVV je určen. KPPS pro první vrstvu přenosové soustavy JSVV pracuje z rádiového hlediska jako přijímač, KPPS pro druhou vrstvu přenosové soustavy JSVV pracuje jako přijímač/vysílač.
+	•	V případě použití obou vrstev přenosové soustavy JSVV plní KPPS pro druhou vrstvu přenosové soustavy JSVV funkci řídícího prvku komunikace s připojeným koncovým prvkem.
+	•	Rozhraním pro propojení KPPS jednotlivých vrstev přenosové soustavy JSVV a dalších komunikačních zařízení ke KPPS je rozhraní RS-232 podle specifikace dle bodu 5.2.2.
+	•	Přijímač pro první vrstvu přenosové soustavy JSVV nesmí být integrální součástí radiostanice pro druhou vrstvu přenosové soustavy JSVV.
+	•	Každý KPPS musí být vybaven nepomíjivou pamětí zaznamenávající:
+	•	veškeré aktivace připojeného KP, a to místní i dálkové,
+	•	automaticky hlášené stavy dle bodu 2.5.5.1.
+	•	Paměť musí obsahovat minimálně 250 posledních záznamů podle bodu 4.1.6.1. a 4.1.6.2. Počínaje 251. záznamem lze odmazat časově nejstarší záznam, tj. záznam s pořadovým číslem 1, a ostatní přečíslovat tak, aby poslední záznam měl vždy číslo max. 250.
+	•	Záznam musí obsahovat minimálně:
+	•	číslo záznamu z paměti,
+	•	identifikační číslo VyC ze kterého byl příkaz přijat a identifikační číslo operátora, který jej zadal,
+	•	informaci o aktivaci připojeného koncového prvku a jejím zadání (místně, ze vzdáleného terminálu, z ASV, dálkově po první nebo druhé vrstvě JSVV nebo bez aktivace) dle přílohy N,
+	•	adresu a typ adresace KPPS, na které byla dálková aktivace odbavena,
+	•	časovou značku dle bodu 2.5.11.,
+	•	údaj o aktivované funkci koncovým prvkem dle specifikace příkazů v bodu 2.5.4.1.
+	•	U EKPV, KPM a VIP i informace o výsledku kontroly z okamžiku zaznamenání aktivity dle bodu 2.5.4.4.
+	•	KPPS musí blokovat odbavení shodného pokynu dle bodu 2.5.4.2., po dobu, kterou musí být možné nastavit na 30 až 300 sekund. Blokování se vztahuje také na shodný pokyn, který byl přijat na jinou identifikační adresu KPPS.
+	•	Pokud bude po dobu odbavování pokynu dle bodu 2.5.4.2. přijat pokyn odlišný od právě odbavovaného, musí být tento nový pokyn uložen do paměti a odbaven max. do 30 sekund po ukončení činnosti koncového prvku podle pokynu předcházejícího.
+	•	Do fronty dle bodu 2.5.10. musí být možné uložit minimálně 3 pokyny přijaté podle bodu 4.1.10.
+	•	Obecné schéma KPPS pro jednotlivé vrstvy přenosové soustavy JSVV, jejich propojení a připojení ke KP je uvedeno v příloze B.
+	•	Pro KPPS musí být použita VHF anténa se ziskem minimálně 5 dBi.
+
+	•	Pro propojení antény s vlastním KPPS musí být použit koaxiální kabel s útlumem max. 8,5 dB/100 m/160 MHz.
+	•	V případě sloučení rádiového signálu do jedné antény pro radiostanici DMR a přijímač POCSAG musí být použit odpovídající anténní slučovač pro konkrétní provozní kmitočty jednotlivých vrstev přenosové soustavy JSVV v daném místě.
+	•	Komunikace KPPS a KP na druhé vrstvě přenosové soustavy JSVV probíhá způsobem dotaz-odpověď (příkaz-potvrzení) s výjimkou stavu dle bodu 5.9.6., přičemž aktivní stranou je vždy KPPS a stranou potvrzující je KP. V klidovém stavu, kdy KPPS neodbavuje přijatý příkaz, předává periodicky dotaz na připojený koncový prvek. Perioda dotazu musí být uživatelsky nastavitelná v rozsahu 1 až 60 sekund. Koncové prvky v odpovědi předávají do KPPS diagnostické informace a údaje z monitoringu prostředí. Periodickým dotazem dle zpráv uvedených v příloze M je v případě připojení EKPV a VIP zpráva „Provozní stav EKPV“ a v případě KPM zpráva „Stav KPM“. Jiné periodické zprávy se nepřipouští.
+	•	KPPS jsou trvale na příjmu na kmitočtu příslušné vrstvy přenosové soustavy JSVV. Když KPPS přijme rádiový signál, vyhodnotí, zda je určen pro jemu přidělenou identifikační adresu. Je-li tomu tak, vyhodnotí obsah vysílání a provede určenou činnost. Vysílání, které není určeno pro jeho adresu, ignoruje.
+	•	Příkazy STOP a RESET musí KPPS po jejich přijetí předat na KP. Příkaz RESET musí KPPS sám také provést dle bodu 2.5.4.1.11., a to i za cenu přerušení právě probíhající činnosti.
+
+	•	Požadavky na KPPS pro první vrstvu přenosové soustavy JSVV
+	•	KPPS pro první vrstvu přenosové soustavy JSVV musí umožnit použití minimálně 8 různých identifikačních adres s tímto určením:
+	•	1. adresa - individuální. Jedinečná adresa přiřazená pouze danému KPPS,
+	•	2. adresa - skupinová krajská. Je přiřazena všem KPPS na území jednoho kraje,
+	•	3. adresa - skupinová územní (okresní). Je přiřazena všem KPPS na území jednoho okresu,
+	•	4. až 7. adresa - skupinové adresy podle potřeb. Shodná adresa pro všechny KPPS na území obce nebo území ohroženém mimořádnou událostí. Tyto adresy mohou být přidělovány KPPS z různých územních skupin, ale vždy v rámci jednoho kraje,
+	•	u rotačních sirén je 8. adresa individuální s určením pro zkušební účely. Jedná se o jedinečnou individuální adresu, určenou výhradně pro tichou technickou zkoušku sirény. Po příjmu příkazu A na osmou adresu provede připojená RS rozběh motoru na 2,5 sec.
+	•	Pracovní kmitočet v pásmu 163,500 – 165,500 MHz podle specifikace uživatele.
+	•	KPPS pro první vrstvu musí splňovat podmínky harmonizovaných norem:
+	•	ČSN ETSI EN 301 489-1 "Norma pro elektromagnetickou kompatibilitu (EMC) rádiových zařízení a služeb – Část 1: Společné technické požadavky – Harmonizovaná norma pokrývající základní požadavky článku 3.1(b) Směrnice 2014/53/EU a základní požadavky článku 6 Směrnice 2014/30/EU".
+	•	ČSN ETSI EN 300 224 "Pozemní pohyblivá služba – Rádiová zařízení pro použití v pagingové službě provozované v kmitočtovém rozsahu 25 MHz - 470 MHz – Harmonizovaná norma pokrývající základní požadavky článku 3.2 Směrnice 2014/53/EU".
+	•	ČSN ETSI EN 301 489-2 "Elektromagnetická kompatibilita a rádiové spektrum (ERM) – Norma pro elektromagnetickou kompatibilitu (EMC) rádiových zařízení a služeb – Část 2: Specifické podmínky pro zařízení rádiového pagingu".
+
+	•	Provoz s přenosovým protokolem POCSAG dle bodu 2.4.1.1 s rychlostí 1200 bit/sec.
+	•	KPPS pro první vrstvu přenosové soustavy JSVV musí být možné vybavit minimálně jednou spínací jednotkou SSR pro ovládání RS.
+	•	KPPS pro první vrstvu přenosové soustavy JSVV komunikuje s KP podle protokolů uvedených v přílohách K a L.
+	•	Minimální citlivost přijímače POCSAG 0,5 µV při 20 dB SINAD.
+
+	•	Požadavky na KPPS pro druhou vrstvu přenosové soustavy JSVV
+	•	KPPS pro druhou vrstvu přenosové soustavy JSVV musí umožnit použití minimálně 35 různých identifikačních adres s tímto určením:
+	•	1. adresa - individuální. Jedinečná adresa přiřazená pouze danému KPPS,
+	•	2. adresa - skupinová územní (okresní). Je přiřazena všem KPPS na území jednoho okresu,
+	•	3. adresa - skupinová krajská. Je přiřazena všem KPPS na území jednoho kraje,
+	•	4. až 19. adresa - krajská skupinová adresa A podle potřeb. Shodná adresa pro všechny KPPS na území jedné obce nebo území ohroženém mimořádnou událostí. Tyto adresy mohou být přidělovány KPPS z různých územních skupin, ale vždy v rámci jednoho kraje,
+	•	20. až 35. adresa - plošná skupinová adresa B podle potřeb. Shodná adresa, přidělená všem KPPS na území ohroženém nějakou mimořádnou událostí ze stejného zdroje, které spadá pod správní území minimálně dvou sousedních krajů. Takovouto mezikrajskou adresu lze vytvořit a používat pouze po vzájemné domluvě dotčených krajů a se souhlasem MV-GŘ HZS ČR.
+	•	Adresy skupiny B, které u konkrétního KPPS nebudou použity k mezikrajským účelům dle bodu 4.3.1.5., mohou být v případě potřeby použity stejným způsobem jako adresy skupiny A dle bodu 4.3.1.4.
+	•	KPPS pro druhou vrstvu přenosové soustavy musí nad protokolem pro druhou vrstvu přenosové soustavy JSVV (tj. nad protokolem dle bodu 2.5.7.) provádět šifrování metodou AES256. Zprávy přijímané z VyC musí dešifrovat pomocí aktuálně nastaveného klíče (primárního nebo záložního) pro příchozí komunikaci. Zprávy odesílané na VyC musí zašifrovat pomocí aktuálně nastaveného klíče (primárního nebo záložního) pro odchozí komunikaci. Šifrování AES256 musí být provedeno v módu CBC (z angl. „Cipher Block Chaining“) s nulovým inicializačním vektorem. Data určená k šifrování musí být doplněna (tzv. „padding“) na požadovanou délku 48 B s využitím metody CMS (z angl. „Cryptographic Message Syntax“). Po zašifrování musí KPPS dále doplnit data nulovými hodnotami připojenými na konec zašifrované zprávy, aby byla dosažena délka potřebná pro zvolený datový formát DMR (dle bodu 4.3.9.1. a dle použité hodnoty parametru „FEC coding rate“). Za účelem šifrování a dešifrování musí mít KPPS ve své nepomíjivé paměti uloženy:
+	•	dva primární 256-bitové klíče, jeden pro příchozí a druhý pro odchozí komunikaci,
+	•	dva záložní 256-bitové klíče, jeden pro příchozí a druhý pro odchozí komunikaci.
+	•	Na příkaz z VyC musí KPPS pro druhou vrstvu přenosové soustavy JSVV umožňovat výměnu primárních klíčů za nové klíče. Výměna je provedena přepnutím na záložní klíče s následným přenesením nových primárních klíčů po druhé vrstvě přenosové soustavy. Po dálkové výměně primárních klíčů za nové se na příkaz z VyC lze přepnout na šifrování dle nových primárních klíčů.
+	•	Výměna záložních klíčů je možná pouze místně po servisním portu KPPS pro druhou vrstvu přenosové soustavy JSVV.
+
+	•	Radiostanice DMR použitá v KPPS pro druhou vrstvu přenosové soustavy JSVV musí umožnit provoz v režimu minimálně DMR Tier II podle standardů v dokumentech:
+	•	ETSI TR 102 398 "Elektromagnetická kompatibilita a rádiové spektrum; Digitální mobilní rádio (DMR) Návrh systému",
+	•	ETSI TS 102 361-1 "Elektromagnetická kompatibilita a rádiové spektrum; Digitální mobilní rádio (DMR) Část 1: DMR vzdušné rozhraní",
+	•	ETSI TS 102 361-2 "Elektromagnetická kompatibilita a rádiové spektrum; Digitální mobilní rádio (DMR) Část 2: DMR hlasové a základní služby a zařízení",
+	•	ETSI TS 102 361-3 "Elektromagnetická kompatibilita a rádiové spektrum; Digitální mobilní rádio (DMR) Část 3: DMR datový protokol".
+	•	Radiostanice DMR použitá v KPPS pro druhou vrstvu přenosové soustavy JSVV musí splňovat podmínky následujících harmonizovaných norem:
+	•	ČSN ETSI EN 300 113 V2.2.1 "Pozemní pohyblivá služba – Rádiová zařízení s anténním konektorem určená pro přenos dat (a/nebo hovoru), používající modulaci s konstantní nebo proměnnou obálkou – Harmonizovaná norma pokrývající základní požadavky článku 3.2 Směrnice 2014/53/EU",
+	•	ETSI EN 301 489-1 V2.2.3 "Norma pro elektromagnetickou kompatibilitu (EMC) rádiových zařízení a služeb – Část 1: Společné technické požadavky – Harmonizovaná norma pro elektromagnetickou kompatibilitu",
+	•	ETSI EN 301 489-5 V2.1.1 "Norma pro elektromagnetickou kompatibilitu (EMC) rádiových zařízení a služeb – Část 5: Specifické podmínky pro soukromá pohyblivá rádiová (PMR) a přidružená zařízení (hovorová a nehovorová) a zemské rádiové svazkové sítě (TETRA) – Harmonizovaná norma pokrývající základní požadavky článku 3.1(b) Směrnice 2014/53/EU",
+	•	nebo novějších verzí těchto norem.
+	•	Doporučenými rozhraními pro připojení radiostanice DMR ke KPPS pro druhou vrstvu přenosové soustavy JSVV jsou RS-232 nebo UART 3,3 V - 5 V.
+	•	Radiostanice DMR musí mít audio rozhraní pro připojení na EKPV s výkonem 0,5 W, audio zkreslením ≤ 3 %, audio odezvou +1 ~ -3 dB, rušivým vyzařováním < -57 dBm a linkovou úrovní 316 mV RMS +/-10%.
+	•	Kmitočtové pásmo pro radiostanici DMR je 146 – 174 MHz, kanálová rozteč 12,5 kHz, duplexní odstup 4,6 MHz. Ostatní provozní parametry radiostanice musí být možné nastavit konfiguračním softwarem výrobce radiostanice. Přenos dat a hlasu musí být realizován následovně:
+	•	Přenos dat (v obou směrech mezi VyC a KPPS) a přenos hlasu (pouze ve směru od VyC ke KPPS) je realizován po timeslotu A.
+	•	Přenos dat je realizován dle DMR protokolu PDP („Packet Data Protocol“).
+	•	Přenos dat ve směru od VyC ke KPPS je realizován dle DMR protokolu SDP („Short Data Protocol“) bez potvrzování doručení. V bloku hlavičky DMR je využit identifikátor datového paketu (DPF) s hodnotou 13 (tj. „Short Data: Defined“), identifikátor SAP s hodnotou 10 (tj. „Short Data“), identifikátor DD s hodnotou 0 (tj. „binary“), identifikátor S („Re-Synchronize Flag“) s hodnotou 0 a identifikátor F („Full Message Flag“) s hodnotou 1.
+	•	Přenos dat ve směru od KPPS k VyC dle DMR PDP je umožněn po protokolu IP („Internet Protocol“) nebo protokolu SDP („Short Data Protocol“). V obou případech se musí jednat o přenos bez potvrzování doručení a musí být odesílán pouze jeden blok hlavičky DMR, následovaný uživatelskými daty protokolu pro druhou vrstvu přenosové soustavy JSVV.
+	•	V případě použití protokolu IP musí být v bloku hlavičky DMR uveden identifikátor datového paketu (DPF) s hodnotou 2 (tj. „Data packet with  unconfirmed  delivery“),  identifikátor  SAP  s hodnotou  3
+
+(tj. „UDP/IP header compression“) a identifikátor F („Full message flag“) s hodnotou 1. Před uživatelskými daty protokolu pro druhou vrstvu přenosové soustavy JSVV, zašifrovanými dle bodu 4.3.2., musí předcházet 5 datových oktetů (5 B), které nejsou šifrovány. Obsah těchto 5 oktetů musí odpovídat rozsahu a určení dle standardu DMR pro službu „UDP/IPv4 header compression“.
+	•	V případě použití protokolu SDP musí být v bloku hlavičky DMR uveden identifikátor datového paketu (DPF) s hodnotou 13 (tj. „Short Data: Defined“), identifikátor SAP s hodnotou 10 (tj. „Short Data“), identifikátor DD s hodnotou 0 (tj. „binary“), identifikátor S („Re-Synchronize Flag“) s hodnotou 0 a identifikátor F („Full Message Flag“) s hodnotou 1. Před uživatelskými daty protokolu pro druhou vrstvu přenosové soustavy JSVV, zašifrovanými dle bodu 4.3.2., nesmí v datové zprávě předcházet žádné další oktety (např. proprietární data využívaná výrobcem radiostanice).
+	•	Minimální citlivost přijímače radiostanice DMR 0,25 μV (5% BER) pro příjem digitálního signálu.
+	•	Vysílací výkon radiostanice DMR musí být stavitelný v rozsahu minimálně 1 až 5 W.
+	•	Maximální spotřeba radiostanice DMR musí být max. 10 W v provozním režimu klid (standby).
+	•	KPPS pro druhou vrstvu JSVV musí obsahovat nepomíjivou paměť, jejíž parametry bude schopen po druhé vrstvě přenosové soustavy JSVV na vyžádání VyC poskytnout dle bodu 4.3.16.10.
+	•	KPPS pro druhou vrstvu přenosové soustavy JSVV musí obsahovat obvod reálného času (RTC), který bude možné synchronizovat podle časové značky obsažené v komunikaci od VyC. Bez synchronizace musí být stabilita obvodu RTC nejhůře +/- 3 sec. za den.
+	•	KPPS pro druhou vrstvu přenosové soustavy JSVV, určené pro ovládání RS, musí být možné vybavit minimálně jednou spínací jednotkou SSR z důvodu umožnění ovládání připojené RS.
+	•	KPPS pro druhou vrstvu JSVV musí na vyžádání z VyC poskytovat následující informace:
+	•	stav komunikace s KP,
+	•	stav vnitřní nepomíjivé paměti,
+	•	stav obvodu reálného času RTC,
+	•	stav napájení KPPS,
+	•	stav spojení s radiostanicí DMR,
+	•	provozní podmínky okolí (teplota, vlhkost),
+	•	stav zaplnění nepomíjivé paměti,
+	•	parametry chybovosti MER (detaily jsou uvedeny v popisu protokolu pro druhou vrstvu přenosové soustavy JSVV, tj. v protokolu dle bodu 2.5.7.),
+	•	diagnostika vadného příjmu (přeskok nebo chyba parseru),
+	•	identifikaci nepomíjivé paměti dle standardu JEDEC (min. Manufacturer ID, Device ID, Capacity a Unique ID),
+	•	počet příkazů JSVV ve frontě,
+	•	stavy digitálních výstupů, minimálně bezpotenciálového kontaktu pro RS,
+	•	typ připojeného KP (ES, MIS, VIP, RS nebo KPM),
+	•	typ aktivního protokolu mezi KPPS a KP (první nebo druhá vrstva),
+	•	kompatibilita v rámci komunikace po protokolu mezi KPPS a KP první vrstvy přenosové soustavy KPPS (výčet možností uveden v servisním protokolu KPPS),
+	•	aktuální nastavení automatických hlášení,
+	•	aktuální uložené adresy,
+
+	•	aktuální servisní nastavení (blokování POCSAG příjmu, blokovací čas, číslo aktivního kanálu radiostanice DMR a aktivní sada šifrovacích klíčů).
+	•	KPPS druhé vrstvy přenosové soustavy JSVV musí:
+	•	zajistit správu front příkazů z obou vrstev JSVV,
+	•	umožnit vymazání fronty příkazů dle příkazu RESET z VyC,
+	•	předávat automaticky informace dle bodů 2.5.5.1. a 2.5.5.2.,
+	•	zapnout nebo vypnout automaticky předávané informace dle bodu 2.5.5., nastavit počet opakování odeslání v rozmezí 1 až 3 a periodu mezi dvěma odesíláními nastavit v rozmezí 1 – 65535 sekund,
+	•	umožnit provedení úpravy skupinových adres KPPS (nová adresa, úprava stávající a smazání) dle protokolu druhé vrstvy přenosové soustavy JSVV,
+	•	umožnit zapnutí/vypnutí blokování příjmu po první vrstvě přenosové soustavy JSVV (POCSAG) na základě příkazu z VyC, příp. na základě vyhodnocení stavu průchodnosti DMR.
+	•	Radiostanice DMR použitá ve druhé vrstvě přenosové soustavy JSVV musí umožnit po komunikačním portu pro spojení s KPPS druhé vrstvy přenosové soustavy JSVV provedení změny kanálu, po kterém probíhá komunikace na druhé vrstvě přenosové soustavy JSVV.
+	•	KPPS pro druhou vrstvu přenosové soustavy JSVV musí:
+	•	automaticky hlášené stavy dle bodu 2.5.5.1. a automaticky hlášené aktivace dle bodu 2.5.5.2., které zjistil dotazem na připojený koncový prvek, odeslat na VyC II. úrovně nejpozději do 3 sec. od jejich zjištění. Pro automaticky hlášené stavy dle bodu 2.5.5.1. platí, že jejich zjištění nastává, pokud je informace o daném stavu perzistentní po dobu 3 opakování. Pro automaticky hlášené aktivace dle bodu 2.5.5.2. platí, že jejich zjištění nastává, pokud je informace o dané aktivaci perzistentní po dobu 1 opakování. Pokud KPPS v uživatelsky nastavitelném časovém intervalu neobdrží z VyC II. úrovně potvrzení o přijetí této zprávy, odešle tuto zprávu znovu. Počet opakování musí být uživatelsky nastavitelný na max. 3 pokusy. Pokud VyC II. úrovně potvrdí přijetí, musí KPPS ukončit další plánovaná opakovaná odesílání této zprávy. Následující automaticky hlášený stav nebo aktivace stejného typu, jako již odeslaný, může být odeslán pouze v případě, že podmínka pro jeho nahlášení odezní a následně opět nastane, nebo v případě, že KPPS přijme příkaz RESET dle bodu 2.5.4.1.11., odeslaný z VyC II. úrovně.
+	•	na stavové dotazy dle bodu 2.5.4.4. přijaté od VyC II. úrovně musí řídící jednotka KPPS odpovědět nejpozději do 1 sec. po jejich přijetí od rádiového komunikačního zařízení.
+	•	V případě, že KPPS pro druhou vrstvu přenosové soustavy JSVV obdrží od KP na 5 po sobě jdoucích dotazů 5 změn jednoho z provozních stavů podle bodu 2.5.5.1., musí KPPS tento stav vyhodnotit jako poruchu KP. Informaci o poruše KP odešle na VyC
+II. úrovně a zastaví další odesílání tohoto automaticky hlášeného stavu na VyC.
+	•	Doba mezi přijetím pokynu radiostanicí DMR a jejím odesláním ke KP nesmí být delší než 3 sec., pokud pokyn není zařazen do fronty v KPPS.
+	•	KPPS pro druhou vrstvu přenosové soustavy JSVV komunikuje s KP dle protokolu, který je uveden v příloze M.
+	•	Nastavení obou sad skupinových adres (skupiny A a skupiny B), šifrovacích klíčů, provozních parametrů, výpis diagnostiky a paměti záznamů KPPS se provádí po servisním rozhraní podle protokolu, který je uveden v příloze N.
+	•	KPPS musí uchovat informace o 3 posledních servisních přístupech do nepomíjivé paměti dle příkazů uvedených v servisním protokolu v příloze N. KPPS musí na příkazy servisního
+
+protokolu dovolit smazat záznamy z nepomíjivé paměti a uvést KPPS do továrního nastavení.
+	•	Výchozí hodnoty pro veškeré nastavitelné parametry (tovární nastavení) jsou uvedeny v servisním protokolu v příloze N (tabulka na str. 76 tohoto dokumentu).
+	•	K tomu, aby byla zajištěna komunikace KPPS pro druhou vrstvu přenosové soustavy JSVV s KP, které byly schváleny pro připojení do JSVV dle starých technických požadavků 4), musí umožnit komunikaci s KP i dle protokolů uvedených v přílohách K a L.
+	•	Volba komunikačního protokolu na rozhraní KPPS – KP a režimu kompatibility ve druhé vrstvě přenosové soustavy JSVV se provádí prostřednictvím servisního protokolu, který je uveden v příloze N.
+	•	V případě, že bude servisním protokolem na rozhraní KPPS – KP zvoleno použití protokolů dle bodu 4.3.26., musí KPPS pro druhou vrstvu přenosové soustavy JSVV v případě příjmu příkazu pro signál sirény č. 3 („Požární poplach“) odeslat na rozhraní pro připojení KP příkaz pro aktivaci signálu č. 4 dle protokolu v příloze K. V případě, že na rozhraní KPPS – KP bude zvoleno použití protokolu dle bodu 4.3.22., bude na rozhraní pro připojení KP předán příkaz pro aktivaci signálu sirény č. 3 dle protokolu v příloze M.
+	•	V případě, že bude servisním protokolem na rozhraní KPPS – KP zvoleno použití protokolů dle bodu 4.3.26., musí KPPS doplnit všechny diagnostické informace vyžadované dle bodu 2.5.4.4., které není možné od KP zjistit, nulovými hodnotami.
+	•	KPPS pro druhou vrstvu přenosové soustavy JSVV musí být vybaven servisním rozhraním UART s galvanickým oddělením, určeným pro servisní přístup. Minimální izolační napětí pro galvanické oddělení je 1500 V.
+	•	Konektor pro připojení servisní aplikace musí být typu RJ-12 se zapojením podle přílohy O. Napájení galvanicky oddělené části (pin 6 konektoru) musí pracovat při napětí v rozmezí 3,3 - 5,5 VDC. EXT_RESET (pin 4 konektoru) je vstup, který provede reset při logické úrovni 1 (high).
+	•	Parametry na servisním rozhraní:
+	•	přenosová rychlost komunikace 115 200 bit/sec.,
+	•	počet datových bitů 8,
+	•	parita žádná,
+	•	stop bit 1,
+	•	bez řízení toku.
+	•	KPPS musí provést změnu jakéhokoliv parametru, zadaného po servisním rozhraní nebo přeneseného formou příkazu po druhé vrstvě přenosové soustavy JSVV, automaticky, bez nutnosti restartu do max. 3 sec. Výjimkou je vymazání nepomíjivé paměti KPPS, které musí být provedeno do max. 30 sec.
+	•	Přijme-li KPPS pokyn, který obsahuje příkaz s prioritou P2, a dotazem na stav EKPV zjistí, že je spuštěno rozhlasové vysílání, odešle do EKPV nejprve příkaz STOP. Přijatý pokyn pak předá do EKPV nejdříve 15 sec. a nejpozději 30 sec. po příkazu STOP. Ustanovení tohoto bodu se použije pouze v případě, že EKPV komunikuje po protokolu první vrstvy.
+	•	Vazby mezi daty zpráv, příkazy a provozními stavy komunikace KPPS s KP dle protokolů pro první a druhou vrstvu přenosové soustavy JSVV jsou shrnuty v příloze S.
+
+
+
+4)  Technické požadavky na koncové prvky varování připojované do jednotného systému varování a vyrozumění, č.j. MV-24666-1/PO-2008 ze dne 15. dubna 2008, uveřejněné ve Sbírce interních aktů řízení generálního ředitele HZS ČR čá. 24/2008 ze dne 15. dubna 2008, ve znění změny č. 1, č.j. MV-15523-1/PO-2009 ze dne 20. března 2009, uveřejněné ve Sbírce interních aktů řízení generálního ředitele HZS ČR čá. 13/2009 ze dne 20. března 2009.
+
+	•	Koncové prvky JSVV
+	•	Koncové prvky JSVV obecně
+	•	Koncový prvek musí tvořit technické zařízení schválené pro připojení do JSVV.
+	•	Koncový prvek založený na softwarovém řešení se nepřipouští.
+	•	Připojení technického zařízení, které provozuje obec nebo jiná právnická osoba, jež je využitelné jako koncový prvek JSVV, připustí HZS kraje, splňuje-li technické požadavky uvedené v bodech 5.1. až 5.9.
+	•	Koncovými prvky JSVV jsou:
+	•	koncové prvky varování,
+	•	koncové prvky měření,
+	•	koncové prvky informování.
+	•	Koncovými prvky varování jsou:
+	•	elektronické koncové prvky varování,
+	•	elektrické rotační sirény.
+	•	Elektronickými koncovými prvky varování jsou:
+	•	elektronické sirény,
+	•	místní informační systémy.
+	•	Koncovými prvky informování jsou varovné informační panely.
+	•	Koncové prvky JSVV musí být konstrukčně řešeny tak, aby místní odbavení signálů sirén, verbálních informací a přímých hlasových vstupů u KPV a odečty hodnot měřených veličin u KPM mohly provádět osoby školené dle § 19 odst. 1 zákona č. 250/2021 Sb., o bezpečnosti práce v souvislosti s provozem vyhrazených technických zařízení a o změně souvisejících zákonů.
+
+	•	Rozhraní pro koncové prvky JSVV
+	•	Koncové prvky JSVV jsou do JSVV připojeny výhradně prostřednictvím KPPS.
+	•	Rozhraním pro připojení EKPV, KPM a VIP ke KPPS, k přenosovým prostředkům ASV a propojení KPPS jednotlivých vrstev přenosové soustavy JSVV je rozhraní RS-232 s následujícími parametry:
+	•	přenosová rychlost 9600 b/s (doporučeno),
+	•	datové bity 8,
+	•	parita žádná,
+	•	stop bit 1,
+	•	řízení toku žádné,
+	•	konektor D-sub DE9 male, použity signály RXD (pin 2), TXD (pin 3) a GND (pin 5). Ostatní signály standardu RS-232 nevyužity,
+	•	propojení KPPS s EKPV, KPM a VIP kříženým kabelem - null-modem.
+	•	Zapojení konektoru D-sub DE9 pro RS-232 a null modemu je uvedeno v příloze J.
+	•	KP, připojený a komunikující s KPPS pro druhou vrstvu přenosové soustavy JSVV, musí na dotaz KPPS vyžadující odpověď odeslat zprávu o posledním zjištěném stavu se zpožděním menším než 3 sec. včetně. Tato doba je počítána od odeslání posledního znaku v komunikační zprávě od KPPS do přijetí prvního znaku odpovědi od KP. Tento čas platí také pro automaticky hlášené stavy a aktivace.
+	•	Rozhraním pro připojení RS ke KPPS je bezpotenciálový spínací kontakt relé jednotky SSR:
+	•	spínané napětí 230 V,
+
+	•	spínaný proud max. 1 A.
+	•	Spínání relé pro jednotlivé signály sirény:
+	•	Signál sirény č. 1: relé 7 sec. sepnuto, následuje 19 sekvencí, kdy je relé 3 sec. rozepnuto a 4 sec. sepnuto (celkem 140 sec.).
+	•	Signál sirény č. 2: relé 140 sec. sepnuto.
+	•	Signál sirény č. 3: relé 25 sec. sepnuto, 10 sec. rozepnuto, 25 sec. sepnuto
+(celkem 60 sec.).
+	•	Rozhraním pro připojení čidel monitoringu prostředí ke KPM nebo jinému KP je rozhraní RS-232 s parametry dle bodu 5.2.2.
+	•	Vstupním rozhraním pro připojení zdroje externího audiosignálu k EKPV a propojení s radiostanicí DMR pro připojení modulace dálkového hlasatelského vstupu je:
+	•	vstup galvanicky oddělený, 1 nesymetrický kanál,
+	•	linková úroveň 316 mV RMS +/-10 %,
+	•	impedance 600 ohm +/- 10 %,
+	•	charakteristika od 120 Hz do 8 kHz,
+	•	konektor JACK 3,5 mm v provedení stereo.
+	•	Koncové prvky komunikují na rozhraní s KPPS pro jednotlivé vrstvy přenosové soustavy JSVV podle protokolů, které jsou uvedeny v bodech 4.2.6. a 4.3.22.
+	•	Koncové prvky musí být schopny rozpoznat na základě zpráv od KPPS komunikační protokol mezi KP a KPPS (dle bodů 4.2.6. a 4.3.22.) a automaticky se mu přizpůsobit.
+
+	•	Obecné požadavky na koncové prvky varování
+	•	Každý KPV musí umožnit připojení externího bezpotenciálového tlačítka místního ovládání.
+	•	Externí tlačítko místního ovládání musí být chráněno před neúmyslnou aktivací vhodným krytem. Ten musí být možné v případě potřeby odstranit bez použití nástrojů užitím přiměřeného násilí, např. rozbitím krytu.
+	•	Po aktivaci místním ovládáním musí KPV odbavit obsluhou předem definované a v paměti KPV uložené varování.
+
+	•	Požadavky na elektronické koncové prvky varování
+	•	EKPV musí umožnit odbavení minimálně 3 signálů sirény a minimálně 16 verbálních informací uložených v jeho vnitřní paměti.
+	•	Časové  a  kmitočtové  charakteristiky  signálů  sirén  pro  EKPV  jsou  uvedeny v příloze E a musí být uloženy ve vnitřní paměti EKPV. Na pozicích paměti, které jsou aktivovány příkazy pro signály sirény č. 3 a č. 4 dle protokolu v příloze M, musí být uložen signál sirény č. 3 („Požární poplach“).
+	•	Obsah verbálních informací pro vnitřní paměť EKPV je uveden v příloze H.
+	•	Přehled standardně používaných kombinací signálů sirén a verbálních informací je uveden v příloze I.
+	•	Každý EKPV musí být vybaven ovládacími prvky pro místní odbavení jednotlivých signálů a verbálních informací.
+	•	Povoluje se i jejich odbavení ze vzdáleného terminálu.
+	•	Každý EKPV musí umožnit:
+
+	•	dálkové připojení rozhlasového přijímače, který bude naladěn na kmitočet dle určení HZS územně příslušného kraje,
+	•	dálkové připojení externího zdroje modulace z VyC (např. místní hlasový vstup - mikrofon),
+	•	dálkové připojení jiného externího zdroje modulace (např. z MIS nebo vzdáleného terminálu),
+	•	dálkové připojení přímého hlasového vstupu z VyC.
+	•	Každé verbální informaci nebo hlasovému vstupu musí předcházet znělka. Znělkou musí být signalizováno i ukončení verbální informace nebo hlasového vstupu. Časové a kmitočtové charakteristiky znělek jsou uvedeny v příloze F.
+	•	V případě, že do 10 minut od dálkového připojení zdrojů modulace dle bodu 5.4.7. nebude přijat příkaz k jejich odpojení, ukončí EKPV činnost automaticky sám.
+	•	Ukončení připojení rozhlasového přijímače nebo jiného externího zdroje modulace nemusí být znělkou signalizováno.
+	•	Místní odbavení signálů sirén a verbálních informací musí být chráněno proti neautorizovanému přístupu heslem o délce minimálně 4 znaky.
+	•	Pro případ nebezpečí z prodlení musí být EKPV na ovládacím panelu vybaven samostatným tlačítkem STOP se shodnou funkcí, jakou má příkaz „STOP“ dle bodu 2.5.4.1.10. Aktivací tlačítka STOP je aktivována „nouzová místní priorita z titulu fyzické přítomnosti obsluhy v místě události a u KPV“. Příkazem STOP je ukončena jakákoliv právě realizovaná činnost KPV a tento je uveden do pohotovostního stavu. Poté je obsluze na místě umožněno místní odbavení signálu sirény, verbální informace nebo hlasový vstup, pokud nejsou v EKPV zařazeny jiné pokyny ve frontě dle bodu 2.5.10.
+	•	Skříň řídící elektroniky EKPV musí být vybavena bezpečnostním kontaktem, který zajišťuje nahlášení otevření skříně do systému diagnostiky a kontroly provozních stavů dle bodu 5.4.14.1.1.
+	•	EKPV musí být vybaven autodiagnostikou a na dotaz, periodicky generovaný KPPS druhé vrstvy přenosové soustavy JSVV, nebo na dotaz zadaný z VyC, předá na rozhraní RS-232 KPPS informaci o:
+	•	Provozním stavu
+	•	Skříň řídící elektroniky – zavřena / otevřena. 5.4.14.1.2. Kapacita akumulátoru – OK / nedostatečná. 5.4.14.1.3. Napájení z elektrorozvodné sítě – OK / mimo provoz. 5.4.14.1.4. Stav audio cesty – OK / porucha.
+5.4.14.1.5. Aktuální napětí akumulátorů. 5.4.14.1.6. Počet připojených akustických hlavic. 5.4.14.1.7. Počet vadných akustických hlavic.
+	•	Počet příkazů v aktivaci.
+	•	Aktuálně prováděný příkaz z aktivace.
+	•	Provozním režimu:
+	•	Klidový stav.
+	•	Spuštěn signál sirény (1 – 3).
+	•	Spuštěna znělka (1, 2).
+	•	Spuštěna verbální informace (1 – 20).
+	•	Rozhlasové vysílání.
+	•	Hlasový vstup z VyC.
+	•	Místní hlasový vstup.
+	•	Připojeno externí audio.
+	•	Připojeno sekundární externí audio. 5.4.14.2.10 TEST.
+
+	•	Způsobu aktivace:
+	•	Klidový stav (nebyla provedena aktivace). 5.4.14.3.2. Místní.
+5.4.14.3.3. Ze vzdáleného terminálu. 5.4.14.3.4. Z ASV.
+5.4.14.3.5. JSVV.
+	•	Perioda dotazů dle bodu 5.4.14. musí být nastavitelná v rozsahu dle bodu 4.1.16. EKPV musí být schopen odpovědět dle bodu 5.2.4.
+	•	V případě zjištění nedostatečné kapacity akumulátoru a jejím nahlášení KPPS druhé vrstvy přenosové soustavy JSVV dle bodu 5.4.14.1.2. se musí EKPV automaticky vypnout, nejpozději však při dosažení napětí 5 % pod hodnotou hraničního napětí dle bodů 3.14. a 3.15. EKPV se automaticky vypne pouze ve chvíli, kdy je v klidovém stavu.
+	•	EKPV musí na rozhraní RS-232 KPPS druhé vrstvy přenosové soustavy JSVV na dotaz předat informaci o stavu audio cesty. Audio cestou se rozumí blok akustické signalizace, který může být složen z několika částí (elektroakustický měnič, zesilovač, popř. další). Je-li zjištěno, že některá z částí nedovoluje provedení akustické signalizace, dochází k nahlášení tohoto stavu.
+	•	Akustickou hlavicí uvedenou v bodech 5.4.14.1.6. a 5.4.14.1.7. se rozumí kombinace koncového zesilovače a k němu připojených elektroakustických měničů. Blok akustické signalizace se může skládat z několika nezávislých akustických hlavic.
+	•	EKPV musí splňovat požadavky bodů 4.1.9. až 4.1.11.
+
+	•	Požadavky na elektronické sirény
+	•	Obecné schéma ES je uvedeno v příloze C.
+	•	ES musí splňovat požadavky dle bodů 3., 5.3. a 5.4.
+	•	Do JSVV lze připojit elektronickou sirénu, jejíž akustický tlak ve vzdálenosti 30 m od zdroje dosahuje hodnoty minimálně 103 dBA.
+	•	Mobilní elektronické sirény a mobilní ozvučovací zařízení lze používat k účelům varování a předávání tísňové informace, ale nelze je připojit do JSVV prostřednictvím KPPS.
+
+	•	Požadavky na místní informační systémy
+	•	MIS musí splňovat požadavky bodů 3., 5.3., 5.4. a požadavky dále uvedené.
+	•	Do JSVV lze zapojit pouze takový MIS, u kterého je možná jednoznačná identifikace všech jeho částí specifikovaných v bodu 5.6.4.
+	•	MIS musí zajistit reprodukci srozumitelné informace o opatřeních k ochraně životů, zdraví a majetku.
+	•	MIS se obecně skládá z:
+	•	ústředny MIS s řídící technologií,
+	•	ovládacího pracoviště,
+	•	prvků přenosové soustavy MIS,
+	•	hlásičů.
+Obecná schémata MIS jsou uvedena v příloze D.
+	•	MIS se do JSVV připojují prostřednictvím KPPS, který se připojuje výhradně k řídící technologii MIS. Na MIS se tak nahlíží jako na jeden samostatný KPV JSVV. Výjimkou je splnění podmínek bodu 6.6. nebo 6.7. těchto požadavků.
+
+	•	Pokud je elektronická siréna integrální součástí MIS, nahlíží se na ni jako na hlásič a v tomto případě se nevybavuje samostatným KPPS. Výjimky jsou uvedeny v bodech
+6.6. až 6.8.
+	•	Ústředna MIS s řídící technologií obsahuje technologické a řídící jádro MIS. Obecně se skládá z:
+	•	technologické skříně,
+	•	napájecí a zdrojové části,
+	•	baterií pro zajištění zálohování napájení 230 V,
+	•	řídící elektroniky s ovládacím panelem (tlačítky místního ovládání),
+	•	komunikačních zařízení pro přenosovou soustavu MIS pro připojení hlásičů (rádiových komunikačních zařízení u BMIS, prostředků pro připojení po kabelové IP síti u KMIS),
+	•	dalších komunikačních zařízení
+(rozhlasový přijímač, radiomodem, GSM modem apod.),
+	•	anténního systému,
+	•	konektorů pro připojení dalších zařízení (vstupy/výstupy).
+	•	Ústředna MIS musí být vybavena prvky místního ovládání (i elektronickými/dotykovými apod.) a zobrazovacím panelem, na kterém bude zobrazena informace o aktivitě MIS a o uživatelské nabídce. Tlačítka a uživatelská nabídka slouží minimálně pro místní aktivaci jednotlivých signálů sirén a verbálních informací, a to i bez funkčního ovládacího pracoviště.
+	•	Ovládací pracoviště MIS je zařízení, které se pro zvýšení komfortu obsluhy připojuje k řídící technologii. Zpravidla se jedná o PC s příslušnou obslužnou aplikací.
+	•	Hlásiče jsou ozvučovací zařízení a bez propojení s řídící technologií jsou samostatně nefunkční. Obecně se skládají z reproduktorů s dostatečným výkonem a propojovacího prostředí s řídící technologií MIS. U BMIS se skládají navíc z:
+	•	technologické skříně,
+	•	řídící jednotky,
+	•	napájecí a zdrojové části,
+	•	baterií pro zajištění zálohování napájení 230 V, pokud je u hlásičů použito,
+	•	rádiového komunikačního zařízení pro zajištění přenosu informací od a k ústředně MIS,
+	•	anténního systému u BMIS,
+	•	konektorů pro připojení dalších zařízení (vstupy/výstupy).
+	•	BMIS využívá vlastní digitální rádiovou přenosovou soustavu pro přenos příkazů a informací na hlásiče, a to včetně hlasových a diagnostických.
+	•	Přenosová soustava BMIS musí pracovat na kmitočtech a za podmínek vydaných pro daný BMIS Českým telekomunikačním úřadem v individuálním oprávnění k využívání rádiových kmitočtů pozemní pohyblivé a pevné služby.
+	•	Rádiová komunikační zařízení přenosové soustavy BMIS musí splňovat ustanovení normy ČSN ETSI EN 300 113 V2.2.1 "Pozemní pohyblivá služba – Rádiová zařízení s anténním konektorem určená pro přenos dat (a/nebo hovoru), používající modulaci s konstantní nebo proměnnou obálkou – Harmonizovaná norma pokrývající základní požadavky článku 3.2 Směrnice 2014/53/EU", nebo novější verze normy.
+	•	Přenosová soustava MIS je v majetku jednoho subjektu a součásti MIS tvoří homogenní celek, nezávislý na infrastrukturách třetích stran.
+	•	V případě aktivace MIS prostřednictvím JSVV musí řídící technologie MIS postupovat dle bodu 2.5.10. Hlásiče MIS musí zahájit reprodukci akustické informace do 5 sec. od zadání příkazu z vlastního ovládacího pracoviště nebo do 10 sec. od přijetí příkazu dálkově zaslaného z VyC.
+
+	•	BMIS musí v rámci přenosové soustavy používat takové rádiové technologie a přenosové protokoly, které zajistí, že přenášená data a informace nebudou ztraceny nebo zkresleny natolik, že budou nesrozumitelné.
+	•	Každé komunikační zařízení přenosové soustavy BMIS a KMIS musí být identifikováno jedinečným identifikačním kódem v rámci jedné přenosové soustavy.
+	•	Žádné rádiové zařízení přenosové soustavy BMIS nesmí být z bezpečnostních důvodů akceptováno či ovládáno prostřednictvím jiného BMIS, než ke kterému náleží.
+	•	BMIS a jejich rádiové přenosové soustavy, které jsou ve vzájemném dosahu, se nesmějí ovlivňovat a nesmějí ovlivňovat ani jednotlivá zařízení příslušející do jiného BMIS. Frekvence a parametry rádiových zařízení musejí odpovídat platným předpisům, tj. podmínkám Českého telekomunikačního úřadu a normám pro elektromagnetickou kompatibilitu.
+	•	Rádiové rušení nesmí vyvolat žádnou nechtěnou aktivaci či akustickou reprodukci zařízení, příslušejícího do jiného BMIS.
+	•	Přenosy mezi řídící technologií BMIS a hlásiči, kterými je zabezpečováno varování nebo předání tísňové informace, se uskutečňují výhradně přenosem příkazů k odbavení varovného signálu nebo verbální informace z paměti hlásiče BMIS.
+	•	Přenos informace mezi řídící technologií a hlásiči MIS formou on-line předávaného modulovaného signálu je možný pouze u DMIS a KMIS. U BMIS pouze pro účely přímého hlasového vstupu z ovládacího pracoviště BMIS, dálkového hlasového vstupu z VyC, z externě připojeného zdroje audiosignálu nebo z rozhlasového přijímače.
+	•	Ústředna MIS musí v pravidelných intervalech na dotaz poskytovat KPPS informace požadované v bodu 5.4.14.
+	•	Každé komunikační zařízení MIS musí na ovládací pracoviště MIS předávat v pravidelných, nastavitelných intervalech nebo na dotaz obsluhy z ovládacího pracoviště diagnostické informace minimálně v rozsahu:
+	•	výsledek testu,
+	•	nepřítomnost napětí 230 V,
+	•	nedostatečná kapacita akumulátoru,
+	•	aktuální hodnota veličiny čidla monitoringu prostředí, pokud je jím vybaven,
+	•	poruchový stav. Poruchovým stavem je:
+	•	závada koncového zesilovače nebo elektroakustického měniče venkovního hlásiče BMIS,
+	•	ztráta komunikace s venkovními hlásiči MIS,
+	•	jiná diagnostickými prostředky zjistitelná závada, jejímž důsledkem je nemožnost realizace varování nebo předání tísňové informace.
+	•	Výsledky diagnostiky akustických zařízení / hlásičů, popř. dalších zařízení MIS musí být zobrazovány v příslušné aplikaci ovládacího pracoviště a uloženy pro další kontrolu.
+	•	MIS musí udržovat ve své paměti identifikátory (ID) všech zjištěných vadných hlásičů a na rozhraní RS-232 KPPS druhé vrstvy přenosové soustavy JSVV na dotaz předaný KPPS z VyC předat ID vadných hlásičů (max. 10 ID na jednu zprávu). Množina vadných hlásičů musí být seřazena podle ID hlásičů vzestupně. Z této množiny je dle dotazu z VyC na základě zaslaných indexů (od-do) vybrána požadovaná podmnožina deseti ID a ty jsou zaslány na rozhraní RS-232 KPPS. Doba odpovědi se řídí bodem 5.2.4.
+	•	Informace od řídící technologie MIS ke KPPS v odpovědi „Vadné hlásiče MIS“ musí být opatřena časovou značkou dle bodu 2.5.11.
+
+	•	Požadavky na koncové prvky informování
+	•	Varovné informační panely musí splňovat požadavky bodů 3., 5.2.1. až 5.2.4., 5.4.14. až
+5.4.17. tohoto dokumentu a požadavky dále uvedené. Pokud je VIP vybaven audio cestou, musí splňovat také požadavky bodů 5.4.1. až 5.4.3.
+	•	VIP musí umožňovat předání tísňové informace a další informování obyvatelstva ve formě textů, piktogramů nebo v jiné vizuální podobě.
+	•	VIP musí umožnit do paměti uložit minimálně 36 připravených textů a piktogramů.
+	•	Veškeré zobrazované informace musí být srozumitelné, jasné a nedvojsmyslné. Nepřipouští se zobrazování informací, které k pochopení vyžadují bližší vysvětlení výrobce nebo dodavatele.
+	•	Varovný informační panel musí umožnit zobrazení textu přijatého KPPS z VyC v rozsahu min. 128 znaků, a to včetně mezer, s českou diakritikou s kódováním CP 1250.
+	•	Text zobrazované informace může být zobrazen i rolováním nebo formou běžícího textu.
+	•	Minimální výška znaku je 100 mm.
+	•	Informace na VIP jsou zobrazeny po dobu 180 sec., nebo do doby přijetí příkazu STOP dle bodu 2.5.4.1.10.
+	•	Vzorové texty zobrazované varovným informačním panelem pro jednotlivé standardní kombinace signálů sirén, znělek a verbálních informací odbavovaných z VyC jsou uvedeny v příloze I. Ta obsahuje i vzory textů pro ostatní příkazy k aktivaci elektronických koncových prvků varování.
+
+	•	Požadavky na elektrické rotační sirény
+	•	RS musí prostřednictvím KPPS umožnit odbavení minimálně 3 signálů sirén. Jejich časové průběhy jsou uvedeny v příloze G.
+	•	Odbavení jednotlivých signálů sirén se uskutečňuje v případě první vrstvy přenosové soustavy JSVV kódy funkcí POCSAG, které mohou být přijaty na 1. až 7. identifikační adrese KPPS:
+	•	kód funkce A – signál sirény č. 1,
+	•	kód funkce B – signál sirény č. 2,
+	•	kód funkce C – rezerva,
+	•	kód funkce D – signál sirény č. 3.
+	•	Ve druhé vrstvě přenosové soustavy JSVV se odbavení jednotlivých signálů uskutečňuje příslušným příkazem dle protokolu pro druhou vrstvu přenosové soustavy JSVV.
+	•	Kontrola  stavu  RS  se  v  první  vrstvě  přenosové  soustavy  JSVV  uskutečňuje na 8. identifikační adrese KPPS kódem POCSAG funkce A. Ve druhé vrstvě přenosové soustavy JSVV příkazem TEST KPV na kterékoliv adrese KPPS. V obou případech musí sepnout spínací kontakt relé na dobu max. 2,5 sec.
+	•	Každý KPPS pro ovládání RS musí obsahovat ochranné prvky proti přepětí na vstupních/výstupních obvodech včetně napájecích obvodů.
+	•	Minimální hladina akustického tlaku varovného signálu generovaného elektrickou rotační sirénou pro připojení do JSVV musí dosahovat minimálně 90 dBA ve vzdálenosti 30 m.
+
+	•	Požadavky na koncové prvky měření
+	•	KPM musí splňovat požadavky dle bodů 3., 5.2.1. až 5.2.4., a 5.2.7. tohoto dokumentu a požadavky dále uvedené.
+	•	KPM se skládá minimálně ze 2 základních funkčních částí, které mohou být oddělitelné nebo plně integrované:
+	•	Měřící senzor, snímač či jiný prvek, který měří analogové nebo binární informace monitorované veličiny.
+	•	Datalogger pro sběr, ukládání a následné poskytování analogových a/nebo binárních informací. Jde o prostředníka (rozhraní) mezi snímacími senzory a KPPS druhé vrstvy přenosové soustavy JSVV, nebo jde o zařízení zcela samostatně shromažďující naměřené údaje.
+	•	KPM musí splňovat zákonné podmínky dle kapitoly 10 a další technické podmínky, které definují parametry měřících zařízení a vztahují se ke konkrétním typům měřících zařízení s ohledem na monitorovanou veličinu.
+	•	Měřenými veličinami jsou různé veličiny prostředí. Jejich měření probíhá neustále a KPM musí být připraveno poskytnout poslední naměřené hodnoty.
+	•	KPM musí rozlišovat minimálně tyto základní stavy měření:
+	•	klidový stav (hodnoty měření v normě),
+	•	horní limit nebezpečí,
+	•	horní limit varování,
+	•	spodní limit nebezpečí,
+	•	spodní limit varování.
+	•	Každé zaznamenané překročení definované hodnoty některého ze základních limitů veličiny monitoringu prostředí musí být uloženo do paměti KPM a v rámci periodického dotazu nebo automaticky, nejpozději do 10 sec. od jeho zjištění, předáno KPPS druhé vrstvy přenosové soustavy JSVV, který je cestou JSVV zašle na VyC II. úrovně, které přijetí této informace automaticky potvrdí. Obsluha na VyC II. úrovně rozhodne o dalším postupu v dané věci.
+	•	KPPS připojený ke KPM musí neprodleně automaticky na VyC II úrovně zaslat informaci o odpovědi KPM na dotaz, který bude obsahovat informaci o:
+	•	překročení	definované hodnoty některého ze	základních	limitů veličiny monitoringu prostředí,
+	•	nedostatečné kapacitě akumulátoru,
+	•	otevření skříně KPM.
+	•	KPM musí na stanovené rozhraní KPPS druhé vrstvy přenosové soustavy JSVV předávat na jeho dotaz, nebo v případě zjištění překročení limitu veličiny monitoringu prostředí dle bodu 5.9.6., informace o:
+	•	Stavu KPM:
+	•	Skříň řídící elektroniky – zavřena / otevřena.
+	•	Kapacita akumulátoru – OK / nedostatečná.
+	•	Napájení z elektrorozvodné sítě – OK / mimo provoz.
+	•	ID senzoru (pro případ připojení více čidel k jednomu KPM).
+	•	Stav monitoringu prostředí
+	•	Klidový stav. 5.9.8.1.5.2. Horní limit nebezpečí. 5.9.8.1.5.3. Horní limit varování. 5.9.8.1.5.4. Dolní limit nebezpečí. 5.9.8.1.5.5. Dolní limit varování. 5.9.8.1.5.6. Probíhá měření.
+
+5.9.8.1.5.7. Porucha.
+	•	Typ odesílaných dat (datový formát).
+	•	Data měření.
+	•	Fyzikální jednotka.
+	•	Časová značka.
+	•	KPM musí být schopen na dotazy dle bodu 5.9.8. odpovědět v čase dle bodu 5.2.4.
+	•	Hodnoty měřených veličin musí být předávány v některém z následujících datových typů: INT8, UINT8, INT16, UINT16, FLOAT nebo DOUBLE. Informace o jednotce měření musí obsahovat max. 4 znaky.
+	•	K jednomu KPM lze připojit max. 255 senzorů (čidel).
+	•	V případě zjištění nedostatečné kapacity akumulátoru a jejím nahlášení KPPS druhé vrstvy přenosové soustavy JSVV dle bodu 5.4.14.1.2. se musí KPM automaticky vypnout.
+
+
+	•	Požadavky na rozmístění koncových prvků varování
+	•	KPV a hlásiče MIS musí být v oblasti akustického pokrytí rozmístěny tak, aby bylo zajištěno spolehlivé varování obyvatelstva a bylo dosaženo dostatečné srozumitelnosti vysílaných informací.
+	•	Jedním KPV může být zabezpečeno území o rozloze max. 4 km2. Rozloha území je dána plochou mnohoúhelníku opsaného kolem zastavěné oblasti.
+	•	Zabezpečení dvou a více obcí jedním KPV se nepřipouští.
+	•	O rozšíření plochy 4 km2 o maximálně 50 % může v odůvodněných případech rozhodnout HZS kraje na základě žádosti dodavatele podložené projektovou dokumentací.
+	•	O rozšíření plochy 4 km2 o maximálně 100 % může v odůvodněných případech rozhodnout MV-GŘ HZS ČR na základě žádosti dodavatele KPV. Žádost musí být podložena projektovou dokumentací a souhlasným vyjádřením HZS příslušného kraje.
+	•	V případě použití MIS v obci s rozlohou větší než 4 km2 musí být MIS členěn do samostatných větví. Každá větev musí zabezpečovat území rozlohou poměrné k počtu větví.
+	•	V případě, že jeden MIS zabezpečuje několik místních částí jedné obce, které tvoří samostatné stavební celky, musí být MIS členěn do samostatných větví. Každá místní část obce musí být zabezpečena samostatnou větví MIS. V odůvodněných případech může o výjimce rozhodnout HZS kraje na základě žádosti obce.
+	•	V případě, že je MIS členěn do větví, musí být každá větev vybavena samostatným KPPS.
+	•	Z důvodů zajištění srozumitelnosti verbálních informací není přípustné realizovat akustické pokrytí jedné obce nebo její místní části souběžným používáním hlásičů MIS a elektronických sirén vybavených samostatnými KPPS. Výjimka je možná pouze v situaci, kdy elektronická siréna vybavená samostatným KPPS nebude ovlivňovat srozumitelnost verbálních informací na území akusticky pokrytém hlásiči MIS a naopak.
+	•	Elektronické sirény mohou tvořit samostatnou větev MIS podle bodů 6.6. až 6.8., za předpokladu, že je splněna podmínka bodu 6.9.
+	•	O rozšíření oblasti akustického pokrytí mimo intravilán obce může v odůvodněných případech rozhodnout MV-GŘ HZS ČR na základě žádosti příslušného orgánu místní samosprávy a souhlasného vyjádření příslušného HZS kraje.
+
+	•	KPV a hlásiče MIS musí být rozmístěny tak, aby varovný signál v celé oblasti akustického pokrytí dosahoval hladiny akustického tlaku minimálně 6 dBA nad hladinou akustického tlaku pozadí, minimálně však 65 dBA.
+	•	Maximální hladina zvuku v místě expozice může dosáhnout max. hodnoty 120 dBA. Místem expozice je míněno místo, ve kterém se běžně pohybují nebo nacházejí lidé.
+	•	Řídící technologie KPV se umísťují ve vhodných objektech, které zajistí ochranu instalované technologie před nežádoucími zásahy nepovolaných osob. KPV musí být umístěny tak, aby byla možná jejich kontrola, údržba a oprava. Skříň s elektronikou a ovládacími prvky musí být pro oprávněnou osobu lehce dostupná.
+	•	Pro umístění KPV a ozvučovacích zařízení MIS se vybírají taková místa instalace, z nichž se zvuk může šířit bez překážek a pokud možno ve směru ulice. Větší překážka, která by významně omezovala šíření zvuku k posluchači, se nesmí vyskytovat blíže než 30 m od KPV nebo hlásiče MIS.
+	•	Antény KPPS se umísťují pokud možno vně objektu.
+	•	Přednostně se KPV a hlásiče MIS umísťují na výškově dominantních objektech.
+	•	Spojnice mezi zdrojem signálu a zájmovým prostorem nesmí být narušena profilem terénu.
+	•	Je požadováno, aby se akustické dosahy sousedních KPV a hlásičů MIS v urbanizovaných oblastech překrývaly.
+
+
+	•	Autonomní systém varování a jeho vazba k JSVV
+	•	ASV může být provozován pouze na spádovém území v působnosti příslušného orgánu samosprávy, nebo na území ohroženém mimořádnou událostí v důsledku činnosti provozovatele objektu podle zákona č. 224/2015 Sb. či držitele povolení podle zákona č. 263/2016 Sb., nebo na území ohroženém zvláštní povodní z vodních děl I. až III. kategorie podle zákona č. 254/2001 Sb.
+	•	ASV se obecně skládá z:
+	•	ovládacího pracoviště,
+	•	řídící technologie,
+	•	přenosové soustavy ASV,
+	•	koncových prvků.
+	•	Do JSVV mohou být připojeny pouze ty koncové prvky ASV, které splňují požadavky stanovené tímto dokumentem.
+	•	Koncové prvky ASV se zapojují do JSVV prostřednictvím KPPS.
+	•	Řídící technologie a prvky přenosové soustavy ASV nesmějí být vybaveny KPPS JSVV.
+
+
+	•	Koncové prvky vyrozumění
+	•	Jako koncové prvky vyrozumění se používají alfanumerické pagery splňující požadavky standardu POCSAG (viz bod 2.4.1.1.) a požadavky dále uvedené, které se připojují do první vrstvy přenosové soustavy JSVV.
+	•	Pracovní kmitočet pageru je dán kmitočtem první vrstvy přenosové soustavy JSVV, kmitočtový zdvih je 25 kHz, přenosová rychlost 1200 bit/sec.
+
+	•	Citlivost pageru musí být minimálně 7,0 µV při přenosové rychlosti 1200 b/s bez ohledu na podmínky v místě příjmu.
+	•	Maximální doba blokování vícenásobného shodného příjmu musí být nastavitelná minimálně do 240 sekund, standardně se nastavuje na 180 sekund. Formálně obsahově shodné zprávy, přijaté po době blokování, musí být zobrazitelné jako nové.
+	•	Pager musí být dodáván s vypnutou funkcí signalizace „mimo dosah“, nebo tato funkce musí být vypínatelná při nastavování parametrů pageru.
+	•	Pager musí umožnit využití minimálně 4 různých identifikačních adres. Adresy musí být v plném rozsahu adres pro první vrstvu přenosové soustavy JSVV, z libovolného rámce, a nezávislé na využití a stavu funkčních bitů číslo 20 a 21.
+	•	Pager musí umožnit přijetí a uložení minimálně 40 zpráv standardní délky. Přijaté zprávy musí být zobrazovány v pořadí dle příjmu a musí být opatřeny datem a časem příjmu. Nejnovější přijatá zpráva musí být zobrazitelná jako první v pořadí. Pager musí být vybaven vizuální a uživatelsky nastavitelnou akustickou indikací nepřečtených zpráv.
+	•	Při výměně napájecího zdroje pageru nesmí dojít ke ztrátě uložených zpráv.
+	•	Systémové časové údaje pageru musí být uživatelsky nastavitelné.
+	•	Přijetí zprávy musí být podle uživatelského nastavení signalizováno akusticky a vibračně, nebo pouze akusticky, nebo pouze vibračně.
+	•	Doba, po kterou je zobrazeno menu pageru a přijaté zprávy, musí být dostatečná pro spolehlivou uživatelskou činnost i při ztížených místních podmínkách. Displej musí umožňovat uživatelsky nastavitelný způsob zobrazování přijatých zpráv k dosažení jejich optimální čitelnosti a uživatelsky nastavitelné podsvícení zobrazeného menu a přijatých zpráv. Doba podsvícení se váže na dobu zobrazení menu a přijatých zpráv.
+	•	Napájení pageru se zajišťuje články o rozměrech AA-LR6 nebo AAA-LR03. Doba provozu na nový standardní alkalický článek o rozměru AAA se stanovuje na 60 dnů při zabezpečení příjmu a uživatelského zpracování minimálně dvou zpráv za 24 hodin, kombinované akustické a vibrační signalizace přijaté zprávy, akustické signalizace nepřečtených zpráv a podsvícení displeje.
+	•	Je vyžadována optická indikace stavu (napětí) napájecího článku na displeji pageru. Indikace musí být uživatelsky nastavitelná podle druhu použitého napájecího článku (alkalického, nabíjecího atd.). Stav před dosažením dolního limitu napájecího napětí musí být indikovatelný akusticky, nebo dle uživatelského nastavení pageru.
+	•	Pager musí splňovat podmínky provozu při pracovních teplotách v minimálním rozsahu
+-10 až +50 °C.
+	•	K pageru musí být dodáván uživatelský manuál v českém jazyce. Z uživatelského manuálu musí být zřejmé základy práce s pagerem, uživatelské činnosti s přijatými zprávami, zajištění napájení pageru a potřebná opatření k zajištění správného a bezporuchového provozu pageru.
+	•	Spolu s dodávkou pagerů musí být umožněn prodej technického vybavení pro správu pagerů a poskytnuty konfigurační a servisní programy s časově neomezenými licencemi. Manuály pro správce musí být v rozsahu potřebném pro správu pagerů v JSVV v českém jazyce.
+	•	Funkce pageru, které nesouvisí přímo s využitím pageru v JSVV, nesmí negativně ovlivňovat činnost pageru, neúměrně zvyšovat jeho energetickou potřebu spotřebu apod. Totéž se týká doplňkové výbavy a příslušenství pageru.
+
+	•	Zkouška a kontrola provozuschopnosti JSVV
+	•	K zajištění trvalé funkčnosti a provozuschopnosti JSVV se provádí zkoušky provozuschopnosti JSVV a kontroly provozuschopnosti zařízení připojeného do JSVV.
+	•	Zkoušku provozuschopnosti JSVV provádí HZS ČR s četností a způsobem dle platných právních předpisů.
+	•	Vždy před pravidelnou i nepravidelnou akustickou zkouškou provozuschopnosti JSVV musí být odbavena verbální informace č. 13 dle přílohy H tohoto dokumentu, a to 5 až 10 minut před vlastní zkouškou. Verbální informace č. 14, 15 a 16 dle přílohy H mohou být odbaveny ve stejném čase.
+	•	Kontrolu provozuschopnosti provádí provozovatel zařízení připojeného do JSVV po jakékoliv změně na zařízení, po provedeném servisním zásahu nebo po jeho opravě. V tomto případě se provádí zkouška provozuschopnosti dotčených zařízení pokud možno bez akustického efektu KPV.
+
+
+	•	Schvalování připojení nových zařízení do JSVV
+	•	Každá typová řada zařízení připojovaných do JSVV podléhá schválení MV-GŘ HZS ČR. Pokud typová řada obsahuje více výkonových variant, provádí se schválení nejvyšší výkonové varianty určené pro trh v ČR.
+	•	Každé zařízení, které má být připojeno do JSVV, musí splňovat technické požadavky uvedené v tomto dokumentu a další podmínky pro připojení nových zařízení do JSVV stanovené MV-GŘ HZS ČR.
+	•	Zařízení připojované do JSVV musí splňovat ustanovení příslušných zákonů a technických norem ČSN EN, platných v době připojování, v plném rozsahu. Jedná se zejména o požadavky stanovené zákonem č. 22/1997 Sb., o technických požadavcích a o změně a doplnění některých zákonů, a nařízením vlády č. 426/2016 Sb., o posuzování shody rádiových zařízení při jejich dodávání na trh.
+	•	Splnění výše uvedených požadavků se dokládá předložením:
+	•	prohlášení o shodě dle zákona č. 90/2016 Sb., o posuzování shody stanovených výrobků při jejich dodávání na trh,
+	•	certifikátu oprávněné autority akreditované ČIA dle ČSN EN ISO/IEC 17025, dosvědčujícím, že zařízení splňuje jednotlivé požadavky bodů 3.3. až 3.5.
+	•	certifikátu oprávněné autority o splnění požadavků bodu 4.2.3. tohoto dokumentu ke KPPS pro první vrstvu přenosové soustavy JSVV,
+	•	certifikátu oprávněné autority o splnění požadavku bodu 4.3.6. tohoto dokumentu k radiostanici DMR pro KPPS druhé vrstvy přenosové soustavy JSVV,
+	•	dokladu o splnění požadavků bodů 5.6.12. a 5.6.13. tohoto dokumentu pro rádiové zařízení přenosové soustavy BMIS,
+	•	jiných certifikátů a rozhodnutí potřebných k provozu zařízení.
+	•	Splnění požadavků pro připojení zařízení do JSVV posuzuje MV-GŘ HZS ČR na základě písemné žádosti předložené výrobcem nebo dodavatelem zařízení. Vzor žádosti je uveden v příloze Q; žádost je ke stažení na webovém portálu MV-GŘ HZS ČR. Vyplněná žádost se podává na adresu: MV-GŘ HZS ČR, odbor komunikačních a informačních systémů, Kloknerova 26, pošt. přihr. 69, 148 01 Praha 414, nebo elektronicky na ID datové schránky: 84taiur , k rukám: odbor komunikačních a informačních systémů.
+
+	•	K ověření splnění požadavků a podmínek pro připojení zařízení do JSVV se provádí experimentální zkouška a měření (dále jen souhrnně „ověřovací zkouška“) v laboratoři MV-GŘ HZS ČR – Institutu ochrany obyvatelstva.
+	•	K ověření se předkládá zařízení v takovém rozsahu, aby bylo možné posoudit veškeré deklarované funkcionality a parametry zařízení.
+	•	Spolu se žádostí předloží výrobce nebo dodavatel veškeré dokumenty požadované v bodu 10.4., a dále podrobný popis zařízení, návod k obsluze a technické (katalogové) listy k veškerým komponentám, kterými je zařízení tvořeno (akumulátor, rozhlasový přijímač, elektroakustický měnič apod.), v elektronické podobě 5). Po kontrole úplnosti a obsahu předložené dokumentace stanoví MV-GŘ HZS ČR – Institut ochrany obyvatelstva žadateli termín a podrobné pokyny pro předložení zařízení k ověřovací zkoušce.
+	•	Z předložené dokumentace musí zřetelně vyplývat popis a funkce zařízení, jeho složení, technické parametry, uživatelská obsluha a další skutečnosti důležité ve vztahu k jeho užívání a ve vztahu k JSVV.
+	•	O splnění požadavků a podmínek pro připojení zařízení do JSVV je zpracován protokol, který obsahuje hodnocení jejich plnění.
+	•	K protokolu vydává MV-GŘ HZS ČR – Institut ochrany obyvatelstva pasport, který obsahuje základní informace a fotodokumentaci, která usnadní identifikaci zařízení. Obsah pasportu je uveden v příloze R.
+	•	V případě, že protokol osvědčí plnění požadavků a podmínek pro připojení zařízení do JSVV, vydá MV-GŘ HZS ČR doklad o povolení připojení předmětné typové řady zařízení do JSVV (dále jen „doklad“). V dokladu musí být uvedena doba jeho platnosti.
+	•	Doklad o povolení připojení do JSVV se vztahuje pouze na zařízení, jejichž konfigurace odpovídá pasportu pro předmětnou typovou řadu dle bodu 10.11.
+	•	Platnost dokladu končí uplynutím doby 5 let od jeho vydání. Platnost dokladu končí rovněž v případě, že výrobce (dodavatel) po vydání dokladu změnil základní užitné vlastnosti, parametry nebo konstrukční řešení předmětné typové řady zařízení, např. změnou části zařízení nebo jeho firmware, která může ovlivnit energetické, akustické či komunikační (radiokomunikační) parametry výrobku. V obou uvedených případech má výrobce nebo dodavatel možnost podat žádost o provedení nové ověřovací zkoušky.
+	•	Rozsah každé jednotlivé ověřovací zkoušky stanoví MV-GŘ HZS ČR – Institut ochrany obyvatelstva na základě předložené dokumentace zařízení, případně na základě deklarovaných změn zařízení.
+	•	Ověřovací zkouška, o kterou výrobce nebo dodavatel požádá dle bodu 10.14., se provádí s přihlédnutím k technickým požadavkům, podle kterých bylo předmětné zařízení původně schváleno k připojení do JSVV.
+	•	MV-GŘ HZS ČR – Institut ochrany obyvatelstva při ověřovací zkoušce KPM z technických důvodů ověřuje pouze soulad předkládaného zařízení s těmito požadavky, nikoliv přesnost a spolehlivost jím prováděného měření prostředí.
+	•	Seznam typových řad zařízení schválených k připojení do JSVV s dobou platnosti jejich dokladu je veřejně přístupný na webovém portálu MV-GŘ HZS ČR. Na něm jsou se souhlasem výrobce nebo dodavatele veřejně přístupné i pasporty dle bodu 10.11.
+	•	Po ukončení platnosti dokladu nelze zařízení z předmětné typové řady nově připojovat do JSVV.
+
+
+
+5)  V případě podání žádosti poštou přiloží výrobce nebo dodavatel dokumentaci v elektronické podobě na nosiči DVD.
+
+	•	Zařízení, která byla instalována v době platnosti jejich dokladu, smí nadále zůstat v provozu bez omezení. Tato zařízení však nelze přemísťovat bez souhlasu HZS kraje.
+	•	Zařízení s platným dokladem, která jsou schopná provozu pouze v první vrstvě přenosové soustavy JSVV, vyjma pagerů a KPPS, lze nově připojovat do JSVV výhradně jako náhradu za konkrétní zařízení stejné typové řady, které je již do JSVV připojeno.
+	•	Pokud vlastník zařízení, na které se vztahuje platný doklad, požádá HZS ČR o připojení předmětného zařízení do druhé vrstvy přenosové soustavy JSVV, obdrží od HZS ČR informace nezbytné pro konfiguraci parametrů rádiové komunikace předmětného zařízení.
+	•	HZS kraje je oprávněn před připojením koncového prvku do JSVV provést kontrolu dle dokumentu „Metodika přejímky KP JSVV“, který je ke stažení na webovém portálu MV-GŘ HZS ČR.
+
+
+	•	Závěrečná ustanovení
+	•	Požadavky na zařízení pro jednotný systém varování a vyrozumění a postup při schvalování připojení nových zařízení do jednotného systému varování a vyrozumění ve znění změny č. 2 (dále jen „Požadavky ve znění změny č. 2“) nabývají účinnosti dnem 1. dubna 2025.
+	•	Nabytím účinnosti Požadavků ve znění změny č. 2 se zrušují ustanovení předchozího znění Požadavků, tj. dokumentu „Požadavky na zařízení pro jednotný systém varování a vyrozumění a postup při schvalování připojení nových zařízení do jednotného systému varování a vyrozumění ve znění změny č. 1“, č.j. MV-29891-1/PO-KIS-2022 ze dne
+4. února 2022.
+
+Seznam příloh
+Příloha A	Obecné schéma JSVV Příloha B	Obecné schéma KPPS
+Příloha C	Obecné schéma elektronické sirény Příloha D	Obecná schémata DMIS, KMIS a BMIS
+Příloha E	Signály sirén pro elektronické koncové prvky varování Příloha F	Znělky pro elektronické koncové prvky varování Příloha G	Signály pro elektrické rotační sirény
+Příloha H	Obsah verbálních informací pro elektronické koncové prvky varování
+Příloha I	Standardní kombinace signálu sirény, znělky, verbální informace a textu pro VIP Příloha J	Zapojení konektoru D-sub DE9 pro rozhraní RS-232
+Příloha K	Protokol komunikace KPPS pro první vrstvu přenosové soustavy JSVV ve směru ke KP
+Příloha L	Protokol komunikace KPPS pro první vrstvu přenosové soustavy JSVV ve směru od KP
+Příloha M	Protokol komunikace KP s KPPS pro druhou vrstvu přenosové soustavy JSVV Příloha N	Servisní protokol pro KPPS druhé vrstvy přenosové soustavy JSVV
+Příloha O	Zapojení konektoru RJ-12 pro KPPS Příloha P	Označení zařízení JSVV
+Příloha Q	Vzor žádosti o posouzení splnění požadavků pro připojení zařízení do JSVV Příloha R	Obsah pasportu zařízení připojovaného do JSVV
+Příloha S	Vazby mezi daty zpráv, příkazy a provozními stavy komunikace KPPS s KP dle protokolů pro první a druhou vrstvu přenosové soustavy JSVV
+
+Příloha A	Obecné schéma JSVV
+
+
+Příloha B	Obecné schéma KPPS
+
+
+
+
+
+
+
+
+
+
+
+
+
+Příloha C	Obecné schéma elektronické sirény
+
+
+
+
+
+
+
+
+
+
+
+Příloha D	Obecné schéma DMIS a KMIS
+
+
+Obecné schéma BMIS
+
+
+Příloha E	Signály sirén pro elektronické koncové prvky varování
+
+
+
+
+
+
+
+
+
+
+
+Příloha F	Znělky pro elektronické koncové prvky varování
+
+
+
+
+
+
+
+
+
+
+
+Příloha G	Signály pro elektrické rotační sirény
+
+
+
+
+
+
+
+
+
+
+
+Příloha H   Obsah verbálních informací pro elektronické koncové prvky varování
+Verbální informace č. 1
+„Zkouška sirén, zkouška sirén, zkouška sirén. Právě proběhla zkouška sirén. Zkouška sirén, zkouška sirén, zkouška sirén.“
+Verbální informace č. 2
+„Všeobecná výstraha, všeobecná výstraha, všeobecná výstraha. Sledujte vysílání Českého rozhlasu, televize a regionálních rozhlasů. Všeobecná výstraha, všeobecná výstraha, všeobecná výstraha.“
+Verbální informace č. 3
+„Nebezpečí zátopové vlny, nebezpečí zátopové vlny. Ohrožení zátopovou vlnou. Sledujte vysílání Českého rozhlasu, televize a regionálních rozhlasů. Nebezpečí zátopové vlny, nebezpečí zátopové vlny.“
+Verbální informace č. 4
+„Chemická havárie, chemická havárie, chemická havárie. Ohrožení únikem škodlivin. Sledujte vysílání Českého rozhlasu, televize a regionálních rozhlasů. Chemická havárie, chemická havárie, chemická havárie.“
+Verbální informace č. 5
+„Radiační havárie, radiační havárie, radiační havárie. Ohrožení únikem radioaktivních látek. Sledujte vysílání Českého rozhlasu, televize a regionálních rozhlasů. Radiační havárie, radiační havárie, radiační havárie.“
+Verbální informace č. 6
+„Konec poplachu, konec poplachu, konec poplachu. Sledujte vysílání Českého rozhlasu, televize a regionálních rozhlasů. Konec poplachu, konec poplachu, konec poplachu.“
+Verbální informace č. 7
+„Požární poplach, požární poplach, požární poplach. Svolání hasičů, svolání hasičů. Byl vyhlášen požární poplach, požární poplach.“
+Verbální informace č. 8 až 12
+Záloha pro potřeby HZS kraje
+Verbální informace č. 13
+„Zkouška sirén, zkouška sirén, zkouška sirén. Za několik minut proběhne zkouška sirén Zkouška sirén, zkouška sirén, zkouška sirén.“
+Verbální informace č. 14
+„Test of sirens, test of sirens, test of sirens, test of sirens will continue within several minutes. Test of sirens, test of sirens, test of sirens.“
+Verbální informace č. 15
+„Sirenen-Probealarm, Sirenen-Probealarm, Sirenen-Probealarm. Der Probealarm erfolgt in einigen Minuten. Sirenen-Probealarm, Sirenen-Probealarm, Sirenen-Probealarm.“
+Verbální informace č. 16
+„Внимание, внимание! Сейчас будет проведена проверка системы оповещения включением сирены.“
+v transkripci do latinky
+„Vnimanije, vnimanije! Sejčas budět pravěděna prověrka sistěmy opověščenija vključenijem sireny.“
+Verbální informace č. 17 až 20
+Záloha pro potřeby HZS kraje
+
+Příloha I	Standardní kombinace signálu sirény, znělky, verbální informace a textu pro VIP
+
+
+p.č.
+číslo
+
+text pro varovný informační panel
+
+signál sirény
+znělka
+verbální informace
+znělka
+
+
+1.
+
+1
+
+1
+
+2
+
+2
+POZOR. Všeobecná výstraha. Ukryjte se/zůstaňte v budově, kde se nacházíte. Sledujte média.
+
+2.
+
+1
+
+1
+
+3
+
+2
+POZOR. Varování – nebezpečí zátopové vlny – připravte se na evakuaci, zdržujte se na vyvýšených místech a sledujte média.
+
+3.
+
+1
+
+1
+
+4
+
+2
+POZOR. Varování – chemická havárie – ohrožení únikem škodlivin. Ukryjte se/zůstaňte v budově, kde se nacházíte. Sledujte média.
+
+4.
+
+1
+
+1
+
+5
+
+2
+POZOR. Varování – radiační havárie – únik radioaktivních látek. Ukryjte se/zůstaňte v budově, kde se nacházíte. Sledujte média.
+5.
+2
+1
+1
+2
+Zkouška sirén – právě probíhá zkouška sirén.
+6.
+3
+1
+7
+2
+Požární poplach – svolání hasičů.
+7.
+-
+1
+6
+2
+Konec varování. Sledujte další pokyny!
+8.
+-
+1
+13
+2
+Zkouška sirén. Za několik minut proběhne zkouška sirén.
+9.
+-
+1
+14
+2
+Test of sirens, test of sirens will continue within several minutes.
+10.
+-
+1
+15
+2
+Sirenen-Probealarm. Der Probealarm erfolgt in einigen Minuten.
+
+Standardní příkazy aktivace EKPV
+
+p.č.
+Příkaz
+text pro varovný informační panel
+1.
+Připojení rozhlasového přijímače
+Věnujte pozornost probíhajícímu hlášení!
+2.
+Připojení hlasového vstupu z VyC
+Věnujte pozornost probíhajícímu hlášení!
+3.
+připojení místního přímého hlasového vstupu
+Věnujte pozornost probíhajícímu hlášení!
+4.
+připojení místního externího zdroje
+audio signálu
+Věnujte pozornost probíhajícímu hlášení!
+5.
+připojení sekundárního externího zdroje audio signálu
+Věnujte pozornost probíhajícímu hlášení!
+6.
+test
+TEST ZAŘÍZENÍ
+
+Příloha J	Zapojení konektoru D-sub DE9 pro rozhraní RS-232
+
+
+
+
+Kde:
+
+PIN 1
+DCD
+– detekce přenosu dat
+PIN 2
+RXD
+– čtená data
+PIN 3
+TXD
+– vysílaná data
+PIN 4
+DTR
+– připravenost k vysílání
+PIN 5
+GND
+– společná zem
+PIN 6
+DSR
+– připravenost k příjmu
+PIN 7
+RTS
+– potvrzení čtených dat
+PIN 8
+CTS
+– potvrzení vysílaných dat
+PIN 9
+RI
+– indikace požadavku na přenos dat
+
+Zapojení null-modem:
+RXD(2) – TXD(3)
+TXD(3)	– RXD(2)
+GND(5) – GND(5)
+
+
+Příloha K	Protokol komunikace KPPS pro první vrstvu přenosové soustavy JSVV ve směru ke KP
+
+Obecná struktura zprávy: <STX><povel>;<počet zpráv>;<data zpráv><ETX>
+
+Část zprávy
+data
+Význam
+<STX>
+?
+STX
+<povel>
+00
+RESET KPV
+
+11
+rezerva
+
+22
+poplach
+
+33
+TEST KPV
+
+44
+STOP činnosti KPV
+<počet zpráv>
+11
+sekvence s jednou zprávou
+
+22
+sekvence se dvěma zprávami
+
+33
+sekvence se třemi zprávami
+
+44
+sekvence se čtyřmi zprávami
+<data zpráv>
+11
+signál č. 1
+
+22
+signál č. 2
+
+33
+signál č. 3
+
+44
+signál č. 4
+
+55
+rezerva
+
+66
+rezerva
+
+77
+kontrola KPV
+
+88
+znělka 1 – začátek verbální informace
+
+99
+znělka 2 – konec informace
+
+AA
+verbální informace č. 1 v paměti EKPV
+
+BB
+verbální informace č. 2 v paměti EKPV
+
+CC
+verbální informace č. 3 v paměti EKPV
+
+DD
+verbální informace č. 4 v paměti EKPV
+
+EE
+verbální informace č. 5 v paměti EKPV
+
+FF
+verbální informace č. 6 v paměti EKPV
+
+GG
+verbální informace č. 7 v paměti EKPV
+
+HH
+odečtení veličiny na koncovém prvku měření
+
+II
+připojení místního externího zdroje audio signálu
+
+JJ
+připojení rozhlasového vysílání
+
+KK
+audiovstup 1
+
+LL
+audiovstup 2 / sekundární externí audio
+
+MM
+místní hlasový vstup (mikrofon)
+
+PP
+verbální informace č. 8 v paměti EKPV
+
+QQ
+verbální informace č. 9 v paměti EKPV
+
+RR
+verbální informace č. 10 v paměti EKPV
+
+SS
+verbální informace č. 11 v paměti EKPV
+
+TT
+verbální informace č. 12 v paměti EKPV
+
+UU
+verbální informace č. 13 v paměti EKPV
+
+VV
+verbální informace č. 14 v paměti EKPV
+
+XX
+verbální informace č. 15 v paměti EKPV
+
+YY
+verbální informace č. 16 v paměti EKPV
+<ETX>
+%
+ETX
+
+Příloha L	Protokol komunikace KPPS pro první vrstvu přenosové soustavy JSVV ve směru od KP
+
+obecná struktura kontrolního dotazu KPPS:
+obecná struktura odpovědi EKPV:
+kde:
+STX
+STX
+ETX
+STATUS  ETX
+STX
+?
++
+pro KPPS (dotaz)
+pro EKPV (odpověď)
+ETX
+%
+
+STATUS	jeden byte, který obsahuje informace o stavu EKPV; má strukturu:
+
+7
+6
+5
+4
+3
+2
+1
+0
+AUDIOVÝSTUP
+NAPÁJENÍ
+STAV AKU
+TAMPER
+STAV EKPV
+STAV EKPV (bit 0 až 3)
+
+0000
+klidový stav – EKPV v pohotovosti
+0001
+signál sirény č. 1
+0010
+signál sirény č. 2
+0011
+rezerva
+0100
+signál sirény č. 3
+0101
+verbální informace č. 1
+0110
+verbální informace č. 2
+0111
+verbální informace č. 3
+1000
+verbální informace č. 4
+1001
+verbální informace č. 5
+1010
+verbální informace č. 6
+1011
+místní spuštění EKPV (signál nebo verbální informace)
+1100
+vstup rozhlasového vysílání
+1101
+dálkové spuštění jiným systémem než JSVV
+1110
+verbální informace č. 7
+1111
+verbální informace č. 8 až 16 (rezerva)
+PORUCHY
+	•	bit č. 4 – TAMPER
+1 = skříň uzavřena 0 = skříň otevřena
+	•	bit č. 5 – STAV AKU
+1 = dostatečná kapacita
+0 = nedostatečná kapacita AKU
+	•	bit č. 6 – NAPÁJENÍ
+1 = napájení z centrálních zdrojů elektrické energie 0 = napájení z akumulátorů
+	•	bit č. 7 – AUDIOVÝSTUP
+1 = koncový prvek není v pořádku; například není v pořádku elektroakustický měnič, výstup z kontrolního snímače nebo výstup z kontrolního mikrofonu
+0 = EKPV pracuje správně
+
+Příloha M	Protokol komunikace KP s KPPS pro druhou vrstvu přenosové soustavy JSVV
+
+Úvod
+Protokol popisuje veškeré zprávy přenášené po komunikačním rozhraní mezi KP a KPPS. KP jsou děleny dle bodů 5.1.4., 5.1.5. a 5.1.6., což je znázorněno na obrázku 1.
+
+OBRÁZEK 1 ROZDĚLENÍ KP
+
+Komunikace probíhá primárně ve formě příkaz – odpověď. Příkazy jsou zprávy generované v KPPS, odpovědi jsou zprávy generované v KP. V případech automatických hlášení jsou odpovědi odeslány bez předchozího příkazu. Forma odpovědi je v obou případech shodná.
+
+Formát dat, datové typy, endianita
+Protokol rozlišuje 3 základní formáty zápisu oktetu (1 byte), které jsou uvedené v tabulce 1.
+
+forma
+příklad zápisu
+využití
+binární (BIN)
+01010101B
+b0,b1,…,b7,ad.
+byte je složen z více jednotlivých částí,
+viz např. zpráva “Výsledek provozní kontroly”
+znak
+(CHAR, HEX)
+“0-9”,”a-Z”, apod.
+0x05 (5H), apod.
+pro přenos tisknutelných znaků, bloků STX, ETX, ID, ad.
+dekadický (DEC)
+0, 9, 65535, apod.
+přenos hodnot, čísel z měření, bloku LEN, ad.
+TABULKA 1 FORMY ZÁPISU DAT
+Př.: dle uvedeného je rozdíl mezi zápisem nuly jako znaku a jako čísla. Vyjádřeno formou znaku je “0” = 0x30, 0 jako číslo = 0x00.
+
+Znaky jsou kódovány dle následujících standardů:
+	•	znaky 0D-127D dle standardu ASCII (viz např. https://www.asciitable.com/)
+	•	znaky 128D-255D dle standardu CP-1250
+(též Windows-1250, viz např. https://cs.wikipedia.org/wiki/Windows-1250)
+
+Pro dekadickou formu zápisu protokol pracuje s datovými typy uvedenými v tabulce 2.
+
+datový typ
+rozsah
+UINT8
+0
+255
+INT8
+-127
++128
+UINT16
+0
++65535
+INT16
+-32766
++32767
+UINT64
+0
++18446744073709551615
+FLOAT
+desetinné číslo SINGLE dle normy IEEE 754 1,175494351 E – 38
+3,402823466 E + 38
+DOUBLE
+desetinné číslo DOUBLE dle normy IEEE 754 2,2250738585072014 E – 308
+1,7976931348623158 E + 308
+TABULKA 2 ČÍSELNÉ DATOVÉ TYPY
+Pro více-bytové datové typy (např. INT16, FLOAT, ad.) je užita endianita „Big Endian“
+(https://cs.wikipedia.org/wiki/Endianita#Big-endian).
+V binární formě zápisu je za bit s nejnižší prioritou (Lsb) považován nultý bit. Př.: byte = 01010101B. Potom b0 (Lsb) = 1, b7 = 0.
+
+Komunikační rámec
+Každý přenos mezi KP a KPPS je rozdělen do 5 funkčních bloků, které musí být přítomny v každé zprávě. Bloky jsou společné pro oba směry přenosu. Pořadí bloků v rámci je uvedeno na obrázku 2 a přehled je uveden v tabulce 3.
+
+OBRÁZEK 2 POŘADÍ BLOKŮ V DATOVÉM RÁMCI
+
+Blok
+Význam
+Délka (B)
+Obsah
+STX
+začátek datového rámce
+1
+0x3F („?“)
+ID
+identifikace typu příkazu nebo odpovědi
+1
+různý
+LEN
+délka bloku DATA (UINT8)
+1
+0-255
+DATA
+užitečná data zprávy
+různá
+různý
+ETX
+konec datového rámce
+1
+0x25 („%“)
+TABULKA 3 OBECNÝ POPIS BLOKŮ DATOVÉHO RÁMCE
+
+Bloky ID, LEN a DATA jsou dále v textu definovány vždy u konkrétního typu příkazu nebo odpovědi.
+Celková délka zprávy je jednoznačně určena jako 4 + LEN. Díky tomu je prvku zpracovávajícímu zprávu (KP nebo KPPS) umožněno rozlišit, zda byla zpráva přenesena celá. Pro potvrzení kompletnosti přenosu slouží bloky STX a ETX. V případě špatné délky zprávy, chybného či chybějícího obsahu bloků STX a ETX nebo výskytu neznámého znaku, musí KP tuto skutečnost nahlásit KPPS pomocí zprávy Chyba přenosu. V případě, že příkaz byl zahájen nebo vykonán v pořádku, nesděluje KP nijak tuto skutečnost a stav KP je v tom případě zjištěn pomocí standardních diagnostických příkazů.
+
+Relevance zpráv
+U každé ze zpráv protokolu je uvedeno, kterého KP nebo skupiny KP se týká. Přehled příkazů a jejich relevancí je uveden v tabulce 4 a v tabulce 8. Periodicita dotazů na KP ze strany KPPS je určena požadavkem 4.1.16.
+
+Příkazy
+Příkazem se rozumí zpráva vysílaná od KPPS směrem ke KP.
+
+Přehled příkazů
+
+ID
+VÝZNAM
+RELEVANCE
+1H
+Aktivace EKPV
+EKPV, VIP
+2H
+Zpráva pro VIP
+VIP
+3H
+Stop
+KP
+4H
+Reset
+KP
+5H
+Test
+KP
+AH
+Provozní stav EKPV
+EKPV, VIP
+BH
+Vadné hlásiče MIS
+MIS
+CH
+Stav KPM
+KPM
+TABULKA 4 PŘEHLED PŘÍKAZŮ A JEJICH RELEVANCE
+
+
+Popis příkazů
+Aktivace EKPV (ID = 1H, LEN = 1-4)
+
+pozice
+offset B
+počet B
+datový typ
+význam
+1
+0
+1-4
+CHAR
+Příkazy aktivace (max. 4):
+1H = signál sirény 1 / piktogram 1 2H = signál sirény 2 / piktogram 2 3H = signál sirény 3 / piktogram 3
+4H -9H = signál sirény 4-9 / piktogram 4-9 (rezerva)
+AH = znělka 1 – začátek verbální informace BH = znělka 2 – konec verbální informace CH = verbální informace č. 1 v paměti EKPV DH = verbální informace č. 2 v paměti EKPV
+EH = verbální informace č. 3 v paměti EKPV FH = verbální informace č. 4 v paměti EKPV
+
+
+
+
+
+
+10H = verbální informace č. 5 v paměti EKPV 11H = verbální informace č. 6 v paměti EKPV 12H = verbální informace č. 7 v paměti EKPV 13H = verbální informace č. 8 v paměti EKPV 14H = verbální informace č. 9 v paměti EKPV 15H = verbální informace č. 10 v paměti EKPV 16H = verbální informace č. 11 v paměti EKPV 17H = verbální informace č. 12 v paměti EKPV 18H = verbální informace č. 13 v paměti EKPV 19H = verbální informace č. 14 v paměti EKPV 1AH = verbální informace č. 15 v paměti EKPV 1BH = verbální informace č. 16 v paměti EKPV 1CH = verbální informace č. 17 v paměti EKPV 1DH = verbální informace č. 18 v paměti EKPV 1EH = verbální informace č. 19 v paměti EKPV 1FH = verbální informace č. 20 v paměti EKPV 20H = připojení rozhlasového přijímače
+30H = připojení přímého hlasového vstupu z VyC 31H = připojení místního přímého hlasového
+vstupu
+40H = připojení místního externího zdroje audio signálu
+41H = připojení sekundárního externího zdroje audio signálu
+2
+1-4
+1
+UINT8
+typ adresace:
+1 = individuální adresa
+2 = územní adresa
+3 = krajská adresa
+4 = skupinová adresa typu A
+5 = skupinová adresa typu B
+6 = posloupnost 5 individuálních adres
+7 = posloupnost 5 krajských adres
+8 = posloupnost 5 územních adres
+9 = posloupnost 5 skupinových adres A
+10 = posloupnost 5 skupinových adres B
+3
+2-5
+2
+UINT16
+aktivační adresa: 1-65534
+4
+4-7
+1
+UINT8
+způsob adresace:
+1 = po první vrstvě JSVV
+2 = po druhé vrstvě JSVV
+TABULKA 5 OBSAH BLOKU DATA
+
+
+V případě, že aktivace obsahuje více než 1 příkaz, jsou jednotlivé příkazy v bloku DATA řazeny ihned po sobě bez dalších oddělujících znaků.
+Sekundárním externím zdrojem audio signálu se rozumí další dostupný přímý zdroj audio signálu, je-li jím KP vybaven (např. v případech, kdy je KP vybaven více rádiovými přijímači schopnými přenášet modulované audio signály).
+Data na pozici 2, 3 a 4 jsou předávána od KPPS na KP pro jejich případné využití v KP.
+
+Zpráva pro VIP (ID = 2H, LEN = 1-255)
+
+pozice
+offset B
+počet B
+datový typ
+význam
+1
+0
+1-255
+CHAR
+zpráva pro VIP
+TABULKA 6 OBSAH BLOKU DATA
+
+
+STOP (ID = 3H, LEN = 0)
+Blok DATA je prázdný.
+
+
+RESET (ID = 4H, LEN = 0)
+Blok DATA je prázdný.
+
+
+TEST (ID = 5H, LEN = 0)
+Blok DATA je prázdný.
+V případě KP typu MIS musí po přijetí příkazu ústředna provést kontrolu všech hlásičů, které jsou k ní připojeny.
+V případě KP typu KPM musí po přijetí příkazu KPM provést kontrolu a měření všech senzorů, které jsou součástí KPM.
+
+Provozní stav EKPV (ID = AH, LEN = 0)
+Blok DATA je prázdný
+KP odešle výsledek poslední provedené kontroly do KPPS ve formátu odpovědi Provozní stav EKPV.
+
+Vadné hlásiče MIS (ID = BH, LEN = 4)
+
+pozice
+offset B
+počet B
+datový typ
+význam
+1
+0
+2
+UINT16
+0 = ID vadných hlásičů není vyžadováno 1-65535 = počáteční index pro výčet ID
+vadných hlásičů
+2
+2
+2
+UINT16
+0 = ID vadných hlásičů není vyžadováno 1-65535 = koncový index pro výčet ID
+vadných hlásičů
+TABULKA 7 OBSAH BLOKU DATA
+Ústředna MIS odešle výsledek poslední provedené kontroly hlásičů do KPPS ve formátu odpovědi Vadné hlásiče MIS.
+Počáteční a koncový index pro ID vadných hlásičů jsou zavedeny z důvodu možného velkého počtu hlásičů v systémech MIS a omezení maximální velikosti jedné zprávy. V případě existence více než 10 vadných hlásičů v rámci MIS udávají indexy rozsah od-do z celkového seznamu vadných hlásičů.
+V případě existence méně vadných hlásičů v rámci MIS než je požadavek ze strany KPPS navrátí KP na příslušných pozicích nulové hodnoty (nuly dle datového typu UINT16).
+
+Stav KPM (ID = CH, LEN = 1)
+
+pozice
+offset B
+počet B
+datový typ
+význam
+1
+0
+1
+UINT8
+Číslo senzoru, jehož měření má být odesláno: 0 = bez specifikace čísla senzoru
+1-255 = vyžádání výsledku měření senzoru č. 1-255
+KPM odešle poslední výsledek provedeného měření ve formátu odpovědi Stav KPM.
+
+Odpovědi
+Odpovědí se rozumí zpráva vysílaná od KP směrem ke KPPS.
+Přehled odpovědí
+
+ID
+VÝZNAM
+RELEVANCE
+1H
+Provozní stav EKPV
+EKPV, VIP
+2H
+Vadné hlásiče MIS
+MIS
+3H
+Stav KPM
+KPM
+AH
+Chyba přenosu
+KP
+TABULKA 8 PŘEHLED ODPOVĚDÍ A JEJICH RELEVANCE
+
+
+Popis odpovědí
+Provozní stav EKPV (ID = 1H, LEN = 13-16)
+
+pozice
+offset B
+počet B
+datový typ
+význam
+1
+0
+1
+BIN
+Provozní stav:
+b0 = skříň řídící elektroniky: 1=zavřena / 0=otevřena
+
+
+
+
+
+
+b1 = kapacita akumulátoru:
+1=v pořádku / 0=nedostatečná b2 = napájení z elektrorozvodné sítě:
+1=v pořádku / 0=mimo provoz b3 = stav audio cesty:
+1=v pořádku / 0=porucha b4 – b7 = 0 (rezerva)
+2
+1
+4
+FLOAT
+Napětí akumulátoru [V] (s přesností na 1 desetinné místo)
+3
+5
+2
+UINT16
+Počet připojených akustických hlavic (ES) nebo hlásičů (MIS)
+4
+7
+2
+UINT16
+Počet vadných akustických hlavic (ES) nebo
+hlásičů (MIS)
+5
+9
+1
+UINT8
+Počet příkazů v aktivaci: 0-4
+6
+10
+1
+UINT8
+Aktuálně prováděný příkaz z aktivace: 0-4
+7
+11
+1-4
+CHAR
+Příkazy v aktivaci JSVV (max.4): 0H = klidový stav
+1H = signál sirény 1 / piktogram 1 2H = signál sirény 2 / piktogram 2 3H = signál sirény 3 / piktogram 3
+4H -9H = signál sirény 4-9 / piktogram 4-9 (rezerva)
+AH = znělka 1 – začátek verbální informace BH = znělka 2 – konec verbální informace CH = verbální informace č. 1 v paměti EKPV DH = verbální informace č. 2 v paměti EKPV EH = verbální informace č. 3 v paměti EKPV FH = verbální informace č. 4 v paměti EKPV
+10H = verbální informace č. 5 v paměti EKPV 11H = verbální informace č. 6 v paměti EKPV 12H = verbální informace č. 7 v paměti EKPV 13H = verbální informace č. 8 v paměti EKPV 14H = verbální informace č. 9 v paměti EKPV 15H = verbální informace č. 10 v paměti EKPV 16H = verbální informace č. 11 v paměti EKPV 17H = verbální informace č. 12 v paměti EKPV 18H = verbální informace č. 13 v paměti EKPV 19H = verbální informace č. 14 v paměti EKPV 1AH = verbální informace č. 15 v paměti EKPV 1BH = verbální informace č. 16 v paměti EKPV 1CH = verbální informace č. 17 v paměti EKPV 1DH = verbální informace č. 18 v paměti EKPV 1EH = verbální informace č. 19 v paměti EKPV 1FH = verbální informace č. 20 v paměti EKPV 20H = rozhlasové vysílání
+30H = hlasový vstup z VyC 31H = místní hlasový vstup
+40H = místní externí zdroj audio signálu
+41H = sekundární externí zdroj audio signálu 50H = test
+70H = stop
+
+
+
+
+
+
+80H = reset
+8
+12-15
+1
+CHAR
+Zdroj spuštění:
+0H = klidový stav 1H = místní
+2H = ze vzdáleného terminálu 3H = z ASV
+4H = JSVV
+Stav audio cesty (pozice 1, bit č. 3) je souhrnným stavem, který obsahuje hodnotu=1 pouze v případě, že všechny části zařízení, které se podílejí na akustickém efektu, jsou bez vady. Odpověď je relevantní také v případě VIP, který je vybaven audio cestou. V případě VIP, který není vybaven audio cestou, je hodnota stále rovna 1.
+Akustickou hlavicí (pozice 3 a 4) se rozumí kombinace koncového zesilovače a k němu připojené EA měniče. V případě VIP, který není vybaven akustickou signalizací, jsou obsahem nulové hodnoty.
+Je-li EKPV v klidovém stavu, je obsahem zprávy na pozicích 5-8 nulová hodnota.
+Je-li mimo JSVV přijat příkaz STOP, musí být nahlášen min. do okamžiku, než dojde k prvnímu odeslání provozního stavu do KPPS. Je-li přijat příkaz RESET, musí být nahlášen do okamžiku provedení příkazu, případně, je-li to technicky možné, po jeho provedení do okamžiku prvního odeslání provozního stavu do KPPS.
+Příklad:
+Je-li EKPV místně nebo dálkově aktivován příkazem 1H – AH – CH – BH a v daném okamžiku probíhá varovná informace č. 1, jsou dotčené pozice následující:
+pozice 5: 4
+pozice 6: 3
+pozice 7: 1H AH CH BH
+
+
+Vadné hlásiče MIS (ID = 2H, LEN = 8-28)
+
+pozice
+offset B
+počet B
+datový typ
+význam
+1
+0
+8
+UINT64
+Časová značka [s]
+2
+8
+0-20
+UINT16
+Pole max. 10 unikátních adres hlásičů, které byly diagnostikovány ústřednou jako vadné
+Časová značka odpovídá času dokončení poslední kontroly a podléhá požadavkům dle bodu 2.5.11.
+Množství adres odeslaných na pozici 2 je definováno rozdílem počátečního a koncového indexu v dotazu Vadné hlásiče MIS. Každá unikátní adresa je typu UINT16 a jednotlivé adresy nejsou odděleny dalšími znaky. V případě, že požadavek ze strany KPPS byl na větší počet hlásičů, než je počet vadných hlásičů, vrací KP na příslušné pozici v odpovědi nulovou hodnotu (nula v datovém typu UINT16).
+
+Stav KPM (ID = 3H, LEN = 17-24)
+
+pozice
+offset B
+počet B
+datový typ
+význam
+1
+0
+1
+UINT8
+Číslo měřeného senzoru:
+0 = KPM nerozlišuje čísla senzorů 1-255 = číslo senzoru
+2
+1
+1
+BIN
+Provozní stav:
+b0 = skříň řídící elektroniky: 1=zavřena / 0=otevřena
+b1 = kapacita akumulátoru:
+1=v pořádku / 0=nedostatečná b2 = napájení z elektrorozvodné sítě:
+1=v pořádku / 0=mimo provoz b3-b7 = 0 (rezerva)
+3
+2
+1
+UINT8
+Stav měření:
+1 = klidový stav, bez poruchy, hodnoty v normě
+2 = překročen horní limit nebezpečí
+3 = překročen horní limit varování
+4 = překročen spodní limit varování
+5 = překročen spodní limit nebezpečí
+6 = zaneprázdněn (probíhá měření)
+7 = nevyužito
+8 = porucha
+9-255 = rezerva
+4
+3
+1
+UINT8
+Datový typ odesílaných dat:
+1 = UINT8
+2 = INT8
+3 = UINT16
+4 = INT16
+5 = FLOAT
+6 = DOUBLE
+5
+4
+1-8
+dle pozice 5
+Data měření
+6
+5-12
+4
+CHAR
+Fyzikální jednotka
+7
+9-16
+8
+UINT64
+Časová značka [s]
+Je-li délka fyzikální jednotky kratší než 4 znaky, je informace doplněna mezerami (0x20) až do naplnění délky 4 znaků.
+
+Chyba přenosu (ID = AH, LEN = 1)
+
+pozice
+offset B
+počet B
+datový typ
+význam
+1
+0
+1
+UINT8
+Identifikace chyby přenosu:
+1 = STX
+2 = ID
+3 = LEN
+4 = DATA
+5 = ETX
+6 = timeout
+7 = porucha
+8 = jiná chyba
+9-255 = rezerva
+Chyba přenosu typu „STX“, „ID“, „DATA“ nebo „ETX“ může znamenat zcela chybějící byte nebo hodnotu, které KP nerozumí.
+
+Chyba přenosu typu „LEN“ znamená, že počet bytů v přijatém bloku DATA neodpovídal počtu udanému v bloku LEN.
+Chyba přenosu typu „timeout“ znamená neočekávanou prodlevu v dokončení komunikace mezi KPPS a KP, která překročí dobu 3 sec. uvedenou v bodu 4.3.21.
+Chyba přenosu typu „porucha“ je nahlášena v případě, že KP příkazu rozumí, ale není schopen ho vykonat z jiných důvodů (interní problém v běhu programu KP, vada na hardwaru KP, typ připojeného KP nepodporuje odeslaný příkaz).
+
+Příloha N	Protokol servisního přístupu na KPPS druhé vrstvy přenosové soustavy JSVV
+
+
+
+ZÁKLADNÍ PROTOKOLÁRNÍ PRVKY
+	•	využity znaky v rozsahu 0x00-0x7F dle standardu ASCII (https://www.asciitable.com/)
+	•	využita znaková forma přenosu, tj. např. číslo 1 je přeneseno jako znak „1“ (0x31), apod.
+	•	každá zpráva začíná blokem identifikace zprávy (MID)
+	•	každá zpráva končí znakem 0x0A (nový řádek, ¶). Jelikož se jedná o netisknutelný znak a není využit pro kontrolní součty CRC, není dále v obsahu jednotlivých zpráv uváděn
+	•	užitečné hodnoty jsou obsaženy v bloku DATA
+	•	jednotlivé bloky zprávy jsou odděleny mezerou (0x20)
+	•	je-li v bloku DATA obsaženo více parametrů, jsou v dalším textu označeny jako [D1] [D2], atd. a jsou odděleny mezerou (0x20)
+	•	některé ze zpráv protokolu musí být na straně KPPS ověřeny kontrolním součtem a výsledek odeslán zpět do servisního nástroje jako zpráva CRC
+	•	časové značky obsažené v datech protokolu jsou ve formátu standardního unixového času s počátkem 1.1.1970 v 00:00:00 a základní jednotkou 1 sekunda
+
+
+STRUKTURA KOMUNIKAČNÍHO RÁMCE
+	•	každá zpráva má následující strukturu:
+[MID] [DATA] = [MID] [D1] [D2] … [Dx]
+	•	příklad zprávy odeslané ze servisního nástroje do KPPS pro inicializaci servisního přístupu:
+INIT OP1 1000¶
+	•	význam jednotlivých částí uvedeného příkladu je následující:
+(hexadecimální zápis)
+INIT
+identifikátor zprávy (MID)
+oddělovací znak
+0x49 0x4E 0x49 0x54
+0x20
+OP1 1000
+data zprávy (DATA)
+0x4F 0x50 0x31 0x20 0x31 0x30 0x30 0x30
+¶
+koncový znak
+0x0A
+
+
+
+VÝPOČET KONTROLNÍHO SOUČTU A ZPRÁVA “CRC”
+	•	metoda výpočtu kontrolního součtu je CRC-16-CCITT (polynom 0x1021, počáteční hodnota 0x00, finální XOR 0x00)
+	•	kontrolní součet je počítán z celé zprávy kromě koncového znaku 0x0A
+	•	příklad výpočtu pro uvedený příklad INIT OP1 1000:
+CRC (0x49 0x4E 0x49 0x54 0x20 0x4F 0x50 0x31 0x20 0x31 0x30 0x30 0x30) = 0x004B
+	•	výsledek je vyjádřen v hexadecimální formě tisknutelnými znaky
+	•	výsledná odpověď odeslaná od KPPS zpět do servisní aplikace musí být následující:
+CRC 004B¶
+	•	význam jednotlivých částí zprávy je následující:
+
+CRC
+identifikátor zprávy
+0x43 0x52 0x43
+
+oddělovací znak
+0x20
+004B
+data zprávy
+0x30 0x30 0x34 0x42
+¶
+koncový znak
+0x0A
+
+
+
+SEZNAM ZPRÁV (SEZNAM IDENTIFIKÁTORŮ “MID”)
+INIT PING
+SET_KEYS READ_ADR SET_ADR READ_CFG SET_CFG READ_LOG
+READ_DIAG FRESET LOGRESET
+
+
+ROZPIS ZPRÁV
+INIT
+
+Zpráva (MID)
+INIT
+Funkce
+Inicializace servisní komunikace. Zpráva je ze servisního nástroje generována po jejím spuštění opakovaně až do odpovědi přijaté
+od KPPS.
+Syntaxe zprávy
+INIT [D1] [D2]
+Obsah bloku DATA
+
+
+[D1]
+identifikace operátora servisního nástroje, délka max. 20 znaků bez mezer
+
+[D2]
+časová značka
+Syntaxe odpovědi KPPS
+INIT [D1] [D2] [D3] [D4]
+Obsah bloku DATA
+
+
+[D1]
+individuální adresa KPPS: 0-65534
+
+[D2]
+stav KPPS:
+“OK” = KPPS je připraveno pro zápis nastavení do NV paměti
+“ERR” = KPPS není připraveno na zápis nastavení do NV paměti (chyba paměti)
+
+[D3]
+identifikátory operátora ze 3 posledních servisních relací oddělené čárkou:
+“X” = relace neexistuje
+[1-20 znaků] = identifikátory operátora
+
+[D4]
+časové značky ze 3 posledních servisních relací oddělené čárkou:
+“X” = relace neexistuje
+[1-20 znaků] = časové značky
+
+Poznámky:
+	•	KPPS musí zaznamenat 3 poslední servisní relace do nepomíjivé paměti
+	•	časově nejnovější (poslední) relace je zaznamenána na první pozici a starší jsou posunuty na pozici 2 a 3
+	•	KPPS musí identifikaci operátora a čas ihned zaznamenat a v odpovědi již musí být tyto údaje uvedeny
+	•	časová značka (paket D4) je značka přijatá ve zprávě od servisního nástroje (D2) Příklad:
+	•	KPPS má individuální adresu 12345
+	•	nový servisní přístup provádí operátor s ID = OP1 v čase 2000
+	•	v paměti KPPS je uložena 1 starší servisní relace (OP2 v čase 1000)
+Zpráva od servisního nástroje:
+INIT OP1 2000
+Odpověď od KPPS:
+INIT 12345 OK OP1,OP2,X 2000,1000,X
+
+PING
+
+Zpráva (MID)
+PING
+Funkce
+Kontrola stavu připojení KPPS k servisnímu nástroji.
+Syntaxe zprávy
+PING
+Obsah bloku DATA
+prázdný
+Syntaxe odpovědi KPPS
+PING OK
+Poznámky:
+	•	zpráva je ze servisního nástroje odesílána automaticky po dokončení inicializace
+	•	perioda odesílání zprávy je 3 až 5 sec.
+
+
+SET_KEYS
+
+Zpráva (MID)
+SET_KEYS
+Funkce
+Nastavení šifrovacích klíčů AES256.
+Syntaxe zprávy
+SET_KEYS [D1] [D2] [D3] [D4]
+Obsah bloku DATA
+
+
+[D1]
+primární klíč TX zakódovaný v Base64 (klíč užitý pro zakódování odesílané zprávy z VyC do KPPS):
+44-znakový řetězec
+
+[D2]
+primární klíč RX zakódovaný v Base64 (klíč užitý pro rozkódování zprávy přijaté ve VyC od KPPS):
+44-znakový řetězec
+
+[D3]
+záložní klíč TX zakódovaný v Base64
+(klíč užitý pro zakódování odesílané zprávy z VyC do KPPS):
+44-znakový řetězec
+
+[D4]
+záložní klíč RX zakódovaný v Base64
+(klíč užitý pro rozkódování zprávy přijaté ve VyC od KPPS):
+44-znakový řetězec
+Syntaxe odpovědi KPPS
+CRC [D1]
+Obsah bloku DATA
+
+
+[D1]
+kontrolní součet zprávy “SET_KEYS” přijaté od servisního nástroje (4 znaky)
+
+READ_ADR
+
+Zpráva (MID)
+READ_ADR
+Funkce
+Přečtení všech adres KPPS.
+Syntaxe zprávy
+READ_ADR
+Obsah bloku DATA
+prázdný
+Syntaxe odpovědi KPPS
+READ_ADR [D1]
+Obsah bloku DATA
+
+
+[D1]
+35 po sobě jdoucích adres KPPS, jednotlivé adresy oddělené čárkou bez dalších mezer v následujícím pořadí:
+individuální adresa, územní adresa, krajská adresa,
+adresa skupiny A na pozici 1, adresa skupiny A na pozici 2,
+…
+adresa skupiny A na pozici 16, adresa skupiny B na pozici 1, adresa skupiny B na pozici 2,
+…
+adresa skupiny B na pozici 16
+
+SET_ADR
+
+Zpráva (MID)
+SET_ADR
+Funkce
+Nastavení všech adres KPPS.
+Syntaxe zprávy
+SET_ADR [D1]
+Obsah bloku DATA
+35 po sobě jdoucích adres KPPS, jednotlivé adresy oddělené čárkou bez dalších mezer v následujícím pořadí:
+individuální adresa, územní adresa, krajská adresa,
+adresa skupiny A na pozici 1, adresa skupiny A na pozici 2,
+…
+adresa skupiny A na pozici 16, adresa skupiny B na pozici 1, adresa skupiny B na pozici 2,
+…
+adresa skupiny B na pozici 16
+Syntaxe odpovědi KPPS
+CRC [D1]
+Obsah bloku DATA
+
+
+[D1]
+kontrolní součet zprávy “SET_ADR” přijaté od servisního nástroje (4 znaky)
+
+READ_CFG
+
+Zpráva (MID)
+READ_CFG
+Funkce
+Přečtení provozních parametrů KPPS.
+Syntaxe zprávy
+READ_CFG
+Obsah bloku DATA
+prázdný
+Syntaxe odpovědi KPPS
+READ_CFG [D1] [D2] [D3] [D4] [D5] [D6] [D7] [D8] [D9]
+Obsah bloku DATA
+
+
+[D1]
+typ připojeného koncového prvku: “0” = bez KP
+“1” = elektronická siréna
+“2” = místní informační systém “3” = varovný informační panel
+“4” = elektrická rotační siréna “5” = koncový prvek měření
+
+[D2]
+interval zasílání dotazu na připojený koncový prvek v sekundách:
+1-60
+
+[D3]
+doba blokování shodného pokynu v sekundách:
+30-300
+
+[D4]
+automaticky odesílané zprávy, celkem 16
+po sobě jdoucích číslic 0-1, pro každou pozici “0” = neodesílá, “1” = odesílá,
+jednotlivé pozice s významem: 1: místní aktivace
+2: aktivace ze vzdáleného terminálu 3: aktivace z ASV
+4: nedostatečná kapacita akumulátorů 5: překročení nastaveného limitu KPM 6: závada na audio cestě
+7 = 0 (rezerva)
+8: vadný hlásič MIS 9: otevření skříně 10: závada na KPPS
+11: nadměrný počet trigger událostí
+12 = 0 (rezerva)
+13 = 0 (rezerva)
+14 = 0 (rezerva)
+15 = 0 (rezerva)
+16 = 0 (rezerva)
+
+[D5]
+maximální počet opakování odeslání automatické zprávy:
+1-3
+
+[D6]
+perioda mezi 2 odesláními automatické zprávy v sekundách:
+1-65535
+
+[D7]
+zvolený protokol mezi KP a KPPS:
+“1” = Protokol komunikace KP s KPPS první vrstvy přenosové soustavy JSVV
+“2” = Protokol komunikace KP s KPPS druhé
+vrstvy přenosové soustavy JSVV
+
+
+
+[D8]
+zvolený režim kompatibility ve druhé vrstvě přenosové soustavy JSVV:
+“1” = plný provoz bez omezení
+“2” = částečně kompatibilní (KP neposkytuje veškeré informace o stavu, ale čtení je aktivní)
+“3” = ignorování provozního stavu
+“4” = deaktivována správa fronty příkazů v KPPS
+“5” = ignorování provozního režimu a deaktivována správa fronty příkazů
+v KPPS
+
+[D9]
+číslo kanálu radiostanice DMR, po které probíhá komunikace na druhé vrstvě přenosové soustavy JSVV:
+1-255
+
+SET_CFG
+
+Zpráva (MID)
+SET_CFG
+Funkce
+Nastavení provozních parametrů KPPS.
+Syntaxe zprávy
+SET_CFG [D1] [D2] [D3] [D4] [D5] [D6] [D7] [D8] [D9]
+Obsah bloku DATA
+
+
+[D1]
+volba typu připojeného koncového prvku:
+0 = bez KP
+1 = elektronická siréna (ES)
+2 = místní informační systém (MIS)
+3 = varovný informační panel (VIP)
+4 = elektrická rotační siréna (RS)
+5 = koncový prvek měření (KPM)
+
+[D2]
+interval zasílání dotazu na připojený koncový prvek v sekundách:
+1-60
+
+[D3]
+doba blokování shodného pokynu v sekundách:
+30-300
+
+[D4]
+volba automaticky odesílaných zpráv, celkem 16 po sobě jdoucích číslic 0-1, pro každou pozici 0 = neodesílá, 1 = odesílá,
+jednotlivé pozice s významem: 1: místní aktivace
+2: aktivace ze vzdáleného terminálu 3: aktivace z ASV
+4: nedostatečná kapacita akumulátorů 5: překročení nastaveného limitu KPM 6: závada na audio cestě
+7 = 0 (rezerva)
+8: vadný hlásič MIS 9: otevření skříně 10: závada na KPPS
+11: nadměrný počet trigger událostí
+12 = 0 (rezerva)
+13 = 0 (rezerva)
+14 = 0 (rezerva)
+15 = 0 (rezerva)
+16 = 0 (rezerva)
+
+[D5]
+maximální počet opakování odeslání automatické zprávy:
+1-3
+
+[D6]
+perioda mezi 2 odesláními automatické zprávy v sekundách:
+1-65535
+
+[D7]
+volba protokolu mezi KP a KPPS:
+1 = Protokol komunikace KP s KPPS první vrstvy přenosové soustavy JSVV
+2 = Protokol komunikace KP s KPPS druhé
+vrstvy přenosové soustavy JSVV
+
+
+
+[D8]
+* volba režimu kompatibility ve druhé vrstvě přenosové soustavy JSVV:
+1 = plný provoz bez omezení
+2 = částečně kompatibilní (KP neposkytuje veškeré informace o stavu, ale čtení je aktivní)
+3 = ignorování provozního stavu
+4 = deaktivována správa fronty příkazů v KPPS
+5 = ignorování provozního režimu a deaktivována správa fronty příkazů
+v KPPS
+
+[D9]
+číslo kanálu radiostanice DMR, po které probíhá komunikace na druhé vrstvě přenosové soustavy JSVV:
+1-255
+Syntaxe odpovědi KPPS
+CRC [D1]
+Obsah bloku DATA
+
+
+[D1]
+kontrolní součet zprávy “SET_CFG” přijaté od servisního nástroje (4 znaky)
+
+	•	vysvětlení k jednotlivým režimům kompatibility [D8]:
+	•	režim kompatibility je nutné u KPPS nastavit v případě, že KPPS komunikuje s KP po protokolu druhé vrstvy JSVV, přičemž KP nemá protokol pro druhou vrstvu JSVV plně kompatibilní (byl např. schválen ještě před realizací druhé vrstvy)
+	•	jednotlivé volby režimu kompatibility vyvolají u KPPS následující chování:
+	•	2 = KP neposkytuje všechny informace, které dle současných požadavků vyžaduje protokol uvedený v příloze M. Proto bude KPPS chybějící hodnoty doplňovat nulovými hodnotami (při respektování datového typu).
+	•	3 = KPPS bude ignorovat odpovědi na dotaz na stav, které od KP přijme.
+Nebude např. automaticky hlásit aktivace, stavy ani poruchy, které z odpovědi od KP zjistí. Všechny informace provozního stavu nahradí nulovými hodnotami (při respektování datového typu).
+	•	4 = KPPS nebude spravovat frontu příkazů. Všechny příkazy, které od VyC obdrží, bude okamžitě odesílat na KP.
+	•	5 = KPPS se bude chovat jako dle volby 3 a 4 zároveň.
+
+READ_LOG
+
+Zpráva (MID)
+READ_LOG
+Funkce
+Přečtení všech záznamů aktivit z paměti KPPS.
+Syntaxe zprávy
+READ_LOG
+Obsah bloku DATA
+prázdný
+Syntaxe odpovědi KPPS
+READ_LOG [D1] [D2] .. [Dx]
+Obsah bloku DATA
+
+
+[D1]
+záznam z paměti KPPS na pozici č. 1, jednotlivé položky záznamu odděleny čárkou:
+číslo záznamu (1-250),
+ID operátora (1-65535),
+ID regionálního pracoviště, odkud byla přijata aktivace (1-255),
+způsob aktivace (0-5), časová značka,
+počet příkazů aktivace (0-4), příkaz aktivace č. 1,
+příkaz aktivace č. 2, příkaz aktivace č. 3, příkaz aktivace č. 4, provozní stav KP,
+adresa, na kterou byla aktivace provedena (1-65534),
+typ adresy, na kterou byla aktivace provedena (1-255)
+
+[D2]
+záznam z paměti KPPS na pozici č. 2, jednotlivé položky záznamu odděleny čárkou:
+číslo záznamu (1-250),
+ID operátora (1-65535),
+ID regionálního pracoviště, odkud byla přijata aktivace (1-255),
+způsob aktivace (0-5), časová značka,
+počet příkazů aktivace (0-4), příkaz aktivace č. 1,
+příkaz aktivace č. 2, příkaz aktivace č. 3, příkaz aktivace č. 4, provozní stav KP,
+adresa, na kterou byla aktivace provedena (1-65534),
+typ adresy, na kterou byla aktivace provedena (1-255)
+
+[Dx]
+záznam z paměti KPPS na pozici č. x, jednotlivé položky záznamu odděleny čárkou:
+číslo záznamu (1-250),
+ID operátora (1-65535),
+ID regionálního pracoviště, odkud byla přijata aktivace (1-255),
+
+
+
+
+způsob aktivace (0-5), časová značka,
+počet příkazů aktivace (0-4), příkaz aktivace č. 1,
+příkaz aktivace č. 2, příkaz aktivace č. 3, příkaz aktivace č. 4, provozní stav KP,
+adresa, na kterou byla aktivace provedena (1-65534),
+typ adresy, na kterou byla aktivace provedena (1-255)
+
+Poznámky:
+	•	pokud není v paměti KPPS žádný záznam, odesílá KPPS zprávu bez paketu DATA
+	•	způsob aktivace má následující významy:
+0 = klidový stav (nebyla provedena aktivace)
+1 = dálkově po první vrstvě přenosové soustavy JSVV
+2 = dálkově po druhé vrstvě přenosové soustavy JSVV
+3 = místní
+4 = ze vzdáleného terminálu
+5 = z ASV
+	•	příkazy aktivace musí odpovídat následujícímu seznamu:
+1 = akustický signál 1 / piktogram 1
+2 = akustický signál 2 / piktogram 2
+3 = akustický signál 3 / piktogram 3
+4-9 = akustický signál 4-9 / piktogram 4-9 (rezerva)
+A = znělka 1 – začátek verbální informace
+B = znělka 2 – konec verbální informace
+C = verbální informace č. 1 v paměti EKPV
+D = verbální informace č. 2 v paměti EKPV
+E = verbální informace č. 3 v paměti EKPV
+F = verbální informace č. 4 v paměti EKPV
+10 = verbální informace č. 5 v paměti EKPV
+11 = verbální informace č. 6 v paměti EKPV
+12 = verbální informace č. 7 v paměti EKPV
+13 = verbální informace č. 8 v paměti EKPV
+14 = verbální informace č. 9 v paměti EKPV
+15 = verbální informace č. 10 v paměti EKPV
+16 = verbální informace č. 11 v paměti EKPV
+17 = verbální informace č. 12 v paměti EKPV
+18 = verbální informace č. 13 v paměti EKPV
+19 = verbální informace č. 14 v paměti EKPV 1A = verbální informace č. 15 v paměti EKPV 1B = verbální informace č. 16 v paměti EKPV 1C = verbální informace č. 17 v paměti EKPV 1D = verbální informace č. 18 v paměti EKPV 1E = verbální informace č. 19 v paměti EKPV 1F = verbální informace č. 20 v paměti EKPV 20 = rozhlasové vysílání
+30 = hlasový vstup z VyC
+
+31 = místní hlasový vstup
+40 = místní externí zdroj audio signálu
+41 = sekundární externí zdroj audio signálu 50 = test
+60 = místní aktivace bez rozlišení signálu 70 = stop
+80 = reset
+90 = aktivace příkazem první vrstvy přenosové soustavy nepodporovaným druhou vrstvou
+	•	je-li počet příkazů aktivace menší než 4, jsou na příslušných pozicích ve zprávě zapsány 0
+	•	provozní stav KP je vyjádřen 8 po sobě jdoucími znaky 0 nebo 1, jejichž význam je následující:
+pozice 1: 0 = skříň řídící elektroniky otevřena, 1 = skříň řídící elektroniky zavřena pozice 2: 0 = kapacita akumulátoru nedostatečná, 1 = kapacita akumulátoru dostatečná pozice 3: 0 = bez napájení z elektrorozvodné sítě, 1 = napájení elektrorozvodné sítě pozice 4: 0 = porucha audio cesty, 1 = audio cesta v pořádku
+pozice 5: 0 = porucha komunikace s radiostanicí DMR, 1 = komunikace s radiostanicí DMR v pořádku
+pozice 6: 0 = porucha KPPS, 1 = KPPS v pořádku pozice 7-8: 0 (rezerva)
+
+
+
+Příklad bloku DATA obsahujícího 2 záznamy (D1 a D2):
+
+READ_LOG
+1,20,10,1,1609542000,4,1,A,C,B,11111100,1234,1 2,20,10,2,1609455600,1,20,0,0,0,00011100,1234,2
+
+Význam obsahu bloku D1: 1,20,10,1,1609542000,4,1,A,C,B,11111100,1234,1
+	•	číslo záznamu: 1
+	•	ID operátora: 20
+	•	ID regionálního pracoviště: 10
+	•	způsob aktivace: 1 (dálkově po první vrstvě JSVV)
+	•	časová značka: 1609542000, tzn. 2.1.2021 0:0:00
+	•	počet příkazů aktivace: 4
+	•	příkazy aktivace:
+	•	1 (akustický signál 1)
+	•	A (znělka 1)
+	•	C (verbální informace č. 1)
+	•	B (znělka 2)
+	•	provozní stav: 11111100:
+	•	skříň zavřena
+	•	kapacita aku dostatečná
+	•	napájení z elektrorozvodné sítě
+	•	audio cesta v pořádku
+	•	komunikace druhé vrstvy přenosové soustavy JSVV v pořádku
+	•	KPPS v pořádku
+	•	adresa, na kterou byla aktivace provedena: 1234
+	•	typ adresy, na kterou byla aktivace provedena: 1 (individuální adresa) Význam obsahu bloku D2: 2,20,10,2,1609455600,1,20,0,0,0,00011100,1234,2
+	•	číslo záznamu: 2
+	•	ID operátora: 20
+	•	ID regionálního pracoviště: 10
+	•	způsob aktivace: 2 (dálkově po druhé vrstvě JSVV)
+	•	časová značka: 1609455600, tzn. 1.1.2021 0:0:00
+	•	počet příkazů aktivace: 1
+	•	příkazy aktivace:
+	•	20 (rozhlasové vysílání)
+	•	provozní stav: 00011100:
+	•	skříň otevřena
+	•	kapacita aku nedostatečná
+	•	bez napájení z elektrorozvodné sítě
+	•	audio cesta v pořádku
+	•	komunikace druhé vrstvy přenosové soustavy JSVV v pořádku
+	•	KPPS v pořádku
+	•	adresa, na kterou byla aktivace provedena: 1234
+	•	typ adresy, na kterou byla aktivace provedena: 2 (územní adresa)
+
+READ_DIAG
+
+Zpráva (MID)
+READ_DIAG
+Funkce
+Diagnostika stavu KPPS.
+Syntaxe zprávy
+READ_DIAG
+Obsah bloku DATA
+prázdný
+Syntaxe odpovědi KPPS
+READ_DIAG [D1] [D2] [D3] [D4] [D5] [D6]
+[D7] [D8] [D9] [D10] [D11] [D12] [D13]
+Obsah bloku DATA
+
+
+[D1]
+stav komunikace s KP:
+“0” = KP nekomunikuje
+“1” = komunikace s KP v pořádku
+
+[D2]
+stav RTC (hodiny reálného času): “0” = porucha RTC
+“1” = RTC v pořádku
+
+[D3]
+stav napájení KPPS: “0” = porucha napájení
+“1” = napájení v pořádku
+
+[D4]
+stav komunikace s radiostanicí DMR: “0” = porucha komunikace
+“1” = komunikace v pořádku
+
+[D5]
+stav provozních podmínek:
+“0” = provozní podmínky mimo bezpečný rozsah
+“1” = provozní podmínky v bezpečném rozsahu
+
+[D6]
+stav nepomíjivé paměti:
+“0” = porucha nepomíjivé paměti “1” = nepomíjivá paměť v pořádku
+
+[D7]
+Identifikace nepomíjivé paměti dle standardu JEDEC CFI. Jednotlivé parametry nesmí obsahovat mezery a jsou odděleny čárkou:
+Manufacturer ID, Device ID,
+Capacity, UniqueID
+
+[D8]
+stav zaplnění nepomíjivé paměti v procentech:
+0-100
+
+[D9]
+aktuální hodnota parametru “MER” v procentech:
+0-100
+
+[D10]
+diagnostika posledního vadného příjmu po 2. vrstvě přenosové soustavy:
+“0” = žádný vadný příjem nebyl zjištěn “1” = chyba přeskoku
+“2” = chyba parseru
+
+
+
+[D11]
+počet příkazů ve frontě JSVV: 0-255
+
+[D12]
+stav portu digitálních vstupů formou 8 po sobě jdoucích číslic 0-1. Pro každou pozici: “0” = vstup na nízké úrovni
+“1” = vstup na vysoké úrovni.
+
+[D13]
+stav portu digitálních výstupů formou 8 po sobě jdoucích číslic 0-1. Pro každou pozici: “0” = výstup na nízké úrovni
+“1” = výstup na vysoké úrovni.
+
+Poznámky:
+	•	parametr MER a vadná zpráva jsou definovány v protokolu pro druhou vrstvu přenosové soustavy JSVV, tj. v protokolu dle bodu 2.5.7.
+	•	pokud má KPPS digitální port s méně než 8 vstupy, jsou na chybějících pozicích v bloku [D12] zapsány “0”
+	•	pokud má KPPS digitální port s méně než 8 výstupy, jsou na chybějících pozicích v bloku [D13] zapsány “0”
+
+FRESET
+
+Zpráva (MID)
+FRESET
+Funkce
+Obnovení KPPS do továrního nastavení.
+Syntaxe zprávy
+FRESET
+Obsah bloku DATA
+prázdný
+Syntaxe odpovědi KPPS
+FRESET [D1]
+Obsah bloku DATA
+
+
+[D1]
+výsledek obnovení továrního nastavení: “OK” = tovární nastavení provedeno “ERR” = tovární nastavení nebylo možné
+provést (chyba zápisu do paměti nebo jiná chyba)
+Poznámky:
+	•	KPPS odesílá odpověď až po dokončení uvedení do továrního nastavení
+	•	obnovení továrního nastavení zahrnuje následující kroky:
+	•	smazání všech záznamů aktivit
+	•	nastavení následujících parametrů dle tabulky:
+
+parametr
+hodnota v továrním nastavení
+šifrovací klíče (všechny 4)
+0x00
+aktivní sada šifrovacích klíčů
+primární
+adresy (všech 35)
+0x00
+automaticky odesílané zprávy
+všechny zakázány
+maximální počet opakování automaticky odesílané zprávy
+3 x
+perioda mezi 2 odesláními automatické zprávy
+10 s
+doba blokování shodného pokynu
+180 s
+stav portu digitálních výstupů
+všechny výstupy na nízké úrovni
+volba typu připojeného koncového prvku
+bez koncového prvku
+interval zasílání dotazu na připojený koncový prvek
+10 s
+volba protokolu mezi KP a KPPS
+Protokol komunikace KP s KPPS druhé vrstvy přenosové soustavy JSVV
+režim kompatibility ve druhé vrstvě přenosové soustavy JSVV
+plný provoz bez omezení
+číslo kanálu radiostanice
+1
+hodnota parametru MER
+0
+diagnostika posledního vadného příjmu
+žádný vadný příjem nebyl zjištěn
+indexy CKI
+0 (příchozí i odchozí)
+
+LOGRESET
+
+Zpráva (MID)
+LOGRESET
+Funkce
+Vymazání celé paměti záznamů.
+Syntaxe zprávy
+LOGRESET
+Obsah bloku DATA
+prázdný
+Syntaxe odpovědi KPPS
+LOGRESET [D1]
+Obsah bloku DATA
+
+
+[D1]
+výsledek vymazání paměti záznamů: “OK” = vymazání úspěšné
+“ERR” = vymazání neúspěšné
+Poznámka:
+	•	KPPS odesílá odpověď až po dokončení vymazání obsahu paměti
+
+Příloha O	Zapojení konektoru RJ–12 pro KPPS
+
+
+
+
+
+
+
+
+
+zásuvka na panelu KPPS
+
+
+
+Příloha P	Označení zařízení JSVV
+
+
+
+
+
+
+
+
+
+
+
+
+Příloha Q	Vzor
+Ž á d o s t
+o posouzení splnění požadavků pro připojení zařízení do jednotného systému varování a vyrozumění
+(dále jen „Žádost“)
+
+Identifikace žadatele1): ..…………………..………………………………………………………………………………….... Typ předkládaného zařízení:	☐ KPPS	☐ ES	☐ MIS	☐ VIP	☐ KPM Typové označení předkládaného zařízení: ……………………………………………….................................
+Identifikace předkládaného zařízení 2): ……………………………………………………................................. Žadatel je výrobcem / dodavatelem zařízení 3).
+Pokud je žadatel dodavatelem, identifikace výrobce 1):
+
+………………………………………………..………………………………………………………………………………………………
+
+Žádáme o posouzení předkládaného zařízení z hlediska splnění technických požadavků, které  byly  stanoveny  v souladu  s  §  9  odst.  7  vyhlášky  č.  380/2002  Sb., k přípravě a provádění úkolů ochrany obyvatelstva, Ministerstvem vnitra-generálním ředitelstvím Hasičského záchranného sboru České republiky (dále jen „MV-GŘ HZS ČR“) v dokumentu s názvem „Požadavky na zařízení pro JSVV a postup při schvalování připojení nových zařízení do JSVV“, v platném znění (dále jen „Požadavky“), zveřejněném na webovém portálu MV-GŘ HZS ČR https://www.hzscr.cz/clanek/varovani-obyvatelstva-v-ceske- republice.aspx?q=Y2hudW09Mw%3d%3d.
+
+
+Bylo předkládané zařízení již dříve schváleno pro připojení do JSVV?	ANO / NE 3)
+Pokud ANO, prohlašujeme, že:
+	•	předkládané zařízení je plně shodné se vzorem dříve schváleným pro připojení do JSVV. 3)
+	•	u zařízení byly provedeny následující změny a úpravy: 3)
+
+………………………………………………..………………………………………………………………………………………………
+
+………………………………………………..………………………………………………………………………………………………
+………………………………………………..………………………………………………………………………………………………
+
+
+	•	U právnické osoby název, sídlo a IČO; u fyzické osoby jméno a příjmení, bydliště, datum narození; u podnikající fyzické osoby jméno a příjmení, sídlo a IČO.
+	•	Označení jednoznačně identifikující konkrétní předkládané zařízení, např. výrobní číslo.
+	•	Nehodící se škrtněte.
+
+Podáním této Žádosti vyslovujeme souhlas:
+	•	s užíváním zařízení Českou republikou - Ministerstvem vnitra pro účely:
+	•	provedení ověřovací zkoušky předkládaného zařízení v laboratoři MV-GŘ HZS ČR – Institutu ochrany obyvatelstva k prověření splnění Požadavků a
+	•	dalších úkonů s tím souvisejících,
+to vše v rozsahu všech práv se k němu vážících, zejména práv duševního vlastnictví,
+	•	se zpracováním protokolu o splnění/nesplnění požadavků pro připojení předkládaného zařízení do jednotného systému varování a vyrozumění,
+	•	se zpracováním pasportu, který bude přílohou protokolu a bude obsahovat základní informace a fotodokumentaci předkládaného zařízení v souladu s Požadavky,
+	•	se zveřejněním uvedeného pasportu na webovém portálu MV-GŘ HZS ČR a jeho
+užíváním v rámci výkonu působnosti HZS ČR. Podáním této Žádosti se vzdáváme práva:
+	•	na úplatu za užívání předkládaného zařízení pro účely výše uvedené, a to v rozsahu všech práv se k němu vážících, zejména práv duševního vlastnictví a
+	•	na náhradu újmy vzniklé v souvislosti s provedením ověřovací zkoušky předkládaného zařízení  v  laboratoři  MV-GŘ  HZS  ČR  –  Institutu  ochrany  obyvatelstva k prověření splnění Požadavků a dalších úkonů s tím souvisejících.
+Podáním této Žádosti prohlašujeme:
+	•	že jsme plně oprávněni k jejímu podání zejména z hlediska práv v oblasti ochrany osobnosti, obchodního tajemství a práv duševního vlastnictví a v případě, že se toto prohlášení ukáže jako rozporné se skutečným právním stavem, zavazujeme se uhradit veškerou újmu z tohoto plynoucí všem dotčeným osobám a
+	•	že jsme připraveni poskytnout veškerou další součinnost potřebnou pro zajištění naplnění účelu této Žádosti.
+Podáním této Žádosti bereme na vědomí:
+	•	že	na	prověření	splnění	Požadavků,	zejména	pak	zpracování	protokolu
+o splnění/nesplnění požadavků a pasportu, není právní nárok a
+	•	že na základě Žádosti dochází ke zpracovávání osobních údajů ve smyslu Nařízení Evropského parlamentu a Rady (EU) 2016/679 ze dne 27. dubna 2016 o ochraně fyzických osob v souvislosti se zpracováním osobních údajů a volném pohybu těchto údajů a o zrušení směrnice 95/46/ES a zákona č. 110/2019 Sb., o zpracování osobních údajů, k čemuž je třeba udělit příslušný souhlas dotčené osoby.
+
+Žádost podána dne: …………………………………………..................................... Podpis oprávněné osoby žadatele 4): ……………………………………………........
+
+	•		V případě, že oprávnění osoby, která je právnickou osobou, k podpisu Žádosti nevyplývá z veřejného rejstříku nebo právního předpisu, je třeba toto doložit formou přílohy Žádosti.
+
+Příloha R	Obsah pasportu zařízení připojovaného do JSVV
+
+	•	Identifikace zařízení:
+	•	Typové označení.
+	•	Identifikaci výrobce případně dodavatele.
+	•	Kategorie zařízení (KPPS, ES, BMIS ...).
+
+	•	Základní technické údaje o zařízení:
+	•	Hlavní součásti.
+	•	Výkonové parametry. 1)
+	•	Rozměry. 1)
+	•	Energetické parametry (minimální klidová spotřeba, maximální spotřeba při plném zatížení koncových stupňů resp. při maximálním akustickém výkonu). 1)
+
+	•	Přenosové a komunikační prostředky – typové označení:
+	•	KPPS první vrstvy přenosové soustavy JSVV.
+	•	KPPS druhé vrstvy přenosové soustavy JSVV.
+	•	Radiostanice přenosové soustavy u BMIS.
+	•	Rozhlasový přijímač.
+	•	Další komunikační zařízení (GSM modul, radiomodem, …).
+
+	•	Náhradní zdroje elektrické energie:
+	•	Typové označení akumulátoru.
+	•	Počet akumulátorů. 1)
+	•	Napětí akumulátoru.
+	•	Kapacita akumulátoru. 1)
+	•	U MIS s rozlišením na akumulátor pro ústřednu MIS a pro hlásič MIS.
+
+	•	Ozvučovací zařízení:
+	•	Typ reproduktoru
+	•	Výkon reproduktoru.
+	•	Počet reproduktorů. 1)
+
+	•	Fotodokumentace minimálně v rozsahu:
+	•	Detail výrobního štítku zařízení.
+	•	Zavřená skříň řídící elektroniky/ústředny MIS.
+	•	Otevřená skříň řídící elektroniky/ústředny MIS.
+	•	Akustická hlavice sirény/hlásič MIS.
+	•	U MIS otevřená montážní skříň hlásiče.
+	•	Detail ovládacích prvků zařízení.
+	•	Detail jednotlivých přenosových a komunikačních prostředků.
+	•	U MIS ovládací pracoviště.
+
+
+
+
+
+
+
+1)  V případě více výkonových řad pro každou z nich zvlášť.
+
+Příloha S		Vazby mezi daty zpráv, příkazy a provozními stavy komunikace KPPS s KP dle protokolů pro první
+a druhou vrstvu přenosové soustavy JSVV
+
+přijato po
+1. vrstvě přenosové soustavy
+log aktivit KP 1. vrstvy
+port EKPV
+2. vrstvy
+log aktivit KP 2. vrstvy
+část zprávy
+data
+
+
+
+<povel>
+00
+
+ID = 4H, LEN = 0
+
+
+11
+
+
+
+
+22
+
+ID = 1H
+
+
+33
+
+ID = 5H, LEN = 0
+
+
+44
+
+ID = 3H, LEN = 0
+
+<data zpráv>
+11
+1H
+1H
+1H
+
+22
+2H
+2H
+2H
+
+33
+90H
+příkaz nepředán
+
+
+44
+3H
+3H
+3H
+
+55
+5H
+5H
+5H
+
+66
+6H
+6H
+6H
+
+77
+90H
+příkaz nepředán
+
+
+88
+AH
+AH
+AH
+
+99
+BH
+BH
+BH
+
+AA
+CH
+CH
+CH
+
+BB
+DH
+DH
+DH
+
+CC
+EH
+EH
+EH
+
+DD
+FH
+FH
+FH
+
+EE
+10H
+10H
+10H
+
+FF
+11H
+11H
+11H
+
+GG
+12H
+12H
+12H
+
+HH
+90H
+příkaz nepředán
+
+
+II
+40H
+40H
+40H
+
+JJ
+20H
+20H
+20H
+
+KK
+90H
+příkaz nepředán
+
+
+LL
+41H
+41H
+41H
+
+MM
+31H
+31H
+31H
+
+PP
+13H
+13H
+13H
+
+QQ
+14H
+14H
+14H
+
+RR
+15H
+15H
+15H
+
+SS
+16H
+16H
+16H
+
+TT
+17H
+17H
+17H
+
+UU
+18H
+18H
+18H
+
+VV
+19H
+19H
+19H
+
+XX
+1AH
+1AH
+1AH
+
+YY
+1BH
+1BH
+1BH
+
+
+
+přijato po
+2. vrstvě přenosové soustavy
+log aktivit KP 2. vrstvy
+port EKPV
+1. vrstvy
+log aktivit KP 1. vrstvy
+
+
+část zprávy
+data
+
+ID = 4H, LEN = 0
+
+<povel>
+00
+
+
+
+
+11
+
+ID = 1H
+
+
+22
+
+ID = 5H, LEN = 0
+
+
+33
+
+ID = 3H, LEN = 0
+
+
+44
+
+1H
+1H
+<data zpráv>
+11
+1H
+2H
+2H
+
+22
+2H
+3H
+3H
+
+44
+3H
+4H
+4H
+
+44
+3H
+5H
+5H
+
+55
+5H
+6H
+6H
+
+66
+6H
+7H
+7H
+
+příkaz nepředán
+
+8H
+8H
+
+příkaz nepředán
+
+9H
+9H
+
+příkaz nepředán
+
+AH
+AH
+
+88
+AH
+BH
+BH
+
+99
+BH
+CH
+CH
+
+AA
+CH
+DH
+DH
+
+BB
+DH
+EH
+EH
+
+CC
+EH
+FH
+FH
+
+DD
+FH
+10H
+10H
+
+EE
+10H
+11H
+11H
+
+FF
+11H
+12H
+12H
+
+GG
+12H
+40H
+40H
+
+II
+40H
+20H
+20H
+
+JJ
+20H
+30H
+30H
+
+příkaz nepředán
+
+41H
+41H
+
+LL
+41H
+31H
+31H
+
+MM
+31H
+13H
+13H
+
+PP
+13H
+14H
+14H
+
+QQ
+14H
+15H
+15H
+
+RR
+15H
+16H
+16H
+
+SS
+16H
+17H
+17H
+
+TT
+17H
+18H
+18H
+
+UU
+18H
+19H
+19H
+
+VV
+19H
+1AH
+1AH
+
+XX
+1AH
+1BH
+1BH
+
+YY
+1BH
+1CH
+1CH
+
+příkaz nepředán
+
+1DH
+1DH
+
+příkaz nepředán
+
+1EH
+1EH
+
+příkaz nepředán
+
+1FH
+1FH
+
+příkaz nepředán
+

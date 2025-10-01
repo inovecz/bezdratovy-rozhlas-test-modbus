@@ -85,6 +85,7 @@ with ModbusAudioClient.from_defaults() as client:
 - `start_audio_stream(addresses, zones=None)` / `stop_audio_stream()` → configure route/zones and toggle `TxControl` in one call.
 - `start_stream(zones=None)` / `stop_stream()` → toggle `TxControl` and (optionally) update zones while keeping the existing route.
 - `dump_documented_registers()` → return a table covering every register listed in the vendor documentation, with read errors noted.
+- Streaming helpers default to `constants.TRANSMITTER_UNIT_ID` (55) for the `TxControl` writes so you can talk to a receiver for status while still triggering the transmitter.
 
 ### Command line helper
 

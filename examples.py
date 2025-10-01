@@ -90,12 +90,15 @@ def read_tx_control_value() -> int:
 
 def start_streaming(zones: Iterable[int] | None = None) -> None:
     with build_client() as client:
-        client.start_stream(zones=zones if zones is not None else DEMO_ZONES)
+        client.start_stream(
+            zones=zones if zones is not None else DEMO_ZONES,
+            tx_unit_id=constants.TRANSMITTER_UNIT_ID,
+        )
 
 
 def stop_streaming() -> None:
     with build_client() as client:
-        client.stop_stream()
+        client.stop_stream(tx_unit_id=constants.TRANSMITTER_UNIT_ID)
 
 
 def set_demo_frequency(value: int | None = None) -> None:

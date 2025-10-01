@@ -58,7 +58,7 @@ class ModbusAudioClient:
 
         return cls(SerialSettings(), unit_id=constants.DEFAULT_UNIT_ID)
 
-    def __init__(self, settings: SerialSettings, unit_id: int = 1) -> None:
+    def __init__(self, settings: SerialSettings, unit_id: int = 55) -> None:
         if _SerialClient is None:
             raise ModbusAudioError(
                 "pymodbus is not available. Install it with 'pip install pymodbus[serial]'."
@@ -118,20 +118,20 @@ class ModbusAudioClient:
 
         return info
 
-    def read_register(self, address: int) -> int:
+    def read_register(self, address: int, unit: int | None = None) -> int:
         """Read a single holding register."""
 
-        return self._read_registers(address, 1)[0]
+        return self._read_registers(address, 1, unit=unit)[0]
 
-    def read_registers(self, address: int, quantity: int) -> list[int]:
+    def read_registers(self, address: int, quantity: int, unit: int | None = None) -> list[int]:
         """Read multiple holding registers."""
 
-        return self._read_registers(address, quantity)
+        return self._read_registers(address, quantity, unit=unit)
 
-    def probe(self, register: int = constants.PROBE_REGISTER) -> int:
+    def probe(self, register: int = constants.PROBE_REGISTER, unit: int | None = None) -> int:
         """Read a register to verify the device responds."""
 
-        return self.read_register(register)
+        return self.read_register(register, unit=unit)
 
     def read_serial_number(self) -> str:
         """Return the device serial number as a hexadecimal string."""
@@ -140,31 +140,37 @@ class ModbusAudioClient:
         words = self.read_registers(block.start, block.quantity)
         return "".join(f"{word:04X}" for word in words)
 
-    def read_frequency(self) -> int:
+    def read_frequency(self, unit: int | None = None) -> int:
         """Return the configured RF frequency (register 0x4024)."""
 
-        return self.read_register(constants.FREQUENCY_REGISTER)
+        return self.read_register(constants.FREQUENCY_REGISTER, unit=unit)
 
-    def write_frequency(self, value: int | None = None) -> None:
+    def write_frequency(self, value: int | None = None, unit: int | None = None) -> None:
         """Set the RF frequency register; defaults to the documented value."""
 
         target = constants.DEFAULT_FREQUENCY if value is None else value
-        self.write_register(constants.FREQUENCY_REGISTER, target)
+        self.write_register(constants.FREQUENCY_REGISTER, target, unit=unit)
 
-    def start_stream(self, zones: Iterable[int] | None = None) -> None:
+    def start_stream(
+        self,
+        zones: Iterable[int] | None = None,
+        tx_unit_id: int | None = None,
+    ) -> None:
         """Start audio streaming to the provided zones (defaults to documentation)."""
 
         zone_values = list(zones) if zones is not None else list(constants.DEFAULT_DESTINATION_ZONES)
         if zone_values:
             self.set_destination_zones(zone_values)
-        self.write_register(constants.TX_CONTROL, 2)
+        target_unit = tx_unit_id if tx_unit_id is not None else self.unit_id
+        self.write_register(constants.TX_CONTROL, 2, unit=target_unit)
 
-    def stop_stream(self) -> None:
+    def stop_stream(self, tx_unit_id: int | None = None) -> None:
         """Stop audio streaming by toggling TxControl."""
 
-        self.write_register(constants.TX_CONTROL, 1)
+        target_unit = tx_unit_id if tx_unit_id is not None else self.unit_id
+        self.write_register(constants.TX_CONTROL, 1, unit=target_unit)
 
-    def write_register(self, address: int, value: int) -> None:
+    def write_register(self, address: int, value: int, unit: int | None = None) -> None:
         """Write a single holding register."""
 
         try:
@@ -172,6 +178,7 @@ class ModbusAudioClient:
                 self._client.write_register,
                 address=address,
                 value=value,
+                unit=unit,
             )
         except ModbusIOException as exc:  # pragma: no cover - depends on transport
             raise ModbusAudioError(
@@ -180,7 +187,7 @@ class ModbusAudioClient:
         if getattr(response, "isError", lambda: False)():  # pragma: no cover - depends on pymodbus
             raise ModbusAudioError(f"Modbus error while writing register 0x{address:04X}")
 
-    def write_registers(self, address: int, values: Iterable[int]) -> None:
+    def write_registers(self, address: int, values: Iterable[int], unit: int | None = None) -> None:
         """Write consecutive holding registers."""
 
         value_list = list(values)
@@ -189,6 +196,7 @@ class ModbusAudioClient:
                 self._client.write_registers,
                 address=address,
                 values=value_list,
+                unit=unit,
             )
         except ModbusIOException as exc:  # pragma: no cover - depends on transport
             raise ModbusAudioError(
@@ -265,12 +273,13 @@ class ModbusAudioClient:
     # ------------------------------------------------------------------
     # Internal helpers
     # ------------------------------------------------------------------
-    def _read_registers(self, address: int, quantity: int) -> list[int]:
+    def _read_registers(self, address: int, quantity: int, unit: int | None = None) -> list[int]:
         try:
             response = self._call_with_unit(
                 self._client.read_holding_registers,
                 address=address,
                 count=quantity,
+                unit=unit,
             )
         except ModbusIOException as exc:  # pragma: no cover - depends on transport
             raise ModbusAudioError(
@@ -350,14 +359,15 @@ class ModbusAudioClient:
 
         return words
 
-    def _call_with_unit(self, method, **kwargs):
+    def _call_with_unit(self, method, *, unit: int | None = None, **kwargs):
         """Invoke a pymodbus client method using the appropriate unit/slave keyword."""
 
         signature = inspect.signature(method)
+        target_unit = self.unit_id if unit is None else unit
         if "unit" in signature.parameters:
-            kwargs["unit"] = self.unit_id
+            kwargs["unit"] = target_unit
         elif "slave" in signature.parameters:
-            kwargs["slave"] = self.unit_id
+            kwargs["slave"] = target_unit
         return method(**kwargs)
 
 
