@@ -20,6 +20,22 @@ STATUS_REGISTER = 0x4036
 ERROR_REGISTER = 0x4037
 OGG_BITRATE = 0x403F
 
+FREQUENCY_REGISTER = 0x4024
+SERIAL_NUMBER_BLOCK = (0x4000, 3)
+
+DEFAULT_SERIAL_PORT = "/dev/tty.usbserial-AV0K3CPZ"
+DEFAULT_BAUDRATE = 57600
+DEFAULT_PARITY = "N"
+DEFAULT_STOPBITS = 1
+DEFAULT_BYTESIZE = 8
+DEFAULT_TIMEOUT = 1.0
+DEFAULT_UNIT_ID = 1
+
+DEFAULT_ROUTE = (1, 116, 225)
+DEFAULT_DESTINATION_ZONES = (22,)
+DEFAULT_FREQUENCY = 7100
+PROBE_REGISTER = 0x0000
+
 
 @dataclass(frozen=True)
 class RegisterBlock:
@@ -43,12 +59,12 @@ class RegisterDescriptor:
 
 
 DEVICE_INFO_REGISTERS = {
-    "serial_number": RegisterBlock(0x4000, 3),
+    "serial_number": RegisterBlock(SERIAL_NUMBER_BLOCK[0], SERIAL_NUMBER_BLOCK[1]),
     "slave_address": RegisterBlock(0x4003),
     "rf_address": RegisterBlock(0x4004, 5),
     "rf_net_id": RegisterBlock(0x4022),
     "mode": RegisterBlock(0x4023),
-    "frequency": RegisterBlock(0x4024),
+    "frequency": RegisterBlock(FREQUENCY_REGISTER),
     "num_configured_addresses": RegisterBlock(0x4025),
     "configured_route": RegisterBlock(0x4026, 5),
     "destination_zones": RegisterBlock(RF_DEST_ZONE_BASE, MAX_DEST_ZONES),
@@ -106,12 +122,12 @@ DOCUMENTED_REGISTERS: tuple[RegisterDescriptor, ...] = (
     RegisterDescriptor("SWRESET", RegisterBlock(0x0666), readable=False, description="Software reset"),
     RegisterDescriptor("RESET", RegisterBlock(0x0667), readable=False, description="Hardware reset"),
     RegisterDescriptor("Buff0-9", RegisterBlock(0x3000, 10), description="Inbound RF buffer"),
-    RegisterDescriptor("SerialNumber", RegisterBlock(0x4000, 3)),
+    RegisterDescriptor("SerialNumber", RegisterBlock(SERIAL_NUMBER_BLOCK[0], SERIAL_NUMBER_BLOCK[1])),
     RegisterDescriptor("SlaveAddr", RegisterBlock(0x4003)),
     RegisterDescriptor("RFAddr0-4", RegisterBlock(0x4004, 5)),
     RegisterDescriptor("RFNetID", RegisterBlock(0x4022)),
     RegisterDescriptor("Mode", RegisterBlock(0x4023)),
-    RegisterDescriptor("Frequency", RegisterBlock(0x4024)),
+    RegisterDescriptor("Frequency", RegisterBlock(FREQUENCY_REGISTER)),
     RegisterDescriptor("numAddrFlash", RegisterBlock(0x4025)),
     RegisterDescriptor("Addr0Flash-4", RegisterBlock(0x4026, 5)),
     RegisterDescriptor("RFDestZone0-4", RegisterBlock(RF_DEST_ZONE_BASE, MAX_DEST_ZONES)),

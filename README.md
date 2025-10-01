@@ -1,4 +1,4 @@
-Dle aktualniho nastaveni plati toto:
+Current default hardware setup:
 
 
 Vysílač:
@@ -18,20 +18,6 @@ Přijímač #2: (ten, ze kterého vede adaptér do sítě)
 - frekvence: 7 100
 - RF Addr: 225
 - RF Dest Zone: 22
-
-
-Korektni nastaveni pro komunikaci skrze modbus:
-SERIAL_SETTINGS = SerialSettings(
-    port="/dev/tty.usbserial-AV0K3CPZ",  # change to the serial port used on your system
-    baudrate=57600,
-    parity="N",
-    stopbits=1,
-    bytesize=8,
-    timeout=1.0,
-)
-UNIT_ID = 1
-
-
 
 ---
 
@@ -61,37 +47,28 @@ pip install pymodbus[serial]
 ### Library usage
 
 ```python
-from modbus_audio import ModbusAudioClient, SerialSettings
+from modbus_audio import ModbusAudioClient, constants
 
-settings = SerialSettings(
-    port="/dev/ttyUSB0",  # or "COM3" on Windows
-    baudrate=115200,
-    parity="E",
-    stopbits=1,
-    bytesize=8,
-    timeout=1.0,
-)
-
-receiver_addresses = [1, 116, 225]  # central hub + two receiver hops
-zones = [22]
-
-with ModbusAudioClient(settings, unit_id=1) as client:
+# Optional: override defaults by editing constants.DEFAULT_SERIAL_PORT, etc.
+with ModbusAudioClient.from_defaults() as client:
     info = client.get_device_info()
     print("Device info:", info)
 
     # Write an arbitrary register (example: tweak RF frequency)
-    client.write_register(0x4024, 7100)
+    client.write_frequency(constants.DEFAULT_FREQUENCY)
 
     # Start audio streaming towards the configured hop/receiver chain
-    client.start_audio_stream(receiver_addresses, zones=zones)
+    client.start_stream(zones=constants.DEFAULT_DESTINATION_ZONES)
 
     # Later on, stop the stream again
-    client.stop_audio_stream()
+    client.stop_stream()
 ```
 
 - `get_device_info()` returns a dictionary with the key configuration and identification registers (serial number, RF details, zones, firmware identifiers, and diagnostic flags).
 - `write_register(address, value)` updates any holding register on the device.
-- `start_audio_stream(addresses, zones)` writes the in-RAM routing table (0x0000..0x0005), optionally updates the destination zones (0x4030..0x4034), and finally sets `TxControl (0x5035)` to `2` which triggers audio playback on the remote receivers. Use `stop_audio_stream()` to revert `TxControl` to `1`.
+- `start_stream(zones)` updates the destination zones (0x4030..0x4034) and sets `TxControl (0x5035)` to `2` which triggers audio playback on the remote receivers. Use `stop_stream()` to revert `TxControl` to `1`.
+- `start_audio_stream(addresses, zones)` remains available when you need to program a hop chain as part of the same call.
+- Serial defaults (serial port, baudrate, parity, etc.) live in `modbus_audio.constants`; adjust them once and every helper (library, CLI, and the example script) will pick them up automatically.
 
 ### Command line helper
 
@@ -100,7 +77,9 @@ A thin CLI wrapper lives in `src/modbus_audio/cli.py`. Run it directly from the 
 ```bash
 PYTHONPATH=src python -m modbus_audio.cli \
     --port /dev/ttyUSB0 \
-    --baudrate 115200 \
+    --baudrate 57600 \
+    --parity N \
+    --stopbits 1 \
     --unit-id 1 \
     info --pretty
 ```

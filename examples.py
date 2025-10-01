@@ -16,9 +16,9 @@ from __future__ import annotations
 
 import argparse
 import json
-from typing import Iterable
 import sys
 from pathlib import Path
+from typing import Iterable
 
 
 ROOT_DIR = Path(__file__).resolve().parent
@@ -30,27 +30,15 @@ from modbus_audio import ModbusAudioClient, ModbusAudioError, SerialSettings, co
 from modbus_audio.constants import TX_CONTROL
 
 
-SERIAL_SETTINGS = SerialSettings(
-    port="/dev/tty.usbserial-AV0K3CPZ",  # change to the serial port used on your system
-    baudrate=57600,
-    parity="N",
-    stopbits=1,
-    bytesize=8,
-    timeout=1.0,
-)
-UNIT_ID = 1
-
-DEMO_ROUTE = [1, 116, 225]
-DEMO_ZONES = [22]
-DEMO_FREQUENCY = 7100
-FREQUENCY_REGISTER = 0x4024
+DEMO_ZONES = list(constants.DEFAULT_DESTINATION_ZONES)
+DEMO_FREQUENCY = constants.DEFAULT_FREQUENCY
 PRETTY_PRINT_INSPECT = True
 
-SCAN_METHODS = ["rtu"]
-SCAN_BAUD_RATES = [9600, 19200, 38400, 57600, 115200]
-SCAN_PARITIES = ["E", "N", "O"]
-SCAN_STOP_BITS = [1, 2]
-SCAN_UNIT_IDS = [1]
+SCAN_METHODS = [SerialSettings().method]
+SCAN_BAUD_RATES = [constants.DEFAULT_BAUDRATE, 9600, 19200, 38400, 115200]
+SCAN_PARITIES = [constants.DEFAULT_PARITY, "E", "O"]
+SCAN_STOP_BITS = [constants.DEFAULT_STOPBITS, 2]
+SCAN_UNIT_IDS = [constants.DEFAULT_UNIT_ID]
 
 
 def parse_args() -> argparse.Namespace:
@@ -77,40 +65,115 @@ def parse_args() -> argparse.Namespace:
 
 
 def build_client() -> ModbusAudioClient:
-    return ModbusAudioClient(settings=SERIAL_SETTINGS, unit_id=UNIT_ID)
+    return ModbusAudioClient.from_defaults()
 
 
-def run_inspect(client: ModbusAudioClient) -> int:
-    info = client.get_device_info()
+def probe_device() -> None:
+    with build_client() as client:
+        client.probe()
+
+
+def read_serial_number_value() -> str:
+    with build_client() as client:
+        return client.read_serial_number()
+
+
+def read_frequency_value() -> int:
+    with build_client() as client:
+        return client.read_frequency()
+
+
+def read_tx_control_value() -> int:
+    with build_client() as client:
+        return client.read_register(constants.TX_CONTROL)
+
+
+def start_streaming(zones: Iterable[int] | None = None) -> None:
+    with build_client() as client:
+        client.start_stream(zones=zones if zones is not None else DEMO_ZONES)
+
+
+def stop_streaming() -> None:
+    with build_client() as client:
+        client.stop_stream()
+
+
+def set_demo_frequency(value: int | None = None) -> None:
+    with build_client() as client:
+        client.write_frequency(DEMO_FREQUENCY if value is None else value)
+
+
+def write_register(address: int, value: int) -> None:
+    with build_client() as client:
+        client.write_register(address, value)
+
+
+def read_registers(address: int, count: int = 1) -> list[int]:
+    with build_client() as client:
+        return client.read_registers(address, count)
+
+
+def dump_documented_registers() -> list[tuple[str, str, str, str]]:
+    with build_client() as client:
+        return client.dump_documented_registers()
+
+
+def collect_device_info() -> dict[str, object]:
+    with build_client() as client:
+        return dict(client.get_device_info())
+
+
+def run_inspect() -> int:
+    try:
+        info = collect_device_info()
+    except ModbusAudioError as exc:
+        print(f"Unable to collect device info: {exc}")
+        return 1
+
     indent = 2 if PRETTY_PRINT_INSPECT else None
     print(json.dumps(info, indent=indent))
     return 0
 
 
-def run_set_frequency(client: ModbusAudioClient) -> int:
-    client.write_register(FREQUENCY_REGISTER, DEMO_FREQUENCY)
-    print(f"Register 0x{FREQUENCY_REGISTER:04X} set to {DEMO_FREQUENCY}")
+def run_set_frequency() -> int:
+    try:
+        set_demo_frequency()
+    except ModbusAudioError as exc:
+        print(f"Unable to write frequency register 0x{constants.FREQUENCY_REGISTER:04X}: {exc}")
+        return 1
+
+    print(f"Register 0x{constants.FREQUENCY_REGISTER:04X} set to {DEMO_FREQUENCY}")
     return 0
 
 
-def run_play_demo(client: ModbusAudioClient, addresses: Iterable[int], zones: Iterable[int]) -> int:
-    client.start_audio_stream(addresses, zones=zones)
+def run_play_demo() -> int:
+    try:
+        start_streaming()
+    except ModbusAudioError as exc:
+        print(f"Failed to start demo stream: {exc}")
+        return 1
+
     print(
-        "Started audio stream with hop chain "
-        f"{list(addresses)} and zones {list(zones)} (TxControl=2)."
+        "Started audio stream with default route {route} and zones {zones}."
+        .format(route=list(constants.DEFAULT_ROUTE), zones=DEMO_ZONES)
     )
     return 0
 
 
-def run_stop_demo(client: ModbusAudioClient) -> int:
-    client.stop_audio_stream()
+def run_stop_demo() -> int:
+    try:
+        stop_streaming()
+    except ModbusAudioError as exc:
+        print(f"Failed to stop streaming: {exc}")
+        return 1
+
     print("Stopped audio stream (TxControl=1).")
     return 0
 
 
-def run_read_tx_control(client: ModbusAudioClient) -> int:
+def run_read_tx_control() -> int:
     try:
-        value = client.read_register(TX_CONTROL)
+        value = read_tx_control_value()
     except ModbusAudioError as exc:
         print(
             "Unable to read TxControl (0x5035). Many receiver firmware builds expose"
@@ -124,9 +187,9 @@ def run_read_tx_control(client: ModbusAudioClient) -> int:
     return 0
 
 
-def run_probe(client: ModbusAudioClient) -> int:
+def run_probe() -> int:
     try:
-        client.read_register(0x0000)
+        probe_device()
     except ModbusAudioError as exc:
         print(f"Probe failed: {exc}")
         return 1
@@ -135,15 +198,13 @@ def run_probe(client: ModbusAudioClient) -> int:
     return 0
 
 
-def run_serial_number(client: ModbusAudioClient) -> int:
-    block = constants.DEVICE_INFO_REGISTERS["serial_number"]
+def run_serial_number() -> int:
     try:
-        words = client.read_registers(block.start, block.quantity)
+        serial = read_serial_number_value()
     except ModbusAudioError as exc:
         print(f"Unable to read serial number: {exc}")
         return 1
 
-    serial = "".join(f"{word:04X}" for word in words)
     if not serial.strip("0"):
         print("Serial number register returned only zeroes")
         return 1
@@ -156,6 +217,7 @@ def run_auto_probe() -> int:
     """Try common serial configurations until one responds."""
 
     attempts = 0
+    base_settings = SerialSettings()
     for method in SCAN_METHODS:
         for baudrate in SCAN_BAUD_RATES:
             for parity in SCAN_PARITIES:
@@ -163,17 +225,17 @@ def run_auto_probe() -> int:
                     for unit_id in SCAN_UNIT_IDS:
                         attempts += 1
                         settings = SerialSettings(
-                            port=SERIAL_SETTINGS.port,
+                            port=base_settings.port,
                             method=method,
                             baudrate=baudrate,
                             parity=parity,
                             stopbits=stopbits,
-                            bytesize=SERIAL_SETTINGS.bytesize,
-                            timeout=SERIAL_SETTINGS.timeout,
+                            bytesize=base_settings.bytesize,
+                            timeout=base_settings.timeout,
                         )
                         try:
                             with ModbusAudioClient(settings=settings, unit_id=unit_id) as client:
-                                client.read_register(0x0000)
+                                client.probe()
                         except ModbusAudioError:
                             continue
                         except OSError as exc:
@@ -195,41 +257,23 @@ def run_auto_probe() -> int:
     return 1
 
 
-def run_frequency(client: ModbusAudioClient) -> int:
-    block = constants.DEVICE_INFO_REGISTERS["frequency"]
+def run_frequency() -> int:
     try:
-        value = client.read_register(block.start)
+        value = read_frequency_value()
     except ModbusAudioError as exc:
-        print(f"Unable to read RF frequency (register 0x{block.start:04X}): {exc}")
+        print(f"Unable to read RF frequency (register 0x{constants.FREQUENCY_REGISTER:04X}): {exc}")
         return 1
 
-    print(f"RF frequency register (0x{block.start:04X}) -> {value}")
+    print(f"RF frequency register (0x{constants.FREQUENCY_REGISTER:04X}) -> {value}")
     return 0
 
 
-def run_dump_registers(client: ModbusAudioClient) -> int:
-    rows: list[tuple[str, str, str, str]] = []
-
-    for desc in constants.DOCUMENTED_REGISTERS:
-        address = f"0x{desc.block.start:04X}"
-        quantity = str(desc.block.quantity)
-
-        if not desc.readable:
-            rows.append((desc.name, address, quantity, "write-only"))
-            continue
-
-        try:
-            values = client.read_registers(desc.block.start, desc.block.quantity)
-        except ModbusAudioError as exc:
-            rows.append((desc.name, address, quantity, f"error: {exc}"))
-            continue
-
-        if desc.block.quantity == 1:
-            rendered = str(values[0])
-        else:
-            rendered = "[" + ", ".join(str(v) for v in values) + "]"
-
-        rows.append((desc.name, address, quantity, rendered))
+def run_dump_registers() -> int:
+    try:
+        rows = dump_documented_registers()
+    except ModbusAudioError as exc:
+        print(f"Unable to dump registers: {exc}")
+        return 1
 
     headers = ("Name", "Address", "Qty", "Value")
     col_widths = [len(h) for h in headers]
@@ -249,38 +293,24 @@ def run_dump_registers(client: ModbusAudioClient) -> int:
     return 0
 
 
-def run_start_stream(client: ModbusAudioClient) -> int:
+def run_start_stream() -> int:
     try:
-        client.set_destination_zones(DEMO_ZONES)
-    except (ModbusAudioError, ValueError) as exc:
-        print(
-            "Zone programming failed: {error}. "
-            "Verify the device supports writing to registers 0x4030-0x4034."
-            .format(error=exc)
-        )
-
-    try:
-        client.write_register(constants.TX_CONTROL, 2)
+        start_streaming()
     except ModbusAudioError as exc:
-        # Device might expose TxControl as write-only or we might be connected to a receiver.
-        print(
-            "Device did not acknowledge writing TxControl to 2 (register 0x5035)."
-            " If you are controlling the transmitter remotely through a receiver,"
-            " that receiver may need to relay the command via a different register set."
-        )
-        print(f"Underlying error: {exc}")
+        print(f"Failed to start streaming: {exc}")
         return 1
 
-    print(
-        "Streaming started (TxControl=2). Zones {zones} updated.".format(
-            zones=DEMO_ZONES,
-        )
-    )
+    print("Streaming started (TxControl=2). Zones {zones} updated.".format(zones=DEMO_ZONES))
     return 0
 
 
-def run_stop_stream(client: ModbusAudioClient) -> int:
-    client.stop_audio_stream()
+def run_stop_stream() -> int:
+    try:
+        stop_streaming()
+    except ModbusAudioError as exc:
+        print(f"Failed to stop streaming: {exc}")
+        return 1
+
     print("Streaming stopped (TxControl reset to 1).")
     return 0
 
@@ -290,37 +320,31 @@ def main() -> None:
 
     if args.action == "auto-probe":
         code = run_auto_probe()
-        raise SystemExit(code)
 
-    try:
-        with build_client() as client:
-            if args.action == "inspect":
-                code = run_inspect(client)
-            elif args.action == "set-frequency":
-                code = run_set_frequency(client)
-            elif args.action == "play-demo":
-                code = run_play_demo(client, DEMO_ROUTE, DEMO_ZONES)
-            elif args.action == "stop-demo":
-                code = run_stop_demo(client)
-            elif args.action == "read-tx-control":
-                code = run_read_tx_control(client)
-            elif args.action == "probe":
-                code = run_probe(client)
-            elif args.action == "serial-number":
-                code = run_serial_number(client)
-            elif args.action == "frequency":
-                code = run_frequency(client)
-            elif args.action == "dump-registers":
-                code = run_dump_registers(client)
-            elif args.action == "start-stream":
-                code = run_start_stream(client)
-            elif args.action == "stop-stream":
-                code = run_stop_stream(client)
-            else:  # pragma: no cover - should not trigger due to argparse choices
-                raise ModbusAudioError(f"Unsupported action: {args.action}")
-    except ModbusAudioError as exc:
-        print(f"Error: {exc}")
-        code = 1
+    elif args.action == "inspect":
+        code = run_inspect()
+    elif args.action == "set-frequency":
+        code = run_set_frequency()
+    elif args.action == "play-demo":
+        code = run_play_demo()
+    elif args.action == "stop-demo":
+        code = run_stop_demo()
+    elif args.action == "read-tx-control":
+        code = run_read_tx_control()
+    elif args.action == "probe":
+        code = run_probe()
+    elif args.action == "serial-number":
+        code = run_serial_number()
+    elif args.action == "frequency":
+        code = run_frequency()
+    elif args.action == "dump-registers":
+        code = run_dump_registers()
+    elif args.action == "start-stream":
+        code = run_start_stream()
+    elif args.action == "stop-stream":
+        code = run_stop_stream()
+    else:  # pragma: no cover - should not trigger due to argparse choices
+        raise ModbusAudioError(f"Unsupported action: {args.action}")
 
     raise SystemExit(code)
 

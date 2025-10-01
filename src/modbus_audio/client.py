@@ -40,17 +40,23 @@ class ModbusAudioError(RuntimeError):
 class SerialSettings:
     """Settings forwarded to :class:`pymodbus.client.ModbusSerialClient`."""
 
-    port: str
+    port: str = constants.DEFAULT_SERIAL_PORT
     method: str = "rtu"
-    baudrate: int = 9600
-    parity: str = "E"
-    stopbits: int = 1
-    bytesize: int = 8
-    timeout: float = 1.0
+    baudrate: int = constants.DEFAULT_BAUDRATE
+    parity: str = constants.DEFAULT_PARITY
+    stopbits: int = constants.DEFAULT_STOPBITS
+    bytesize: int = constants.DEFAULT_BYTESIZE
+    timeout: float = constants.DEFAULT_TIMEOUT
 
 
 class ModbusAudioClient:
     """Convenience wrapper around ``pymodbus`` for this specific device family."""
+
+    @classmethod
+    def from_defaults(cls) -> "ModbusAudioClient":
+        """Create a client using the default serial settings and unit id."""
+
+        return cls(SerialSettings(), unit_id=constants.DEFAULT_UNIT_ID)
 
     def __init__(self, settings: SerialSettings, unit_id: int = 1) -> None:
         if _SerialClient is None:
@@ -121,6 +127,42 @@ class ModbusAudioClient:
         """Read multiple holding registers."""
 
         return self._read_registers(address, quantity)
+
+    def probe(self, register: int = constants.PROBE_REGISTER) -> int:
+        """Read a register to verify the device responds."""
+
+        return self.read_register(register)
+
+    def read_serial_number(self) -> str:
+        """Return the device serial number as a hexadecimal string."""
+
+        block = constants.DEVICE_INFO_REGISTERS["serial_number"]
+        words = self.read_registers(block.start, block.quantity)
+        return "".join(f"{word:04X}" for word in words)
+
+    def read_frequency(self) -> int:
+        """Return the configured RF frequency (register 0x4024)."""
+
+        return self.read_register(constants.FREQUENCY_REGISTER)
+
+    def write_frequency(self, value: int | None = None) -> None:
+        """Set the RF frequency register; defaults to the documented value."""
+
+        target = constants.DEFAULT_FREQUENCY if value is None else value
+        self.write_register(constants.FREQUENCY_REGISTER, target)
+
+    def start_stream(self, zones: Iterable[int] | None = None) -> None:
+        """Start audio streaming to the provided zones (defaults to documentation)."""
+
+        zone_values = list(zones) if zones is not None else list(constants.DEFAULT_DESTINATION_ZONES)
+        if zone_values:
+            self.set_destination_zones(zone_values)
+        self.write_register(constants.TX_CONTROL, 2)
+
+    def stop_stream(self) -> None:
+        """Stop audio streaming by toggling TxControl."""
+
+        self.write_register(constants.TX_CONTROL, 1)
 
     def write_register(self, address: int, value: int) -> None:
         """Write a single holding register."""
@@ -194,6 +236,31 @@ class ModbusAudioClient:
         """Stop the audio stream by clearing ``TxControl``."""
 
         self.write_register(constants.TX_CONTROL, 1)
+
+    def dump_documented_registers(self) -> list[tuple[str, str, str, str]]:
+        """Return a table of documented registers and their current values."""
+
+        rows: list[tuple[str, str, str, str]] = []
+        for desc in constants.DOCUMENTED_REGISTERS:
+            address = f"0x{desc.block.start:04X}"
+            quantity = str(desc.block.quantity)
+
+            if not desc.readable:
+                rows.append((desc.name, address, quantity, "write-only"))
+                continue
+
+            try:
+                values = self.read_registers(desc.block.start, desc.block.quantity)
+            except ModbusAudioError as exc:
+                rows.append((desc.name, address, quantity, f"error: {exc}"))
+                continue
+
+            rendered = (
+                str(values[0]) if desc.block.quantity == 1 else "[" + ", ".join(str(v) for v in values) + "]"
+            )
+            rows.append((desc.name, address, quantity, rendered))
+
+        return rows
 
     # ------------------------------------------------------------------
     # Internal helpers
