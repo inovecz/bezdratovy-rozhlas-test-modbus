@@ -1,0 +1,709 @@
+MODBUS REGISTRY VP_PRIJIMAC_DIGITAL_3
+
+
+
+Address	Register Description	Comments					Type
+
+0x0000		numAddrRam			RAM							R/W
+0x0001		Addr0Ram			RAM						           	R/W
+0x0002		Addr1Ram			RAM							R/W
+0x0003		Addr2Ram			RAM						           	R/W
+0x0004		Addr3Ram			RAM							R/W
+0x0005		Addr4Ram			RAM							R/W
+
+0x0666		SWRESET			Software RESET						W
+0x0667		RESET				Hardware RESET						W
+
+0x3000		buff0				RAM						         	R/W
+0x3001		buff1				RAM						         	R/W
+0x3002		buff2				RAM							R/W
+0x3003		buff3	 			RAM							R/W 0x3004		buff4				RAM							R/W
+0x3005		buff5   				RAM						           	R/W
+0x3005		buff6				RAM							R/W
+0x3007		buff7				RAM						           	R/W
+0x3008		buff8				RAM						           	R/W
+0x3009		buff9				RAM						           	R/W
+
+0x4000		SNUMBER			Flash						         	R/W
+0x4001		SNUMBER			Flash						         	R/W
+0x4002		SNUMBER			Flash						         	R/W
+0x4003		SlaveAddr 			Flash							R/W
+0x4004		RFAddr0	 			Flash							R/W 0x4005		RFAddr1	 			Flash							R/W
+0x4006		RFAddr2				Flash						           	R/W
+0x4007		RFAddr3				Flash							R/W
+0x4008		RFAddr4				Flash						           	R/W
+
+0x4021		RFAddr29			Flash						           	R/W
+0x4022		RFNetID				Flash						           	R/W
+0x4023		Mode				Flash						           	R/W
+0x4024		Frequency			Flash						           	R/W
+0x4025		numAddrFlash			RAM							R/W
+0x4026		Addr0Flash			RAM						           	R/W
+0x4027		Addr1Flash			RAM							R/W
+0x4028		Addr2Flash			RAM						           	R/W
+0x4029		Addr3Flash			RAM							R/W
+0x402A		Addr4Flash			RAM							R/W
+
+0x4030		RFDestZone0			RAM							R/W
+0x4031		RFDestZone1			RAM							R/W
+0x4032		RFDestZone2			RAM							R/W
+0x4033		RFDestZone3			RAM							R/W
+0x4034		RFDestZone4			RAM							R/W
+0x4035		RxControl			RAM						           	R/W
+
+0x5035		TxControl				RAM						           	R/W
+
+0x4036		Status				RAM						           	R/W
+0x4037		Error				RAM						           	R/W
+0x403F		OggBitrate			RAM						           	R/W
+
+
+0xFFF0...0xFFF2	Reserved			Reserved								R
+0xFFF3		INSTID (I)		Instrument identification number					R
+0xFFF4		FNUM (S)		Number of HW Version						R
+0xFFF5		FWINST (F)		Number of Firmware						R
+0xFFF6...0xFFF8	Reserved			Reserved								R
+0xFFF9...0xFFFA	FWDATE			Firmware Date							R
+0xFFFB...0xFFFF	UNUMBER		Identification Number						R
+0x0000	numAddrRam									R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+numAddrRam 
+
+0000000000000000
+Prostor pro zadávání počtu adres, adres (přeskoků) v RAM. Běžně jej používá ústředna pro vyžádáné zprávy.
+
+Příklad 1:NumAddr=2, Addr0 = adresa ústřednového obousměru(1), Addr1 = adresa koncového hnízda(x)
+
+Příklad 2:NumAddr=3, Addr0 = adresa ústřednového obousměru(1), Addr1 = adresa hnízda pro přeskok(x), Addr2 = adresa koncového hnízda(y)
+
+0x0001	Addr0Ram								           		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Addr0Ram 
+
+0000000000000000
+
+0x0002	Addr1Ram										R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Addr1Ram
+
+0000000000000000
+
+0x0003	Addr2Ram								           		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Addr2Ram
+
+0000000000000000
+
+0x0004	Addr3Ram										R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Addr3Ram 
+
+0000000000000000
+
+0x0005	Addr4Ram										R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Addr4Ram 
+
+00000000000000000x3000 - 0x300F	Buff0 – Buff9									R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Buffx
+
+0000000000000000
+.
+.
+
+Místo v RAM pro nevyžádané zprávy.
+Vzdálené hnízdo vždy zapisuje (fce 16) na adresu 0x3000, numReg 5, do ústřednového obousměru. Ten odpoví klasickou modbus odpovědí přes RF, že zápis provedl. Registrů je 10 z důvodu rezervy či aplikace LIFO viz dále.
+
+Vyjímka, požadováno nestandardní chování těchto registrů:
+
+Ústředna si pravidelně tento buffer, z ústřdednového obousměru, vyčítá (fce 3, reg:0x3000, numReg 5).Při každém čtení je třeba klasicky poslat požadovaný obsah, ale následně obsah vynulovat!!!!!
+
+Pokud by se mezi jednotlivým čtením stalo, že příjdou dvě nevyžádané zprávy. Tak FW musí zajistit, že na adresách 0x3000 – 0x3004 bude poslední balík dat (LIFO), ale předposlední bude před zápisem posledních přesunut buď na vyšší adresy 0x3005 – 0x3009 nebo do nějakého “stínového” registru.
+Pak vyčtení ústřednou způsobí, že se odešlou poslední data, dalším vyčtením předposlední data a následně se buffery vyprázdní či vynulují.
+Co se týká zmínky o LIFO, je to myšleno pro pořadí jednotlivých balíků dat, nikoliv pořadí dat v těchto balících. Pořadí jednotlivých dat v balících musí zůstat zachováno.
+
+Pokud by se stalo, že by přišly tři a více zpráv z důvodu, že ústředna je zaneprázdněna nebo nemá povoleno pravidelné vyčítání těchto registrů, tak se budou z bufferu zahazovat nejstarší a aktuální poslední budou vždy na 0x3000 – 0x3004, předposlední na 0x3005 – 0x3009 nebo jiným způsobem v paměti ram.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0x0666	SWRESET						Software RESET		W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+RESET KEY
+
+0000000000000000
+RESET KEY	Zápis klíče  0x7A1C způsobí reinit proměnných 
+
+
+0x0667           RESET	                                                                     Hardware RESET	W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+RESET KEY
+
+0000000000000000
+RESET KEY Zápis klíče 0x7A1D způsobí HW reset cpu a inicializaci HW a SW
+
+
+
+0x4000…0x4002	SNUMBER		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+SNUMBER LSW
+
+0000000000000000
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+SNUMBER
+
+0000000000000000
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+SNUMBER MSW
+
+0000000000000000
+Pozn.: 11-ti místné sériové číslo odpovídá hodnotě obsazující až 37 bitů.
+SNUMBER LSW 	- spodních 16-bitů
+SNUMBER	      - prostředních 16-bitů
+SNUMBER MSW	- horních 16-bitů (z toho prakticky je využito 5 nejnižších bitů)		
+
+0x4003	SlaveAddr (Flash)		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Slave Address (adresa zařízení) - defaultně 0x03 (nabíječ)
+
+0000000000000000
+
+0x4004	RFAddr (Flash)		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Vlastní RF adresa hnízda
+
+0000000000000000
+Vlastní RF adresa slouží pro vyhodnocení privátního audio vysílání do tohoto příjímače a v obousměrné komunikaci pro vyhodnocení zdali je RF modbus telegram určen pro tento vysílač/přijímač.
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+0x4005	Zone_0		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Zone_0
+
+0000000000000000
+Zóna, lokalita pro příjem digitálního audia.
+
+.
+.
+
+0x4012	Zone_13		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Zone_14
+
+0000000000000000
+
+
+
+0x4013	RecZone_0		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+RecZone_0
+
+0000000000000000
+Zóna, lokalita pro příjem a záznam digitálního audia.
+
+.
+.
+
+0x4021	RecZone_13		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+RecZone_14
+
+0000000000000000
+
+
+
+
+
+
+
+
+
+
+
+
+
+0x4022	RFNetID		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+RFNetID
+
+0000000000000000
+ID číslo RF sítě (rozsah 0 až 3). Pro správnou funkci je nutné, aby vysílač i přijímač měli stejné ID sítě. Defaultní hodnota je 0.
+
+0x4023	Mode		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Mode
+
+0000000000000000
+Registrem se nastavuje, zda zařízení bude pracovat jako přijímač (hodnota >0) nebo jako vysílač (hodnota 0). Defaultní hodnota je 1.
+
+0x4024	Frequency		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Frequency
+
+0000000000000000
+Kmitočet vysílání nebo přijmu. Hodnota je násobkem 10kHz (7200 odpovídá 72.00MHz). Defaultní 
+hodnota je 7250.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0x4025	numAddrFlash									R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+numAddrFlash 
+
+0000000000000000
+Prostor pro zadávání počtu adres, adres (přeskoků) ve Flash. Běžně jej používá koncové hnízdo pro uložení příchozí RF cesty (v obráceném pořadí). Z důvodu toho, že nějaký prvek v hnízdě může odeslat alarm, nevyžádanou zprávu, bez nastavení cesty. Protože obousměr v hnízdu nemá nastavenou adresu v ram registrech 0x0000, proto se podívá do flash 0x0025, kde by měla cesta být pokud alespoň někdy proběhla vyžádaná komunikace z ústředny do hnízda.
+
+Vždy pokud příjde nový vyžádaný telegram z ústředny, tak se obousměr v hnízdu podívá zdali se cesta v RF telegramu shoduje s cestou ve flash a případně ji updatuje (např. když obsluha zjistí, že určitá cesta (přeskoky) z nějakého důvodu nefungují, tak zvolí jinou tzv. profoukne cestu požadavkem na vyčtení např. napětí nabíječky.
+
+Vyjímka, požadováno nestandardní chování těchto registrů:
+Z důvodu toho, že digitální vysílače/přijímače s FW budou totožné v hnízdě i ústředně, tak je třeba zajistit, aby nevyžádané zprávy(alarmy), které budou chodit do ústřednového obousměru z různých hnízd (adres, cest) zbytečně nepřepisovaly tuto oblast ve flash 0x0025 - 0x002A.
+Proto bude ujednáno, že ústřednový obousměr bude mít vždy RFAddr = 1 (registr 0x4004).
+Pak jednotka, která je v ústředně ví, že na základně podmínky RFAddr == 1 nemá ukládat adresy, cestu do Flash oblasti, kdežto jednotka v hnízdu kde RFAddr <> 1 bude cestu ukládat vždy, pokud se obsah bude lišit.
+
+
+
+
+
+0x4026	Addr0Flash								           		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Addr0Flash
+
+0000000000000000
+
+0x4027	Addr1Flash										R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Addr1Flash
+
+0000000000000000
+
+0x4028	Addr2Flash								           		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Addr2Flash
+
+0000000000000000
+0x4029	Addr3Flash										R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Addr3Flash
+
+0000000000000000
+
+0x402A	Addr4Flash										R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Addr4Flash 
+
+0000000000000000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0x4030	RFDestZone0		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+RFDestZone0
+
+0000000000000000
+Zóna, lokalita pro odvysílání s digitálním audiem.
+
+0x4031	RFDestZone1		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+RFDestZone1
+
+0000000000000000
+Zóna, lokalita pro odvysílání s digitálním audiem.
+
+0x4032	RFDestZone2		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+RFDestZone2
+
+0000000000000000
+Zóna, lokalita pro odvysílání s digitálním audiem.
+
+0x4033	RFDestZone3		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+RFDestZone3
+
+0000000000000000
+Zóna, lokalita pro odvysílání s digitálním audiem.
+
+0x4034	RFDestZone4		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+RFDestZone4
+
+0000000000000000
+Zóna, lokalita pro odvysílání s digitálním audiem.
+
+
+
+
+
+
+
+
+
+
+
+0x4035	RxControl		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+RxControl
+
+0000000000000000
+Řídící registr přijímače. U přijímače se může tento registr měnit dle aktuálního stavu přijmu audio streamu nebo zpětného přehrávání audio záznamů. 
+Hodnoty:
+1 - zastaveno přehrávání audia
+2 - přehrává se audio z RF
+3 - požadavek na přehrání posledního záznamu
+4 - požadavek na přehrání všech záznamu - není zatím podporováno
+
+0x5035	TxControl		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+TxControl
+
+0000000000000000
+Řídící registr vysílače.
+Hodnoty:
+1 - zastaveno vysílání audio streamu
+2 - spuštění vysílání audio streamu (pro vysílač)
+
+
+0x4036	Status		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Status
+
+0000000000000000
+Pro budoucí použití. Defaultní hodnota 0.
+
+0x4037	Error		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Error
+
+0000000000000000
+Detekované chyby.
+Jednotlivé bity mají význam:
+bit0 - chyba nahrání FW do RF modemu.
+bit1 - chyba nahrání FW do audio codeku nebo kodek nepřítomen.
+bit2 - chyba CRC konfiguračních parametrů.
+
+
+
+
+
+0x403F	OggBitrate		R/W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+OggBitrate
+
+0000000000000000
+Audio bitrate vypočítaný audio kodekem během přehrávání přijímačem.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0x40C0	UNUM_01		W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+ASCII 1
+
+ASCII 2
+0000000000000000
+0x40C1	UNUM_02		 W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+ASCII 3
+
+ASCII 4
+0000000000000000
+0x40C2	UNUM_03		W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+ASCII 5
+
+ASCII 6
+0000000000000000
+0x40C3	UNUM_04		W
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+ASCII 7
+
+ASCII 8
+0000000000000000
+
+Zápis těchto registrů změní obsah jinak nepřístupné oblasti 0xFFFB…0xFFFF 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0xFFF3	INSTID (I)		R
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+InstID
+
+0000000000000000
+
+0xFFF4	FNUM(S)	 	R
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+FNum
+
+0000000000000000
+
+0xFFF5	FWINST (F)		R
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+Fwinst
+
+0000000000000000
+
+
+
+0xFFF9…
+0xFFFA	FWDATE		R
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+0x00
+
+YY
+0000000000000000
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+MM
+
+DD
+0000000000000000
+
+0xFFFB…
+0xFFFF	UNUMBER		R
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+ASCII 1
+
+ASCII 2
+0000000000000000
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+ASCII 3
+
+ASCII 4
+0000000000000000
+
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+ASCII 5
+
+ASCII 6
+0000000000000000
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+ASCII 7
+
+ASCII 8
+0000000000000000
+D15D14D13D12D11D10D9D8D7D6D5D4D3D2D1D0
+ASCII 9
+
+ASCII 10
+0000000000000000
+
+
+
+
+
+
+
+
+
+RIPOPIS MODBUS REGISTRŮ  DIGITÁLNÍHO PŘIJÍMAČE DATE \@"DD/MM/YYYY" 27/10/2017 PAGE \*Arabic 3/ NUMPAGES \*Arabic 15
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
