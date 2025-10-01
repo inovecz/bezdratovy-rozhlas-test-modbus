@@ -68,6 +68,8 @@ def parse_args() -> argparse.Namespace:
             "serial-number",
             "frequency",
             "dump-registers",
+            "start-stream",
+            "stop-stream",
         ],
         help="Which built-in scenario to execute",
     )
@@ -247,6 +249,42 @@ def run_dump_registers(client: ModbusAudioClient) -> int:
     return 0
 
 
+def run_start_stream(client: ModbusAudioClient) -> int:
+    try:
+        client.set_destination_zones(DEMO_ZONES)
+    except (ModbusAudioError, ValueError) as exc:
+        print(
+            "Zone programming failed: {error}. "
+            "Verify the device supports writing to registers 0x4030-0x4034."
+            .format(error=exc)
+        )
+
+    try:
+        client.write_register(constants.TX_CONTROL, 2)
+    except ModbusAudioError as exc:
+        # Device might expose TxControl as write-only or we might be connected to a receiver.
+        print(
+            "Device did not acknowledge writing TxControl to 2 (register 0x5035)."
+            " If you are controlling the transmitter remotely through a receiver,"
+            " that receiver may need to relay the command via a different register set."
+        )
+        print(f"Underlying error: {exc}")
+        return 1
+
+    print(
+        "Streaming started (TxControl=2). Zones {zones} updated.".format(
+            zones=DEMO_ZONES,
+        )
+    )
+    return 0
+
+
+def run_stop_stream(client: ModbusAudioClient) -> int:
+    client.stop_audio_stream()
+    print("Streaming stopped (TxControl reset to 1).")
+    return 0
+
+
 def main() -> None:
     args = parse_args()
 
@@ -274,6 +312,10 @@ def main() -> None:
                 code = run_frequency(client)
             elif args.action == "dump-registers":
                 code = run_dump_registers(client)
+            elif args.action == "start-stream":
+                code = run_start_stream(client)
+            elif args.action == "stop-stream":
+                code = run_stop_stream(client)
             else:  # pragma: no cover - should not trigger due to argparse choices
                 raise ModbusAudioError(f"Unsupported action: {args.action}")
     except ModbusAudioError as exc:
