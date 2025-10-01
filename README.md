@@ -70,6 +70,22 @@ with ModbusAudioClient.from_defaults() as client:
 - `start_audio_stream(addresses, zones)` remains available when you need to program a hop chain as part of the same call.
 - Serial defaults (serial port, baudrate, parity, etc.) live in `modbus_audio.constants`; adjust them once and every helper (library, CLI, and the example script) will pick them up automatically.
 
+### Client API reference
+
+- `from_defaults()` → instantiate using defaults from `constants`.
+- `connect()` / `close()` → manually open/close the serial link (useful outside the context manager).
+- `get_device_info()` → fetch the aggregated snapshot of key registers.
+- `probe(register=constants.PROBE_REGISTER)` → quick link check by reading a single register.
+- `read_register(address)` / `read_registers(address, quantity)` → raw Modbus reads.
+- `write_register(address, value)` / `write_registers(address, values)` → raw Modbus writes.
+- `read_serial_number()` → return the serial number as a hex string.
+- `read_frequency()` / `write_frequency(value=None)` → access the RF frequency register (`0x4024`).
+- `configure_route(addresses)` → program the RAM hop table (`0x0000..0x0005`).
+- `set_destination_zones(zones)` → update `0x4030..0x4034`.
+- `start_audio_stream(addresses, zones=None)` / `stop_audio_stream()` → configure route/zones and toggle `TxControl` in one call.
+- `start_stream(zones=None)` / `stop_stream()` → toggle `TxControl` and (optionally) update zones while keeping the existing route.
+- `dump_documented_registers()` → return a table covering every register listed in the vendor documentation, with read errors noted.
+
 ### Command line helper
 
 A thin CLI wrapper lives in `src/modbus_audio/cli.py`. Run it directly from the repository root by putting `src` on `PYTHONPATH`:
