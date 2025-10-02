@@ -1,10 +1,17 @@
-"""Simulate JSVV hardware frames and feed them into the client library."""
+"""Simulate JSVV hardware frames and feed them into the client library.
+
+When a VERBAL command is encountered the simulator prints the resolved audio
+asset path so you can verify playback routing without touching the filesystem
+manually.
+"""
 
 from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import sys
+import time
 from pathlib import Path
 
 
@@ -16,6 +23,8 @@ if SRC_DIR.exists() and str(SRC_DIR) not in sys.path:
 from jsvv import JSVVError  # noqa: E402
 from jsvv.simulator import JSVVSimulator, SCENARIOS, SimulationEvent  # noqa: E402
 
+from modbus_audio import ModbusAudioClient, ModbusAudioError, SerialSettings  # noqa: E402
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="JSVV hardware simulator")
@@ -23,6 +32,26 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--vyc-id", type=int, default=1)
     parser.add_argument("--kpps-address", default="0x0001")
     parser.add_argument("--operator-id", type=int)
+    parser.add_argument("--modbus-port", help="Serial port used to drive real Modbus streaming during simulation")
+    parser.add_argument("--modbus-baudrate", type=int, default=57600)
+    parser.add_argument("--modbus-parity", default="N")
+    parser.add_argument("--modbus-stopbits", type=int, default=1)
+    parser.add_argument("--modbus-bytesize", type=int, default=8)
+    parser.add_argument("--modbus-timeout", type=float, default=1.0)
+    parser.add_argument("--modbus-method", default="rtu")
+    parser.add_argument("--modbus-unit-id", type=int, default=1)
+    parser.add_argument("--modbus-zones", type=int, nargs="*", help="Optional destination zones to configure before playback")
+    parser.add_argument(
+        "--modbus-hold-seconds",
+        type=float,
+        default=5.0,
+        help="Seconds to keep TxControl active when no player command is provided",
+    )
+    parser.add_argument(
+        "--modbus-player",
+        nargs="+",
+        help="Optional external player command (e.g. --modbus-player afplay)",
+    )
 
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -51,6 +80,90 @@ def build_simulator(args: argparse.Namespace) -> JSVVSimulator:
     )
 
 
+class ModbusPlaybackBridge:
+    """Forward VERBAL/STOP commands to the Modbus audio transmitter."""
+
+    def __init__(
+        self,
+        settings: SerialSettings,
+        unit_id: int,
+        zones: list[int] | None,
+        hold_seconds: float,
+        player_command: list[str] | None,
+    ) -> None:
+        self._client = ModbusAudioClient(settings=settings, unit_id=unit_id)
+        self._zones = zones
+        self._hold_seconds = hold_seconds
+        self._player_command = player_command
+        self._connected = False
+
+    def close(self) -> None:
+        if self._connected:
+            self._client.close()
+            self._connected = False
+
+    def _ensure_connected(self) -> None:
+        if not self._connected:
+            self._client.connect()
+            self._connected = True
+
+    def handle(self, result: dict[str, object]) -> None:
+        payload = result.get("json")
+        if not isinstance(payload, dict):
+            return
+        command = payload.get("command")
+        if command == "VERBAL_INFO":
+            asset = result.get("asset") if isinstance(result.get("asset"), str) else None
+            try:
+                self._handle_verbal(asset)
+            except ModbusAudioError as exc:
+                print(f"# Modbus error during VERBAL_INFO handling: {exc}")
+        elif command == "STOP":
+            try:
+                self._ensure_connected()
+                self._client.stop_stream()
+            except ModbusAudioError as exc:
+                print(f"# Modbus error while stopping stream: {exc}")
+
+    def _handle_verbal(self, asset_path: str | None) -> None:
+        self._ensure_connected()
+        zones = self._zones if self._zones else None
+        self._client.start_stream(zones=zones)
+        try:
+            if self._player_command and asset_path:
+                try:
+                    subprocess.run([*self._player_command, asset_path], check=False)
+                except OSError as exc:
+                    print(f"# unable to run player '{self._player_command[0]}': {exc}")
+                    time.sleep(max(0.0, self._hold_seconds))
+            else:
+                time.sleep(max(0.0, self._hold_seconds))
+        finally:
+            self._client.stop_stream()
+
+
+def build_modbus_bridge(args: argparse.Namespace) -> ModbusPlaybackBridge | None:
+    if not args.modbus_port:
+        return None
+    settings = SerialSettings(
+        port=args.modbus_port,
+        method=args.modbus_method,
+        baudrate=args.modbus_baudrate,
+        parity=args.modbus_parity,
+        stopbits=args.modbus_stopbits,
+        bytesize=args.modbus_bytesize,
+        timeout=args.modbus_timeout,
+    )
+    zones = list(args.modbus_zones) if args.modbus_zones else None
+    return ModbusPlaybackBridge(
+        settings=settings,
+        unit_id=args.modbus_unit_id,
+        zones=zones,
+        hold_seconds=args.modbus_hold_seconds,
+        player_command=args.modbus_player,
+    )
+
+
 def run_list() -> int:
     for name in sorted(SCENARIOS.keys()):
         print(name)
@@ -61,19 +174,31 @@ def run_scenario(args: argparse.Namespace) -> int:
     simulator = build_simulator(args)
     events = SCENARIOS[args.name]
     indent = 2 if args.pretty else None
-    for result in simulator.run(events):
-        print(result["raw"])
-        print(json.dumps(result["json"], indent=indent))
-        if result["note"]:
-            print(f"# {result['note']}")
-        if result["duplicate"]:
-            print("# duplicate within dedup window")
-        print()
+    bridge = build_modbus_bridge(args)
+    try:
+        for result in simulator.run(events):
+            print(result["raw"])
+            print(json.dumps(result["json"], indent=indent))
+            if result["note"]:
+                print(f"# {result['note']}")
+            if result.get("asset"):
+                print(f"# verbal asset path: {result['asset']}")
+            elif result.get("asset_error"):
+                print(f"# verbal asset error: {result['asset_error']}")
+            if result["duplicate"]:
+                print("# duplicate within dedup window")
+            if bridge is not None:
+                bridge.handle(result)
+            print()
+    finally:
+        if bridge is not None:
+            bridge.close()
     return 0
 
 
 def run_emit(args: argparse.Namespace) -> int:
     simulator = build_simulator(args)
+    bridge = build_modbus_bridge(args)
     try:
         raw, payload, duplicate = simulator.emit(
             args.mid,
@@ -87,8 +212,29 @@ def run_emit(args: argparse.Namespace) -> int:
     indent = 2 if args.pretty else None
     print(raw)
     print(json.dumps(payload, indent=indent))
+    if payload.get("command") == "VERBAL_INFO":
+        slot = payload.get("params", {}).get("slot")
+        voice = payload.get("params", {}).get("voice", "male")
+        if isinstance(slot, int):
+            try:
+                asset_path = simulator.client.get_verbal_asset(slot, voice=voice)
+            except JSVVError as exc:
+                print(f"# verbal asset error: {exc}")
+            else:
+                print(f"# verbal asset path: {asset_path}")
+                if bridge is not None:
+                    bridge.handle(
+                        {
+                            "json": payload,
+                            "asset": str(asset_path),
+                            "duplicate": duplicate,
+                            "note": None,
+                        }
+                    )
     if duplicate:
         print("# duplicate within dedup window")
+    if bridge is not None:
+        bridge.close()
     return 0
 
 

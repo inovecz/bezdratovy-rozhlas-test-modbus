@@ -78,11 +78,25 @@ class JSVVSimulator:
                 priority=event.priority,
                 timestamp=event.timestamp,
             )
+            asset_path: str | None = None
+            asset_error: str | None = None
+            if payload.get("command") == "VERBAL_INFO":
+                slot = payload.get("params", {}).get("slot")
+                voice = payload.get("params", {}).get("voice", "male")
+                if isinstance(slot, int):
+                    try:
+                        asset = self.client.get_verbal_asset(slot, voice=voice)
+                    except JSVVError as exc:
+                        asset_error = str(exc)
+                    else:
+                        asset_path = str(asset)
             yield {
                 "raw": raw,
                 "json": payload,
                 "duplicate": duplicate,
                 "note": event.note,
+                "asset": asset_path,
+                "asset_error": asset_error,
             }
 
     def _parse(self, frame_text: str) -> JSVVFrame:
@@ -132,5 +146,16 @@ SCENARIOS: dict[str, tuple[SimulationEvent, ...]] = {
         SimulationEvent("FAULT", ("Battery", 101, "Voltage below 11.5"), priority="P1", note="Battery alarm"),
         SimulationEvent("STOP", (), note="Stop active transmissions"),
         SimulationEvent("RESET", (), note="Perform controlled reset"),
+    ),
+    "stream_with_status": (
+        SimulationEvent("VERBAL", (4, "male"), note="Start playing slot 4"),
+        SimulationEvent("STATUS_KPPS", (), delay=0.5, note="Status request during playback"),
+        SimulationEvent("READ_CFG", (), note="Configuration request while audio still active"),
+        SimulationEvent("STOP", (), delay=0.2, note="Stop streaming after handling requests"),
+    ),
+    "verbal_overlap": (
+        SimulationEvent("VERBAL", (6, "female"), note="Primary announcement"),
+        SimulationEvent("VERBAL", (7, "male"), delay=1.0, note="Queued follow-up announcement"),
+        SimulationEvent("STOP", (), delay=0.5, note="Ensure transmitter resets after queue"),
     ),
 }

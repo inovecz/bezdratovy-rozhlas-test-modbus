@@ -6,6 +6,7 @@ Usage examples (adjust the constants below to match your setup):
     python3 examples.py set-frequency
     python3 examples.py play-demo
     python3 examples.py stop-demo
+    python3 examples.py verbal-asset --verbal-slot 3 --verbal-voice female
 
 The script reuses the ``modbus_audio`` library and exposes a couple of
 high-level scenarios that mirror the typical workflows when interacting with
@@ -16,7 +17,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import sys
+import time
 from pathlib import Path
 from typing import Iterable
 
@@ -28,6 +31,7 @@ if SRC_DIR.exists() and str(SRC_DIR) not in sys.path:
 
 from modbus_audio import ModbusAudioClient, ModbusAudioError, SerialSettings, constants
 from modbus_audio.constants import TX_CONTROL
+from jsvv import JSVVClient
 
 
 DEMO_ZONES = list(constants.DEFAULT_DESTINATION_ZONES)
@@ -58,8 +62,23 @@ def parse_args() -> argparse.Namespace:
             "dump-registers",
             "start-stream",
             "stop-stream",
+            "verbal-asset",
         ],
         help="Which built-in scenario to execute",
+    )
+    parser.add_argument("--verbal-slot", type=int, default=3, help="Slot id used by the verbal-asset demo")
+    parser.add_argument("--verbal-voice", default="female", help="Voice variant for the verbal-asset demo")
+    parser.add_argument("--verbal-duration", type=float, default=5.0, help="Seconds to keep TxControl active if no player is used")
+    parser.add_argument(
+        "--verbal-player",
+        nargs="+",
+        help="Optional external player command (e.g. --verbal-player afplay)",
+    )
+    parser.add_argument(
+        "--verbal-zones",
+        type=int,
+        nargs="*",
+        help="Optional list of destination zones to configure before playback",
     )
     return parser.parse_args()
 
@@ -96,6 +115,45 @@ def start_streaming(zones: Iterable[int] | None = None) -> None:
 def stop_streaming() -> None:
     with build_client() as client:
         client.stop_stream()
+
+
+def run_verbal_asset(
+    slot: int,
+    voice: str,
+    duration: float,
+    player_command: list[str] | None,
+    zones: Iterable[int] | None,
+) -> int:
+    client = JSVVClient.from_defaults()
+    asset_path = client.get_verbal_asset(slot, voice=voice)
+    frame = JSVVClient.build_frame("VERBAL", (slot, voice))
+    parsed = JSVVClient.parse_frame(frame)
+    payload = parsed.to_json(
+        network_id=1,
+        vyc_id=1,
+        kpps_address="0x0001",
+    )
+    print(frame.rstrip("\n"))
+    print(json.dumps(payload, indent=2))
+    print(f"Audio asset: {asset_path}")
+    try:
+        with build_client() as modbus_client:
+            modbus_client.start_stream(zones=zones)
+            try:
+                if player_command and asset_path:
+                    try:
+                        subprocess.run([*player_command, str(asset_path)], check=False)
+                    except OSError as exc:
+                        print(f"Warning: unable to run player '{player_command[0]}': {exc}")
+                        time.sleep(max(0.0, duration))
+                else:
+                    time.sleep(max(0.0, duration))
+            finally:
+                modbus_client.stop_stream()
+    except ModbusAudioError as exc:
+        print(f"Failed to control Modbus transmitter: {exc}")
+        return 1
+    return 0
 
 
 def set_demo_frequency(value: int | None = None) -> None:
@@ -342,6 +400,14 @@ def main() -> None:
         code = run_start_stream()
     elif args.action == "stop-stream":
         code = run_stop_stream()
+    elif args.action == "verbal-asset":
+        code = run_verbal_asset(
+            args.verbal_slot,
+            args.verbal_voice,
+            args.verbal_duration,
+            args.verbal_player,
+            args.verbal_zones,
+        )
     else:  # pragma: no cover - should not trigger due to argparse choices
         raise ModbusAudioError(f"Unsupported action: {args.action}")
 
