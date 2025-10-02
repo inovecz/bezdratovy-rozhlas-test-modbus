@@ -90,15 +90,12 @@ def read_tx_control_value() -> int:
 
 def start_streaming(zones: Iterable[int] | None = None) -> None:
     with build_client() as client:
-        client.start_stream(
-            zones=zones if zones is not None else DEMO_ZONES,
-            tx_unit_id=constants.TRANSMITTER_UNIT_ID,
-        )
+        client.start_stream(zones=zones if zones is not None else DEMO_ZONES)
 
 
 def stop_streaming() -> None:
     with build_client() as client:
-        client.stop_stream(tx_unit_id=constants.TRANSMITTER_UNIT_ID)
+        client.stop_stream()
 
 
 def set_demo_frequency(value: int | None = None) -> None:
@@ -170,7 +167,7 @@ def run_stop_demo() -> int:
         print(f"Failed to stop streaming: {exc}")
         return 1
 
-    print("Stopped audio stream (TxControl=1).")
+    print("Stopped audio stream (TxControl 0x4035 <- 1).")
     return 0
 
 
@@ -179,9 +176,8 @@ def run_read_tx_control() -> int:
         value = read_tx_control_value()
     except ModbusAudioError as exc:
         print(
-            "Unable to read TxControl (0x5035). Many receiver firmware builds expose"
-            " this register as write-only; try 0x4035 for RxControl or confirm the"
-            " target device is the transmitter."
+            "Unable to read TxControl (0x4035). Many firmware builds expose this"
+            " register as write-only; confirm the target device is the transmitter."
         )
         print(f"Underlying error: {exc}")
         return 1
@@ -303,7 +299,7 @@ def run_start_stream() -> int:
         print(f"Failed to start streaming: {exc}")
         return 1
 
-    print("Streaming started (TxControl=2). Zones {zones} updated.".format(zones=DEMO_ZONES))
+    print("Streaming started (TxControl 0x4035 <- 2). Zones {zones} updated.".format(zones=DEMO_ZONES))
     return 0
 
 
@@ -314,7 +310,7 @@ def run_stop_stream() -> int:
         print(f"Failed to stop streaming: {exc}")
         return 1
 
-    print("Streaming stopped (TxControl reset to 1).")
+    print("Streaming stopped (TxControl 0x4035 reset to 1).")
     return 0
 
 

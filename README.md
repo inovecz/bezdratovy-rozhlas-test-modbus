@@ -66,7 +66,7 @@ with ModbusAudioClient.from_defaults() as client:
 
 - `get_device_info()` returns a dictionary with the key configuration and identification registers (serial number, RF details, zones, firmware identifiers, and diagnostic flags).
 - `write_register(address, value)` updates any holding register on the device.
-- `start_stream(zones)` updates the destination zones (0x4030..0x4034) and sets `TxControl (0x5035)` to `2` which triggers audio playback on the remote receivers. Use `stop_stream()` to revert `TxControl` to `1`.
+- `start_stream(zones)` updates the destination zones (0x4030..0x4034) and sets `TxControl (0x4035)` to `2` (via Modbus FC16) which triggers audio playback on the remote receivers. Use `stop_stream()` to revert `TxControl` to `1`.
 - `start_audio_stream(addresses, zones)` remains available when you need to program a hop chain as part of the same call.
 - Serial defaults (serial port, baudrate, parity, etc.) live in `modbus_audio.constants`; adjust them once and every helper (library, CLI, and the example script) will pick them up automatically.
 
@@ -82,10 +82,10 @@ with ModbusAudioClient.from_defaults() as client:
 - `read_frequency()` / `write_frequency(value=None)` → access the RF frequency register (`0x4024`).
 - `configure_route(addresses)` → program the RAM hop table (`0x0000..0x0005`).
 - `set_destination_zones(zones)` → update `0x4030..0x4034`.
-- `start_audio_stream(addresses, zones=None)` / `stop_audio_stream()` → configure route/zones and toggle `TxControl` in one call.
-- `start_stream(zones=None)` / `stop_stream()` → toggle `TxControl` and (optionally) update zones while keeping the existing route.
+- `start_audio_stream(addresses, zones=None)` / `stop_audio_stream()` → configure route/zones and toggle `TxControl (0x4035)` in one call.
+- `start_stream(zones=None)` / `stop_stream()` → toggle `TxControl (0x4035)` and (optionally) update zones while keeping the existing route.
 - `dump_documented_registers()` → return a table covering every register listed in the vendor documentation, with read errors noted.
-- Streaming helpers default to `constants.TRANSMITTER_UNIT_ID` (55) for the `TxControl` writes so you can talk to a receiver for status while still triggering the transmitter.
+- Streaming helpers always target the unit id configured on the client (default `1`).
 
 ### Command line helper
 
@@ -107,7 +107,7 @@ Supported commands:
 - `read --count N ADDRESS` → reads one or more holding registers.
 - `write ADDRESS VALUE` → writes a single holding register.
 - `start-audio --addresses ... [--zones ...]` → fills the hop table and starts audio streaming.
-- `stop-audio` → stops the stream by writing `1` into `TxControl`.
+- `stop-audio` → stops the stream by writing `1` into `TxControl (0x4035)`.
 
 Values accept decimal (`7100`) or hexadecimal (`0x1BC4`) notation. The CLI surfaces errors from the device or from the transport layer so wiring faults and Modbus exceptions are easy to spot.
 

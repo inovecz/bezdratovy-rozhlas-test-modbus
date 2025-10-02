@@ -13,7 +13,9 @@ MAX_ADDR_ENTRIES = 5
 RF_DEST_ZONE_BASE = 0x4030
 MAX_DEST_ZONES = 5
 
-TX_CONTROL = 0x5035
+# Legacy documentation mentioned 0x5035 (TxControl) for transmitters. Current
+# hardware toggles streaming via register 0x4035 instead.
+TX_CONTROL = 0x4035
 RX_CONTROL = 0x4035
 
 STATUS_REGISTER = 0x4036
@@ -35,7 +37,6 @@ DEFAULT_ROUTE = (1, 116, 225)
 DEFAULT_DESTINATION_ZONES = (22,)
 DEFAULT_FREQUENCY = 7100
 PROBE_REGISTER = 0x0000
-TRANSMITTER_UNIT_ID = 55
 
 
 @dataclass(frozen=True)

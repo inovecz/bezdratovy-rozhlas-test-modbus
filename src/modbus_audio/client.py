@@ -151,24 +151,20 @@ class ModbusAudioClient:
         target = constants.DEFAULT_FREQUENCY if value is None else value
         self.write_register(constants.FREQUENCY_REGISTER, target, unit=unit)
 
-    def start_stream(
-        self,
-        zones: Iterable[int] | None = None,
-        tx_unit_id: int | None = None,
-    ) -> None:
-        """Start audio streaming to the provided zones (defaults to documentation)."""
+    def start_stream(self, zones: Iterable[int] | None = None) -> None:
+        """Start audio streaming by writing ``2`` into TxControl (0x4035)."""
 
         zone_values = list(zones) if zones is not None else list(constants.DEFAULT_DESTINATION_ZONES)
         if zone_values:
             self.set_destination_zones(zone_values)
-        target_unit = tx_unit_id if tx_unit_id is not None else self.unit_id
-        self.write_register(constants.TX_CONTROL, 2, unit=target_unit)
+        # Some firmware revisions only honour TxControl writes when issued via
+        # function code 16 (write multiple registers), even for a single word.
+        self.write_registers(constants.TX_CONTROL, (2,))
 
-    def stop_stream(self, tx_unit_id: int | None = None) -> None:
-        """Stop audio streaming by toggling TxControl."""
+    def stop_stream(self) -> None:
+        """Stop audio streaming by writing ``1`` into TxControl (0x4035)."""
 
-        target_unit = tx_unit_id if tx_unit_id is not None else self.unit_id
-        self.write_register(constants.TX_CONTROL, 1, unit=target_unit)
+        self.write_registers(constants.TX_CONTROL, (1,))
 
     def write_register(self, address: int, value: int, unit: int | None = None) -> None:
         """Write a single holding register."""
@@ -238,12 +234,12 @@ class ModbusAudioClient:
         self.configure_route(hop_addresses)
         if zones is not None:
             self.set_destination_zones(zones)
-        self.write_register(constants.TX_CONTROL, 2)
+        self.write_registers(constants.TX_CONTROL, (2,))
 
     def stop_audio_stream(self) -> None:
-        """Stop the audio stream by clearing ``TxControl``."""
+        """Stop the audio stream by clearing ``TxControl`` (0x4035)."""
 
-        self.write_register(constants.TX_CONTROL, 1)
+        self.write_registers(constants.TX_CONTROL, (1,))
 
     def dump_documented_registers(self) -> list[tuple[str, str, str, str]]:
         """Return a table of documented registers and their current values."""

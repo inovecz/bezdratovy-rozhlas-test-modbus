@@ -54,7 +54,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="Optional list of destination zones (fills 0x4030..0x4034)",
     )
 
-    sub.add_parser("stop-audio", help="Stop audio streaming by writing 1 to TxControl")
+    sub.add_parser("stop-audio", help="Stop audio streaming by writing 1 to TxControl (0x4035)")
 
     return parser
 
