@@ -20,7 +20,7 @@ SRC_DIR = ROOT_DIR / "src"
 if SRC_DIR.exists() and str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
-from jsvv import JSVVError  # noqa: E402
+from jsvv import JSVVClient, JSVVError  # noqa: E402
 from jsvv.simulator import JSVVSimulator, SCENARIOS, SimulationEvent  # noqa: E402
 
 from modbus_audio import ModbusAudioClient, ModbusAudioError, SerialSettings  # noqa: E402
@@ -67,6 +67,11 @@ def parse_args() -> argparse.Namespace:
     emit_cmd.add_argument("--priority", help="Override payload priority")
     emit_cmd.add_argument("--timestamp", type=int, help="Override payload timestamp")
     emit_cmd.add_argument("--pretty", action="store_true", help="Pretty-print JSON payload")
+
+    frame_cmd = sub.add_parser("frame", help="Decode a raw JSVV frame string")
+    frame_cmd.add_argument("frame", nargs="+", help="Raw frame tokens (quote the whole string if it contains spaces)")
+    frame_cmd.add_argument("--skip-crc", action="store_true", help="Skip CRC validation during parsing")
+    frame_cmd.add_argument("--pretty", action="store_true", help="Pretty-print JSON payload")
 
     return parser.parse_args()
 
@@ -238,6 +243,49 @@ def run_emit(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_frame(args: argparse.Namespace) -> int:
+    raw_input = " ".join(args.frame)
+    try:
+        frame = JSVVClient.parse_frame(raw_input, validate_crc=not args.skip_crc)
+    except JSVVError as exc:
+        print(f"Error parsing frame: {exc}")
+        return 1
+
+    simulator = build_simulator(args)
+    bridge = build_modbus_bridge(args)
+
+    try:
+        raw, payload, duplicate = simulator.emit(frame.mid, frame.params)
+    except JSVVError as exc:
+        print(f"Simulation error: {exc}")
+        if bridge is not None:
+            bridge.close()
+        return 1
+
+    indent = 2 if args.pretty else None
+    print(raw)
+    print(json.dumps(payload, indent=indent))
+    asset_path = None
+    if payload.get("command") == "VERBAL_INFO":
+        params = payload.get("params", {})
+        slot = params.get("slot") if isinstance(params, dict) else None
+        voice = params.get("voice", "male") if isinstance(params, dict) else "male"
+        if isinstance(slot, int):
+            try:
+                path = simulator.client.get_verbal_asset(slot, voice=voice)
+            except JSVVError as exc:
+                print(f"# verbal asset error: {exc}")
+            else:
+                asset_path = str(path)
+                print(f"# verbal asset path: {asset_path}")
+    if duplicate:
+        print("# duplicate within dedup window")
+    if bridge is not None:
+        bridge.handle({"json": payload, "asset": asset_path, "duplicate": duplicate, "note": None})
+        bridge.close()
+    return 0
+
+
 def main() -> None:
     args = parse_args()
     if args.command == "list":
@@ -246,6 +294,8 @@ def main() -> None:
         raise SystemExit(run_scenario(args))
     if args.command == "emit":
         raise SystemExit(run_emit(args))
+    if args.command == "frame":
+        raise SystemExit(run_frame(args))
     raise SystemExit(0)
 
 
