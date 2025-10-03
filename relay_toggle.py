@@ -1,26 +1,27 @@
 #!/usr/bin/env python3
-"""Simple helper to test a relay controlled via a GPIO line."""
+"""Simple helper that toggles a relay via gpioset shell commands."""
 
-import gpiod
-from gpiod import line
+from __future__ import annotations
 
-CHIP = "/dev/gpiochip2"
-PIN = 8  # BCM number of the GPIO driving the relay
-ACTIVE_HIGH = True  # Flip to False if your relay triggers on low level
+import subprocess
 
-VALUE_ON = line.Value.ACTIVE if ACTIVE_HIGH else line.Value.INACTIVE
-VALUE_OFF = line.Value.INACTIVE if ACTIVE_HIGH else line.Value.ACTIVE
+
+CHIP = "gpiochip2"
+PIN = 8
+
+
+def _run_gpioset(level: int) -> None:
+    command = ["gpioset", CHIP, f"{PIN}={level}"]
+    try:
+        subprocess.run(command, check=True)
+    except subprocess.CalledProcessError as exc:
+        raise SystemExit(f"gpioset failed with exit code {exc.returncode}") from exc
 
 
 def main() -> None:
-    with gpiod.request_lines(
-        CHIP,
-        consumer="relay-toggle",
-        config={PIN: gpiod.LineSettings(direction=line.Direction.OUTPUT)},
-    ) as request:
-        request.set_value(PIN, VALUE_ON)
-        input("Relay energised. Press Enter to release...")
-        request.set_value(PIN, VALUE_OFF)
+    _run_gpioset(1)
+    input("Relé sepnuté. Stiskni Enter pro rozepnutí...")
+    _run_gpioset(0)
 
 
 if __name__ == "__main__":  # pragma: no cover - manual utility
