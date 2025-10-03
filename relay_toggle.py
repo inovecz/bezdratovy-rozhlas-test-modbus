@@ -4,8 +4,8 @@
 import gpiod
 from gpiod import line
 
-CHIP = "/dev/gpiochip0"
-PIN = 16  # BCM number of the GPIO driving the relay
+CHIP = "/dev/gpiochip2"
+PIN = 8  # BCM number of the GPIO driving the relay
 ACTIVE_HIGH = True  # Flip to False if your relay triggers on low level
 
 VALUE_ON = line.Value.ACTIVE if ACTIVE_HIGH else line.Value.INACTIVE
