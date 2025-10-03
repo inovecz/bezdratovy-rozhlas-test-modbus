@@ -38,6 +38,13 @@ DEFAULT_DESTINATION_ZONES = (22,)
 DEFAULT_FREQUENCY = 7100
 PROBE_REGISTER = 0x0000
 
+# Optional RS485 direction control via GPIO.
+ENABLE_RS485_GPIO = False
+RS485_GPIO_CHIP = "/dev/gpiochip0"
+RS485_GPIO_LINE_OFFSET = 16
+RS485_GPIO_ACTIVE_HIGH = True
+RS485_GPIO_CONSUMER = "modbus-audio"
+
 
 @dataclass(frozen=True)
 class RegisterBlock:

@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import inspect
-from typing import Iterable, Mapping, MutableMapping
+from typing import Callable, Iterable, Mapping, MutableMapping
 
 from . import constants
 
@@ -69,6 +69,7 @@ class ModbusAudioClient:
         serial_kwargs = self._build_serial_kwargs(settings)
         self._client = _SerialClient(**serial_kwargs)
         self._connected = False
+        self._rs485_controller: _RS485Controller | None = None
 
     # ---------------------------------------------------------------------
     # Context manager helpers
@@ -91,11 +92,15 @@ class ModbusAudioClient:
             raise ModbusAudioError(f"Unable to open serial port {self.settings.port}")
 
         self._connected = True
+        self._setup_rs485_gpio()
 
     def close(self) -> None:
         if self._connected:
             self._client.close()
             self._connected = False
+        if self._rs485_controller is not None:
+            self._rs485_controller.close()
+            self._rs485_controller = None
 
     # ------------------------------------------------------------------
     # Public API
@@ -365,6 +370,147 @@ class ModbusAudioClient:
         elif "slave" in signature.parameters:
             kwargs["slave"] = target_unit
         return method(**kwargs)
+
+
+    def _setup_rs485_gpio(self) -> None:
+        if not constants.ENABLE_RS485_GPIO:
+            return
+
+        if self._rs485_controller is not None:
+            return
+
+        serial_handle = self._resolve_serial_handle()
+        if serial_handle is None:
+            raise ModbusAudioError("Unable to locate the underlying serial handle for RS485 control")
+
+        try:
+            controller = _RS485Controller(
+                chip=constants.RS485_GPIO_CHIP,
+                line_offset=constants.RS485_GPIO_LINE_OFFSET,
+                active_high=constants.RS485_GPIO_ACTIVE_HIGH,
+                consumer=constants.RS485_GPIO_CONSUMER,
+            )
+        except Exception as exc:
+            raise ModbusAudioError(f"Unable to configure RS485 GPIO control: {exc}") from exc
+
+        try:
+            controller.attach(serial_handle)
+        except Exception:
+            controller.close()
+            raise
+
+        self._rs485_controller = controller
+
+    def _resolve_serial_handle(self):
+        candidates = (
+            "transport",
+            "socket",
+            "serial",
+            "_serial",
+            "client",
+        )
+        for name in candidates:
+            handle = getattr(self._client, name, None)
+            if handle is not None and hasattr(handle, "write") and hasattr(handle, "read"):
+                return handle
+        return None
+
+
+class _RS485Controller:
+    """Manage RS485 direction control via a dedicated GPIO line."""
+
+    def __init__(self, *, chip: str, line_offset: int, active_high: bool, consumer: str) -> None:
+        try:
+            import gpiod  # type: ignore[import]
+        except ModuleNotFoundError as exc:  # pragma: no cover - optional dependency
+            raise ModbusAudioError("gpiod is not installed; disable ENABLE_RS485_GPIO or install gpiod") from exc
+
+        self._chip_name = chip
+        self._line_offset = line_offset
+        self._active_high = active_high
+        self._consumer = consumer
+        self._serial_handle = None
+        self._original_write: Callable[..., object] | None = None
+
+        self._value_tx = 1 if active_high else 0
+        self._value_rx = 0 if active_high else 1
+
+        self._chip = None
+        self._request = None
+        self._set_value: Callable[[int], None]
+        self._release: Callable[[], None]
+
+        if hasattr(gpiod, "request_lines"):
+            from gpiod import line  # type: ignore[import]
+
+            config = {
+                line_offset: gpiod.LineSettings(direction=line.Direction.OUTPUT)
+            }
+            request = gpiod.request_lines(chip, consumer=consumer, config=config)
+            self._request = request
+            self._set_value = lambda value: request.set_value(line_offset, value)
+            self._release = request.release
+        else:  # pragma: no cover - legacy libgpiod v1 fallback
+            chip_obj = gpiod.Chip(chip)
+            line_obj = chip_obj.get_line(line_offset)
+            line_obj.request(consumer=consumer, type=gpiod.LINE_REQ_DIR_OUT)
+            self._chip = chip_obj
+            self._request = line_obj
+            self._set_value = line_obj.set_value
+            self._release = line_obj.release
+
+        self.receive()
+
+    def attach(self, serial_handle) -> None:
+        if self._serial_handle is not None:
+            return
+
+        original_write = getattr(serial_handle, "write", None)
+        if original_write is None:
+            raise ModbusAudioError("Serial handle does not expose a writable interface for RS485 control")
+
+        def wrapped(data, *args, **kwargs):
+            self.transmit()
+            try:
+                return original_write(data, *args, **kwargs)
+            finally:
+                self.receive()
+
+        serial_handle.write = wrapped  # type: ignore[attr-defined]
+        self._serial_handle = serial_handle
+        self._original_write = original_write
+        self.receive()
+
+    def transmit(self) -> None:
+        self._set_value(self._value_tx)
+
+    def receive(self) -> None:
+        self._set_value(self._value_rx)
+
+    def close(self) -> None:
+        if self._serial_handle is not None and self._original_write is not None:
+            try:
+                self._serial_handle.write = self._original_write  # type: ignore[attr-defined]
+            except Exception:  # pragma: no cover - best effort cleanup
+                pass
+        self._serial_handle = None
+        self._original_write = None
+
+        try:
+            self.receive()
+        except Exception:  # pragma: no cover - GPIO access may fail during teardown
+            pass
+
+        if self._release is not None:
+            try:
+                self._release()
+            except Exception:  # pragma: no cover
+                pass
+        if self._chip is not None:  # pragma: no cover - legacy cleanup
+            try:
+                self._chip.close()
+            except Exception:
+                pass
 
 
 def _resolve_framers() -> dict[str, type]:
