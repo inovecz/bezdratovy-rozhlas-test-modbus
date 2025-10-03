@@ -432,12 +432,9 @@ class _RS485Controller:
         self._serial_handle = None
         self._original_write: Callable[..., object] | None = None
 
-        self._value_tx = 1 if active_high else 0
-        self._value_rx = 0 if active_high else 1
-
         self._chip = None
         self._request = None
-        self._set_value: Callable[[int], None]
+        self._set_value: Callable[[object], None]
         self._release: Callable[[], None]
 
         if hasattr(gpiod, "request_lines"):
@@ -448,6 +445,8 @@ class _RS485Controller:
             }
             request = gpiod.request_lines(chip, consumer=consumer, config=config)
             self._request = request
+            self._value_tx = line.Value.ACTIVE if active_high else line.Value.INACTIVE
+            self._value_rx = line.Value.INACTIVE if active_high else line.Value.ACTIVE
             self._set_value = lambda value: request.set_value(line_offset, value)
             self._release = request.release
         else:  # pragma: no cover - legacy libgpiod v1 fallback
@@ -456,6 +455,8 @@ class _RS485Controller:
             line_obj.request(consumer=consumer, type=gpiod.LINE_REQ_DIR_OUT)
             self._chip = chip_obj
             self._request = line_obj
+            self._value_tx = 1 if active_high else 0
+            self._value_rx = 0 if active_high else 1
             self._set_value = line_obj.set_value
             self._release = line_obj.release
 
